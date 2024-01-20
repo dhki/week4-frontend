@@ -27,6 +27,7 @@ function GalleryList(){
     return(
         <>
         <div style={{position: 'relative', width:'100vw', height:'100vh'}}>
+            
             {/* Canvas: Background Wall, Picture Frames */}
             <Canvas camera={{position: [0, 0, 5], fov: 75, aspect: winWidth / winHeight}}
             style={{position: 'absolute', top: 0, left: 0, maxWidth: '100%', maxHeight: '100%'}}>
@@ -39,13 +40,17 @@ function GalleryList(){
                 <MarbleWall position={[0, -5, 5]}
                 args={[16, 0.03, 10]}/>
                 
-                <PictureFrame 
+                <PictureFrame
+                // image url은 필요한 url을 받아와서 전달해야 합니다
+                image_url='https://blog.dhki.kr/static/img/main/intro-card.jpg'
                 position={[0, 0, 0]}
-                size = {{picture_width: 4, picture_height: 3}}/>
+                size = {{width: 4, height: 3}}/>
 
-                <PictureFrame 
+                {/* <PictureFrame 
+                // image url은 필요한 url을 받아와서 전달해야 합니다
+                image_url='https://blog.dhki.kr/static/img/main/intro-card.jpg'
                 position={[8, 0, 0]}
-                size = {{picture_width: 4, picture_height: 3}}/>
+                size = {{width: 4, height: 3}}/> */}
             </Canvas>
 
             {/* Previous, Next button */}
