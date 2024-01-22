@@ -14,6 +14,7 @@ export const userReducer = (state = { user: {} }, { type, payload }) => {
         case LOGIN_USER_SUCCESS:
         case REGISTER_USER_SUCCESS:
         case LOAD_USER_SUCCESS:
+            alert('success?');
             return {
                 ...state,
                 loading: false,
