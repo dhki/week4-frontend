@@ -3,7 +3,6 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import GalleryList from './pages/GalleryList';
 import Intro from './pages/Intro';
 import Home from './pages/Home';
-import GalleryList from './pages/GalleryList';
 
 import './App.css';
 
