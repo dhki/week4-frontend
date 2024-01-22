@@ -21,6 +21,7 @@ const ShowcaseModal = ({ isOpen, onClose, data }) => {
 
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
+            <button onClick={onClose} className="absolute top-4 right-4 text-white text-2xl cursor-pointer">X</button>
             <div className="bg-white w-7/10 h-7/10 overflow-auto flex">
                 <div className="w-2/3 flex justify-center items-center">
                     {/* <img

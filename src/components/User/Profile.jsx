@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import PostContainer from './Posts/PostContainer';
+// import PostContainer from './Posts/PostContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { clearErrors, followUser, getUserDetails } from '../../actions/userAction';
@@ -25,7 +25,24 @@ const Profile = () => {
     const [usersArr, setUsersArr] = useState([]);
     const [savedTab, setSavedTab] = useState(false);
 
-    const { user, error, loading } = useSelector((state) => state.userDetails);
+    const user = {
+        name: 'Young Ko',
+        username: '0_forever',
+        posts: 20,
+        followers: 1000,
+        following: 500,
+        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida tellus id metus ullamcorper.',
+        website: 'https://www.example.com',
+        avatar: 'https://www.example.com/avatar.jpg',
+    };
+    const dummyPosts = [
+        { id: 1, imageUrl: 'https://www.example.com/post1.jpg' },
+        { id: 2, imageUrl: 'https://www.example.com/post2.jpg' },
+        // Add more dummy posts here
+    ];
+
+    // const { user, error, loading } = useSelector((state) => state.userDetails);
+    const { error, loading } = useSelector((state) => state.userDetails);
     const { user: loggedInUser } = useSelector((state) => state.user);
     const { error: followError, success, message } = useSelector((state) => state.followUser);
     const { error: chatError, chat } = useSelector((state) => state.newChat);
@@ -35,17 +52,17 @@ const Profile = () => {
         dispatch(followUser(user._id));
     }
 
-    const handleFollowersModal = () => {
-        setFollowersModal(true);
-        setViewModal(true)
-        setUsersArr(user?.followers);
-    }
+    // const handleFollowersModal = () => {
+    //     setFollowersModal(true);
+    //     setViewModal(true)
+    //     setUsersArr(user?.followers);
+    // }
 
-    const handleFollowingModal = () => {
-        setViewModal(true)
-        setFollowersModal(false);
-        setUsersArr(user?.following);
-    }
+    // const handleFollowingModal = () => {
+    //     setViewModal(true)
+    //     setFollowersModal(false);
+    //     setUsersArr(user?.following);
+    // }
 
     const closeModal = () => {
         setViewModal(false)
@@ -75,7 +92,7 @@ const Profile = () => {
 
     useEffect(() => {
         // console.log(user?.followers?.some((id) => id === loggedInUser._id))
-        setFollow(user?.followers?.some((u) => u._id === loggedInUser._id))
+        // setFollow(user?.followers?.some((u) => u._id === loggedInUser._id))
     }, [user]);
 
     const addToChat = () => {
@@ -135,9 +152,12 @@ const Profile = () => {
                             </div>
 
                             <div className="flex justify-between items-center max-w-[21.5rem]">
-                                <div className="cursor-pointer"><span className="font-semibold">{user.posts?.length}</span> posts</div>
+                                {/* <div className="cursor-pointer"><span className="font-semibold">{user.posts?.length}</span> posts</div>
                                 <div onClick={handleFollowersModal} className="cursor-pointer"><span className="font-semibold">{user.followers?.length}</span> followers</div>
-                                <div onClick={handleFollowingModal} className="cursor-pointer"><span className="font-semibold">{user.following?.length}</span> following</div>
+                                <div onClick={handleFollowingModal} className="cursor-pointer"><span className="font-semibold">{user.following?.length}</span> following</div> */}
+                                <div className="cursor-pointer"><span className="font-semibold">{user.posts}</span> posts</div>
+                                <div className="cursor-pointer"><span className="font-semibold">{user.followers}</span> followers</div>
+                                <div className="cursor-pointer"><span className="font-semibold">{user.following}</span> following</div>
                             </div>
 
                             {/* bio */}
@@ -152,11 +172,11 @@ const Profile = () => {
 
                     </div>
 
-                    {followersModal ?
+                    {/* {followersModal ?
                         <UsersDialog title="Followers" open={viewModal} onClose={closeModal} usersList={user?.followers} />
                         :
                         <UsersDialog title="Following" open={viewModal} onClose={closeModal} usersList={user?.following} />
-                    }
+                    } */}
 
                     <div className="border-t sm:ml-8 sm:mr-14">
 
@@ -175,7 +195,7 @@ const Profile = () => {
                         </div>
 
                         {/* posts grid data */}
-                        {savedTab ?
+                        {/* {savedTab ?
                             <PostContainer posts={user?.saved} id={"saved"} /> :
                             user?.posts?.length > 0 ?
                                 <PostContainer posts={user?.posts} id={"posts"} /> :
@@ -187,7 +207,7 @@ const Profile = () => {
                                     </div>
 
                                 </div>
-                        }
+                        } */}
 
                     </div>
 

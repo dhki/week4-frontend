@@ -10,7 +10,7 @@ const StoriesContainer = () => {
         dots: false,
         infinite: false,
         speed: 500,
-        slidesToShow: 9,
+        slidesToShow: 8,
         slidesToScroll: 3,
         // responsive: [
         //     {
