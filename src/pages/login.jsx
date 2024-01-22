@@ -23,20 +23,13 @@ function KakaoLogin(){
             axios.post('https://madcamp.dhki.kr/users/login/kakao', data) // login request
                 .then(response => {
                     if(response.status == 200){
-                        const {login, token, user_name, user_tag, avatar_url} = response.data;
-                        console.log(`user name: ${user_name}`);
-                        console.log(`avatar_url: ${avatar_url}`);
-
-                        if(login != true){
-                            alert('error');
-                            navigate(`/intro`);
-                        }
+                        const { token } = response.data;
 
                         const cookie = new Cookies();
                         cookie.set('token', token, { expires: new Date(Date.now() + 20 * 60 * 60 * 1000) });
 
                         // inform to redux : success login !!
-                        dispatch(loginSuccess(user_name, avatar_url, user_tag));
+                        dispatch(loginSuccess(response.data));
                     }
                 })
                 .catch(error => {
