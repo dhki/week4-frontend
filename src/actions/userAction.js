@@ -74,8 +74,6 @@ export const getInitialData = (code) => async (dispatch) => {
 
 // kakao login success !!
 export const loginSuccess = (user_name, avatar_url) => async (dispatch) => {
-    alert(`get name: ${user_name}`);
-    alert(`get avatar: ${avatar_url}`);
 
     try{
         dispatch({
@@ -83,7 +81,7 @@ export const loginSuccess = (user_name, avatar_url) => async (dispatch) => {
             payload: {'name': user_name, 'avatar': avatar_url}
         });
 
-        window.location.href = '/home';
+        // window.location.href = '/home';
     } catch (error){
         dispatch({
             type: LOGIN_USER_FAIL,
