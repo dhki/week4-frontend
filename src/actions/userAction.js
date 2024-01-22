@@ -2,31 +2,52 @@ import { ALL_USERS_FAIL, ALL_USERS_REQUEST, ALL_USERS_SUCCESS, CLEAR_ERRORS, FOL
 import axios from 'axios';
 
 // Login User
-export const loginUser = (userId, password) => async (dispatch) => {
+export const loginUser = () => async (dispatch) => {
     try {
         dispatch({ type: LOGIN_USER_REQUEST });
 
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }
+        window.location.href = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=3407bf71c6f6be482b518366e128d6d7&redirect_uri=http://localhost:3000/login'
 
-        const { data } = await axios.post(
-            '/api/v1/login',
-            { userId, password },
-            config
-        );
+        // const config = {
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        // }
 
-        dispatch({
-            type: LOGIN_USER_SUCCESS,
-            payload: data.user,
-        });
+        // const { data } = await axios.post(
+        //     '/api/v1/login',
+        //     { userId, password },
+        //     config
+        // );
+
+        // dispatch({
+        //     type: LOGIN_USER_SUCCESS,
+        //     payload: data.user,
+        // });
     } catch (error) {
         dispatch({
             type: LOGIN_USER_FAIL,
             payload: error.response.data.message,
         });
+    }
+}
+
+// kakao login success !!
+export const loginSuccess = (user_name, avatar_url) => async (dispatch) => {
+    try{
+        dispatch({
+            type: LOGIN_USER_SUCCESS,
+            payload: {name: user_name, avatar: avatar_url}
+        });
+
+        window.location.href = '/home';
+    } catch (error){
+        dispatch({
+            type: LOGIN_USER_FAIL,
+            payload: error
+        });
+
+        window.location.href = '/intro';
     }
 }
 
