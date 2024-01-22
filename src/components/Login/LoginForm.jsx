@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './LoginForm.css'; // CSS 파일 임포트
+import { useDispatch, useSelector } from 'react-redux';
+import { clearErrors, loginUser } from '../../actions/userAction';
 
 const LoginForm = () => {
     const [showRegisterForm, setShowRegisterForm] = useState(false);
@@ -12,10 +14,16 @@ const LoginForm = () => {
         setShowRegisterForm(false);
     };
 
+    const dispatch = useDispatch();
+    const handleLogin = (e) => {
+        e.preventDefault();
+        // dispatch(loginUser(email, password));
+    }
+
     return (
         <div className="login-form-container">
             {!showRegisterForm ? (
-                <form className="login-form">
+                <form onSubmit={handleLogin} className="login-form">
                     <h2>Login</h2>
                     <input type="text" placeholder="Username" />
                     <input type="password" placeholder="Password" />

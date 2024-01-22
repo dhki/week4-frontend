@@ -21,6 +21,7 @@ function Camera({
     }, [moveRight, moveLeft])
 
     useFrame(() => {
+        console.log("camera.position.x: ", camera.position.x)
         if(moveRight){
             if(camera.position.x <= current_x + 4){
                 camera.position.x += speed;
@@ -33,6 +34,7 @@ function Camera({
                     camera.rotation.y += 0.005;
                 }
             }else{
+                camera.position.x = parseFloat((camera.position.x).toFixed(0));
                 setMoveRight(false);
             }
         }else if(moveLeft){
@@ -47,6 +49,7 @@ function Camera({
                     camera.rotation.y -= 0.005;
                 }
             }else{
+                camera.position.x = parseFloat((camera.position.x).toFixed(0));
                 setMoveLeft(false);
             }
         }

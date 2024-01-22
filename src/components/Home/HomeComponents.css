@@ -1,0 +1,3 @@
+.slick-prev, .slick-next {
+    z-index: 2; /* Adjust this value as necessary */
+}

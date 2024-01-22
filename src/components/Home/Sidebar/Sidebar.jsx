@@ -2,48 +2,48 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-// import { getPostsOfFollowing } from '../../../actions/postAction';
-// import { clearErrors, getSuggestedUsers, loadUser } from '../../../actions/userAction';
-// import { POST_FOLLOWING_RESET } from '../../../constants/postConstants';
-// import { FOLLOW_USER_RESET } from '../../../constants/userConstants';
+import { getPostsOfFollowing } from '../../../actions/postAction';
+import { clearErrors, getSuggestedUsers, loadUser } from '../../../actions/userAction';
+import { POST_FOLLOWING_RESET } from '../../../constants/postConstants';
+import { FOLLOW_USER_RESET } from '../../../constants/userConstants';
 // import SkeletonUserItem from '../../Layouts/SkeletonUserItem';
 import UserListItem from './UserListItem';
 
 const Sidebar = () => {
-    const user = {
-        username: "0_forever",
-        name: "Young Ko",
-        avatar: "default_avatar.png"
-    };
+    // const user = {
+    //     username: "0_forever",
+    //     name: "Young Ko",
+    //     avatar: "default_avatar.png"
+    // };
 
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    // const { user } = useSelector((state) => state.user);
+    const { user } = useSelector((state) => state.user);
 
-    // const { error, users, loading } = useSelector((state) => state.allUsers)
-    // const { error: followError, success, message } = useSelector((state) => state.followUser)
+    const { error, users, loading } = useSelector((state) => state.allUsers)
+    const { error: followError, success, message } = useSelector((state) => state.followUser)
 
-    // useEffect(() => {
-    //     if (error) {
-    //         toast.error(error);
-    //         dispatch(clearErrors());
-    //     }
-    //     dispatch(getSuggestedUsers());
-    // }, [dispatch, error]);
+    useEffect(() => {
+        if (error) {
+            toast.error(error);
+            dispatch(clearErrors());
+        }
+        dispatch(getSuggestedUsers());
+    }, [dispatch, error]);
 
-    // useEffect(() => {
-    //     if (followError) {
-    //         toast.error(followError);
-    //         dispatch(clearErrors());
-    //     }
-    //     if (success) {
-    //         toast.success(message);
-    //         // dispatch({ type: POST_FOLLOWING_RESET });
-    //         // dispatch(getPostsOfFollowing());
-    //         dispatch({ type: FOLLOW_USER_RESET });
-    //     }
-    // }, [success, followError])
+    useEffect(() => {
+        if (followError) {
+            toast.error(followError);
+            dispatch(clearErrors());
+        }
+        if (success) {
+            toast.success(message);
+            // dispatch({ type: POST_FOLLOWING_RESET });
+            // dispatch(getPostsOfFollowing());
+            dispatch({ type: FOLLOW_USER_RESET });
+        }
+    }, [success, followError])
 
 
     return (

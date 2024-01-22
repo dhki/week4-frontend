@@ -2,9 +2,8 @@ import { useLoader, extend } from "@react-three/fiber";
 import React from "react";
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 
-function PictureFrame({image_url, position, size}) {
+function PictureFrame({ image_url, position, size }) {
   const picture = new TextureLoader().load(image_url);
-
 
   return (
     <group>
@@ -35,7 +34,7 @@ function PictureFrame({image_url, position, size}) {
       {/* 사진 */}
       <mesh position={position} rotation={[0, 0, 0]}>
         <planeGeometry args={[size.width - 0.1, size.height - 0.1]} />
-        <meshStandardMaterial map={picture}/>
+        <meshStandardMaterial map={picture} />
       </mesh>
     </group>
   );

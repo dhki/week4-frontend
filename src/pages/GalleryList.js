@@ -49,7 +49,7 @@ function GalleryList(){
                 
                 <PictureFrame
                 // image url은 필요한 url을 받아와서 전달해야 합니다
-                image_url='https://blog.dhki.kr/static/img/main/intro-card.jpg'
+                image_url='https://cdn-pro-web-208-246.cdn-nhncommerce.com/whitecotton5_godomall_com/data/goods/21/11/44//1000006669/modify_detail_059.jpg'
                 position={[0, 0, 0]}
                 size = {{width: 4, height: 3}}/>
 
@@ -71,7 +71,7 @@ function GalleryList(){
                     Prev
                 </button>
                 <button onClick={() => {setMoveRight(true); console.log('pressed button')}}
-                style={{position: 'absolute', top: '50%', left: "100%",
+                style={{position: 'absolute', top: '50%', right: 40,
                 width: 40, height: 40}}>
                     Next
                 </button>
