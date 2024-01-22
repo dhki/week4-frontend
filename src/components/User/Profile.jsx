@@ -52,17 +52,17 @@ const Profile = () => {
         dispatch(followUser(user._id));
     }
 
-    // const handleFollowersModal = () => {
-    //     setFollowersModal(true);
-    //     setViewModal(true)
-    //     setUsersArr(user?.followers);
-    // }
+    const handleFollowersModal = () => {
+        setFollowersModal(true);
+        setViewModal(true)
+        setUsersArr(user?.followers);
+    }
 
-    // const handleFollowingModal = () => {
-    //     setViewModal(true)
-    //     setFollowersModal(false);
-    //     setUsersArr(user?.following);
-    // }
+    const handleFollowingModal = () => {
+        setViewModal(true)
+        setFollowersModal(false);
+        setUsersArr(user?.following);
+    }
 
     const closeModal = () => {
         setViewModal(false)
