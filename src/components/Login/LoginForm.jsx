@@ -17,13 +17,14 @@ const LoginForm = () => {
     const dispatch = useDispatch();
     const handleLogin = (e) => {
         e.preventDefault();
-        // dispatch(loginUser(email, password));
+        // dispatch(loginUser());
     }
 
     return (
         <div className="login-form-container">
             {!showRegisterForm ? (
                 <form onSubmit={handleLogin} className="login-form">
+                    <button type='button' onClick={handleLogin} >login with kakao</button>
                     <h2>Login</h2>
                     <input type="text" placeholder="Username" />
                     <input type="password" placeholder="Password" />
