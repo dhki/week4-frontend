@@ -6,7 +6,7 @@ export const loginUser = () => async (dispatch) => {
     try {
         dispatch({ type: LOGIN_USER_REQUEST });
 
-        window.location.href = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=3407bf71c6f6be482b518366e128d6d7&redirect_uri=http://localhost:3000/login'
+        window.location.href = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=3407bf71c6f6be482b518366e128d6d7&redirect_uri=https://week4-frontend-indol.vercel.app/login'
 
         // const config = {
         //     headers: {
