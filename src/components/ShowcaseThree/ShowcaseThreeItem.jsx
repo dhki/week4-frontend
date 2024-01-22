@@ -5,7 +5,7 @@ import { Canvas, useThree } from "@react-three/fiber";
 import WhiteWall from "../whiteWall/WhiteWall";
 import Camera from "../camera/Camera";
 
-function ShowcaseThreeItem({ _id, image }) {
+function ShowcaseThreeItem({ _id, imageUrl }) {
     const [cameraPosition, setCameraPosition] = useState(0);
 
     const imageList = [
@@ -99,7 +99,7 @@ function ShowcaseThreeItem({ _id, image }) {
                     {imageList.map((image, index) => (
                         <PictureFrame
                             key={image.id}
-                            image_url={image.url}
+                            image_url={imageUrl}
                             position={[(frameWidth + gapBetweenFrames) * index, 0, 0]}
                             size={{ width: frameWidth, height: 3 }}
                         />
