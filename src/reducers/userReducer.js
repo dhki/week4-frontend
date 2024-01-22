@@ -14,13 +14,16 @@ export const userReducer = (state = { user: {} }, { type, payload }) => {
         case LOGIN_USER_SUCCESS:
         case REGISTER_USER_SUCCESS:
         case LOAD_USER_SUCCESS:
+            console.log(payload);
             alert('success?');
-            return {
+            const ret = {
                 ...state,
                 loading: false,
                 isAuthenticated: true,
                 user: payload,
             };
+            console.log(ret);
+            return ret;
         case LOGOUT_USER_SUCCESS:
             return {
                 loading: false,
