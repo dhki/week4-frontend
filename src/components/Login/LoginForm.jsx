@@ -17,7 +17,7 @@ const LoginForm = () => {
     const dispatch = useDispatch();
     const handleLogin = (e) => {
         e.preventDefault();
-        // dispatch(loginUser());
+        dispatch(loginUser());
     }
 
     return (

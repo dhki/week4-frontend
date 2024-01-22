@@ -12,7 +12,7 @@ function Camera({
 
     const { camera, gl } = useThree();
     const cameraRef = useRef(null);
-    const speed = 0.1;
+    const speed = 0.05;
 
     useEffect(() => {
         if(moveRight || moveLeft){
@@ -21,7 +21,7 @@ function Camera({
     }, [moveRight, moveLeft])
 
     useFrame(() => {
-        console.log("camera.position.x: ", camera.position.x)
+        // console.log("camera.position.x: ", camera.position.x)
         if(moveRight){
             if(camera.position.x <= current_x + 4){
                 camera.position.x += speed;
