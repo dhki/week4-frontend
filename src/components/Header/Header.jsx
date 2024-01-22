@@ -10,8 +10,13 @@ import { ClickAwayListener } from '@mui/material';
 const Header = () => {
 
     const { user } = useSelector((state) => state.user);
-    console.log(user);
-    console.log(user.avatar);
+    if(user){
+        console.log(user);
+        console.log(user.avatar);
+    }else{
+        console.log('no user found');
+    }
+    
 
     const [profileToggle, setProfileToggle] = useState(false);
     const [newPost, setNewPost] = useState(false);

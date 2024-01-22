@@ -32,6 +32,43 @@ export const loginUser = () => async (dispatch) => {
     }
 }
 
+export const getInitialData = (code) => async (dispatch) => {
+    const data = {
+        redirect_uri: 'https://week4-frontend-indol.vercel.app/login',
+        code: code
+    };
+
+    axios.post('https://madcamp.dhki.kr/users/login/kakao', data) // login request
+        .then(response => {
+            if (response.status == 200) {
+                const { login, token, user_name, avatar_url } = response.data;
+                console.log(`user name: ${user_name}`);
+                console.log(`avatar_url: ${avatar_url}`);
+
+                if (login != true) {
+                    alert('error');
+                    window.location.href = '/intro';
+                }
+
+                const cookie = new Cookies();
+                cookie.set('token', token, { expires: new Date(Date.now() + 20 * 60 * 60 * 1000) });
+
+                // inform to redux : success login !!
+                dispatch({
+                    type: LOGIN_USER_SUCCESS,
+                    payload: response.data,
+                });
+            }
+        })
+        .catch(error => {
+            dispatch({
+                type: LOGIN_USER_FAIL,
+                payload: error,
+            });
+            window.location.href = '/intro';
+        })
+}
+
 // kakao login success !!
 export const loginSuccess = (user_name, avatar_url) => async (dispatch) => {
     alert(`get name: ${user_name}`);
