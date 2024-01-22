@@ -2,8 +2,6 @@ import { ALL_USERS_FAIL, ALL_USERS_REQUEST, ALL_USERS_SUCCESS, CLEAR_ERRORS, FOL
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
 
-const navigate = useNavigate();
-
 // Login User
 export const loginUser = () => async (dispatch) => {
     try {
