@@ -1,29 +1,13 @@
 import { ALL_USERS_FAIL, ALL_USERS_REQUEST, ALL_USERS_SUCCESS, CLEAR_ERRORS, FOLLOW_USER_FAIL, FOLLOW_USER_REQUEST, FOLLOW_USER_SUCCESS, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, LOAD_USER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGOUT_USER_FAIL, LOGOUT_USER_SUCCESS, REGISTER_USER_FAIL, REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, RESET_PASSWORD_FAIL, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PROFILE_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS, USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS } from "../constants/userConstants";
 import axios from 'axios';
+import { Cookies } from 'react-cookie';
 
 // Login User
 export const loginUser = () => async (dispatch) => {
     try {
         dispatch({ type: LOGIN_USER_REQUEST });
 
-        window.location.href = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=3407bf71c6f6be482b518366e128d6d7&redirect_uri=http://localhost:3000/login'
-
-        // const config = {
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        // }
-
-        // const { data } = await axios.post(
-        //     '/api/v1/login',
-        //     { userId, password },
-        //     config
-        // );
-
-        // dispatch({
-        //     type: LOGIN_USER_SUCCESS,
-        //     payload: data.user,
-        // });
+        window.location.href = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=3407bf71c6f6be482b518366e128d6d7&redirect_uri=https://week4-frontend-indol.vercel.app/login'
     } catch (error) {
         dispatch({
             type: LOGIN_USER_FAIL,
@@ -33,14 +17,13 @@ export const loginUser = () => async (dispatch) => {
 }
 
 // kakao login success !!
-export const loginSuccess = (user_name, avatar_url) => async (dispatch) => {
+export const loginSuccess = (payload) => async (dispatch) => {
+
     try{
         dispatch({
             type: LOGIN_USER_SUCCESS,
-            payload: {name: user_name, avatar: avatar_url}
+            payload: payload
         });
-
-        window.location.href = '/home';
     } catch (error){
         dispatch({
             type: LOGIN_USER_FAIL,

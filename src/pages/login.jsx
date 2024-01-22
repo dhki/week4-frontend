@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
 import { Loading } from "../components/Intro/Loading";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { loginSuccess } from "../actions/userAction";
+import { getInitialData, loginSuccess } from "../actions/userAction";
 import { Cookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+import { isA } from "@jest/expect-utils";
 
 function KakaoLogin(){
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const queryParameters = new URLSearchParams(window.location.search)
     const code = queryParameters.get("code")
 
@@ -20,32 +23,37 @@ function KakaoLogin(){
             axios.post('https://madcamp.dhki.kr/users/login/kakao', data) // login request
                 .then(response => {
                     if(response.status == 200){
-                        const {login, token, user_name, avatar_url} = response.data;
-
-                        if(login != true){
-                            alert('error');
-                            window.location.href = '/intro';
-                        }
+                        const { token } = response.data;
 
                         const cookie = new Cookies();
                         cookie.set('token', token, { expires: new Date(Date.now() + 20 * 60 * 60 * 1000) });
 
                         // inform to redux : success login !!
-                        dispatch(loginSuccess(user_name, avatar_url));
+                        dispatch(loginSuccess(response.data));
                     }
                 })
                 .catch(error => {
                     alert(error);
-                    window.location.href = '/intro';
+                    navigate(`/intro`);
                 })
         }else{ // there's no authentication code?
-            window.location.href = '/intro';
+            navigate(`/intro`);
         }
     }
 
+    const {loading, isAuthenticated, error, user} = useSelector((state) => state.user);
     useEffect(() => {
         loginRequest();
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        console.log(isAuthenticated);
+        if(isAuthenticated){
+            console.log(user);
+            // window.location.href = '/home';
+            navigate(`/home`);
+        }
+    }, [isAuthenticated])
 
     return(
         // 로그인이 되는 동안.. 대기 화면..
