@@ -40,7 +40,7 @@ export const loginSuccess = (user_name, avatar_url) => async (dispatch) => {
     try{
         dispatch({
             type: LOGIN_USER_SUCCESS,
-            payload: {name: user_name, avatar: avatar_url}
+            payload: {'name': user_name, 'avatar': avatar_url}
         });
 
         window.location.href = '/home';
