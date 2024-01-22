@@ -34,8 +34,8 @@ export const loginUser = () => async (dispatch) => {
 
 // kakao login success !!
 export const loginSuccess = (user_name, avatar_url) => async (dispatch) => {
-    console.log(`get name: ${user_name}`);
-    console.log(`get avatar: ${avatar_url}`);
+    alert(`get name: ${user_name}`);
+    alert(`get avatar: ${avatar_url}`);
 
     try{
         dispatch({
