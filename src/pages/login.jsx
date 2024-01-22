@@ -5,7 +5,6 @@ import axios from "axios";
 import { getInitialData, loginSuccess } from "../actions/userAction";
 import { Cookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { isA } from "@jest/expect-utils";
 
 function KakaoLogin(){
     const dispatch = useDispatch();

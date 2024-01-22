@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-// import PostContainer from './Posts/PostContainer';
+import PostContainer from './Posts/PostContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { clearErrors, followUser, getUserDetails } from '../../actions/userAction';
@@ -195,19 +195,19 @@ const Profile = () => {
                         </div>
 
                         {/* posts grid data */}
-                        {/* {savedTab ?
+                        {savedTab ?
                             <PostContainer posts={user?.saved} id={"saved"} /> :
                             user?.posts?.length > 0 ?
                                 <PostContainer posts={user?.posts} id={"posts"} /> :
                                 <div className="bg-white mt-2 mb-10 drop-shadow-sm rounded flex sm:flex-row flex-col sm:gap-0 gap-5 sm:p-0 p-4 items-center justify-between">
-                                    <img draggable="false" className="w-2/5 rounded-l" src="https://www.instagram.com/static/images/mediaUpsell.jpg/6efc710a1d5a.jpg" alt="" />
-                                    <div className="mx-auto flex flex-col items-center">
+                                    {/* <img draggable="false" className="w-2/5 rounded-l" src="https://www.instagram.com/static/images/mediaUpsell.jpg/6efc710a1d5a.jpg" alt="" /> */}
+                                    <div className="mt-20 mb-20 mx-auto flex flex-col items-center">
                                         <h4 className="font-medium text-lg sm:text-xl">Start capturing and sharing your moments.</h4>
                                         <p>Get the app to share your first photo or video.</p>
                                     </div>
 
                                 </div>
-                        } */}
+                        }
 
                     </div>
 

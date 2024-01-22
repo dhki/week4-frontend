@@ -13,12 +13,12 @@ function MarbleWall(props){
     return(
         <>
         <group>
-            <mesh position={[props.position[0], props.position[1], -0.05]} rotation={[0, 0, 0]}>
+            {/* <mesh position={[props.position[0], props.position[1], -0.05]} rotation={[0, 0, 0]}>
                 <boxGeometry attach="geometry" args={[props.args[0], props.args[1], 0.1]}/>
                 <meshStandardMaterial attach="material" color='black'/>
-            </mesh>
+            </mesh> */}
 
-            <mesh position={props.position} rotation={[0, 0, 0]}>
+            <mesh position={props.position} rotation={[0, 0, 0]} receiveShadow>
                 <boxGeometry attach="geometry" args={props.args}/>
                 <meshStandardMaterial attach="material" map={MarbleTexture}/>
             </mesh>

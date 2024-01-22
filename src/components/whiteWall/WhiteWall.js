@@ -8,7 +8,7 @@ function WhiteWall(props){
     
     return(
         <>
-        <mesh position={props.position} rotation={[0, 0, 0]}>
+        <mesh position={props.position} rotation={props.rotation} castShadow receiveShadow>
             <boxGeometry attach="geometry" args={props.args}/>
             <meshStandardMaterial attach="material" map={WhitePaperTexture}/>
         </mesh>
