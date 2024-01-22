@@ -21,6 +21,8 @@ function KakaoLogin(){
                 .then(response => {
                     if(response.status == 200){
                         const {login, token, user_name, avatar_url} = response.data;
+                        console.log(`user name: ${user_name}`);
+                        console.log(`avatar_url: ${avatar_url}`);
 
                         if(login != true){
                             alert('error');
