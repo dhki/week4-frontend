@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { Loading } from "../components/Intro/Loading";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { getInitialData, loginSuccess } from "../actions/userAction";
 import { Cookies } from "react-cookie";
+import { Navigate } from "react-router";
 
 function KakaoLogin(){
     const dispatch = useDispatch();
@@ -47,9 +48,16 @@ function KakaoLogin(){
         }
     }
 
+    const {loading, isAuthenticated, error, user} = useSelector((state) => state.user);
     useEffect(() => {
         loginRequest();
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        if(isAuthenticated){
+            window.location.href = '/home';
+        }
+    }, [isAuthenticated])
 
     return(
         // 로그인이 되는 동안.. 대기 화면..
