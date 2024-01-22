@@ -1,7 +1,6 @@
 import { ALL_USERS_FAIL, ALL_USERS_REQUEST, ALL_USERS_SUCCESS, CLEAR_ERRORS, FOLLOW_USER_FAIL, FOLLOW_USER_REQUEST, FOLLOW_USER_SUCCESS, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, LOAD_USER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGOUT_USER_FAIL, LOGOUT_USER_SUCCESS, REGISTER_USER_FAIL, REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, RESET_PASSWORD_FAIL, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PROFILE_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS, USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS } from "../constants/userConstants";
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
-import { useNavigate } from "react-router-dom";
 
 const navigate = useNavigate();
 
@@ -19,45 +18,6 @@ export const loginUser = () => async (dispatch) => {
     }
 }
 
-export const getInitialData = (code) => async (dispatch) => {
-    const data = {
-        redirect_uri: 'https://week4-frontend-indol.vercel.app/login',
-        code: code
-    };
-
-    axios.post('https://madcamp.dhki.kr/users/login/kakao', data) // login request
-        .then(response => {
-            if (response.status == 200) {
-                const { login, token, user_name, avatar_url } = response.data;
-                console.log(`user name: ${user_name}`);
-                console.log(`avatar_url: ${avatar_url}`);
-
-                if (login != true) {
-                    alert('error');
-                    window.location.href = '/intro';
-                }
-
-                const cookie = new Cookies();
-                cookie.set('token', token, { expires: new Date(Date.now() + 20 * 60 * 60 * 1000) });
-
-                // inform to redux : success login !!
-                dispatch({
-                    type: LOGIN_USER_SUCCESS,
-                    payload: response.data,
-                });
-
-                // window.location.href = '/home';
-            }
-        })
-        .catch(error => {
-            dispatch({
-                type: LOGIN_USER_FAIL,
-                payload: error,
-            });
-            window.location.href = '/intro';
-        })
-}
-
 // kakao login success !!
 export const loginSuccess = (user_name, avatar_url, user_tag) => async (dispatch) => {
 
@@ -72,7 +32,7 @@ export const loginSuccess = (user_name, avatar_url, user_tag) => async (dispatch
             payload: error
         });
 
-        navigate(`/home`);
+        window.location.href = '/intro';
     }
 }
 
