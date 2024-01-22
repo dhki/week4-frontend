@@ -59,6 +59,8 @@ export const getInitialData = (code) => async (dispatch) => {
                     type: LOGIN_USER_SUCCESS,
                     payload: response.data,
                 });
+
+                window.location.href = '/home';
             }
         })
         .catch(error => {
