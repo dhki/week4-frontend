@@ -9,7 +9,7 @@ import { ClickAwayListener } from '@mui/material';
 
 const Header = () => {
 
-    const { user } = useSelector((state) => state.user);
+    const user = useSelector((state) => state.user);
     if(user){
         console.log(user);
         console.log(user.avatar);
