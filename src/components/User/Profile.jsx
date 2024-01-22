@@ -164,9 +164,9 @@ const Profile = () => {
                             <div className="max-w-full">
                                 <p className="font-medium">{user.name}</p>
                                 <p className="whitespace-pre-line">{user.bio}</p>
-                                {user?.website &&
+                                {/* {user?.website &&
                                     <a href={user.website} target="_blank" className="text-blue-900 font-medium">{new URL(user.website).hostname}</a>
-                                }
+                                } */}
                             </div>
                         </div>
 
