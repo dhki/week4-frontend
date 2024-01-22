@@ -17,12 +17,12 @@ export const loginUser = () => async (dispatch) => {
 }
 
 // kakao login success !!
-export const loginSuccess = (user_name, avatar_url, user_tag) => async (dispatch) => {
+export const loginSuccess = (payload) => async (dispatch) => {
 
     try{
         dispatch({
             type: LOGIN_USER_SUCCESS,
-            payload: {name: user_name, avatar: avatar_url, username: user_tag}
+            payload: payload
         });
     } catch (error){
         dispatch({

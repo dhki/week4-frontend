@@ -25,24 +25,24 @@ const Profile = () => {
     const [usersArr, setUsersArr] = useState([]);
     const [savedTab, setSavedTab] = useState(false);
 
-    const user = {
-        name: 'Young Ko',
-        username: '0_forever',
-        posts: 20,
-        followers: 1000,
-        following: 500,
-        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida tellus id metus ullamcorper.',
-        website: 'https://www.example.com',
-        avatar: 'https://www.example.com/avatar.jpg',
-    };
-    const dummyPosts = [
-        { id: 1, imageUrl: 'https://www.example.com/post1.jpg' },
-        { id: 2, imageUrl: 'https://www.example.com/post2.jpg' },
-        // Add more dummy posts here
-    ];
+    // const user = {
+    //     name: 'Young Ko',
+    //     username: '0_forever',
+    //     posts: 20,
+    //     followers: 1000,
+    //     following: 500,
+    //     bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida tellus id metus ullamcorper.',
+    //     website: 'https://www.example.com',
+    //     avatar: 'https://www.example.com/avatar.jpg',
+    // };
+    // const dummyPosts = [
+    //     { id: 1, imageUrl: 'https://www.example.com/post1.jpg' },
+    //     { id: 2, imageUrl: 'https://www.example.com/post2.jpg' },
+    //     // Add more dummy posts here
+    // ];
 
-    // const { user, error, loading } = useSelector((state) => state.userDetails);
-    const { error, loading } = useSelector((state) => state.userDetails);
+    const { user, error, loading } = useSelector((state) => state.userDetails);
+    // const { error, loading } = useSelector((state) => state.userDetails);
     const { user: loggedInUser } = useSelector((state) => state.user);
     const { error: followError, success, message } = useSelector((state) => state.followUser);
     const { error: chatError, chat } = useSelector((state) => state.newChat);
@@ -84,9 +84,9 @@ const Profile = () => {
             dispatch({ type: FOLLOW_USER_RESET });
         }
 
-        // return () => {
-        //     dispatch({ type: USER_DETAILS_RESET })
-        // }
+        return () => {
+            dispatch({ type: USER_DETAILS_RESET })
+        }
 
     }, [dispatch, error, params.username, followError, success, message]);
 
@@ -152,12 +152,12 @@ const Profile = () => {
                             </div>
 
                             <div className="flex justify-between items-center max-w-[21.5rem]">
-                                {/* <div className="cursor-pointer"><span className="font-semibold">{user.posts?.length}</span> posts</div>
+                                <div className="cursor-pointer"><span className="font-semibold">{user.posts?.length}</span> posts</div>
                                 <div onClick={handleFollowersModal} className="cursor-pointer"><span className="font-semibold">{user.followers?.length}</span> followers</div>
-                                <div onClick={handleFollowingModal} className="cursor-pointer"><span className="font-semibold">{user.following?.length}</span> following</div> */}
-                                <div className="cursor-pointer"><span className="font-semibold">{user.posts}</span> posts</div>
+                                <div onClick={handleFollowingModal} className="cursor-pointer"><span className="font-semibold">{user.following?.length}</span> following</div>
+                                {/* <div className="cursor-pointer"><span className="font-semibold">{user.posts}</span> posts</div>
                                 <div className="cursor-pointer"><span className="font-semibold">{user.followers}</span> followers</div>
-                                <div className="cursor-pointer"><span className="font-semibold">{user.following}</span> following</div>
+                                <div className="cursor-pointer"><span className="font-semibold">{user.following}</span> following</div> */}
                             </div>
 
                             {/* bio */}
