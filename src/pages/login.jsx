@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { getInitialData, loginSuccess } from "../actions/userAction";
 import { Cookies } from "react-cookie";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { isA } from "@jest/expect-utils";
 
 function KakaoLogin(){
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const queryParameters = new URLSearchParams(window.location.search)
     const code = queryParameters.get("code")
 
@@ -59,7 +60,7 @@ function KakaoLogin(){
         if(isAuthenticated){
             console.log(user);
             // window.location.href = '/home';
-            Navigate(`/home`);
+            navigate(`/home`);
         }
     }, [isAuthenticated])
 
