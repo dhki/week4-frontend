@@ -60,7 +60,7 @@ export const getInitialData = (code) => async (dispatch) => {
                     payload: response.data,
                 });
 
-                window.location.href = '/home';
+                // window.location.href = '/home';
             }
         })
         .catch(error => {
