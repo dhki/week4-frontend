@@ -20,8 +20,6 @@ function KakaoLogin(){
                 code: code
             };
 
-            // dispatch(getInitialData(code));
-
             axios.post('https://madcamp.dhki.kr/users/login/kakao', data) // login request
                 .then(response => {
                     if(response.status == 200){
@@ -31,7 +29,7 @@ function KakaoLogin(){
 
                         if(login != true){
                             alert('error');
-                            window.location.href = '/intro';
+                            navigate(`/intro`);
                         }
 
                         const cookie = new Cookies();
@@ -43,10 +41,10 @@ function KakaoLogin(){
                 })
                 .catch(error => {
                     alert(error);
-                    window.location.href = '/intro';
+                    navigate(`/intro`);
                 })
         }else{ // there's no authentication code?
-            window.location.href = '/intro';
+            navigate(`/intro`);
         }
     }
 
