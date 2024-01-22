@@ -4,6 +4,7 @@ import GalleryList from './pages/GalleryList';
 import Intro from './pages/Intro';
 import Home from './pages/Home';
 import SpinLoader from './components/Layouts/SpinLoader';
+import Profile from './components/User/Profile';
 
 import './App.css';
 
@@ -15,6 +16,9 @@ function App() {
           <Route path='/list' element={<GalleryList />}></Route>
           <Route path='/intro' element={<Intro />}></Route>
           <Route path='/home' element={<Home />}></Route>
+          <Route path="/:username" element={
+            <Profile />
+          } />
         </Routes>
       </Suspense>
     </div>
