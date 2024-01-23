@@ -12,11 +12,11 @@ function KakaoLogin(){
     const queryParameters = new URLSearchParams(window.location.search)
     const code = queryParameters.get("code")
     console.log(code)
+    console.log(code)
 
     const loginRequest = async () => {
         if(code){
             const data = {
-                redirect_uri: 'http://localhost:3000/login',
                 redirect_uri: 'http://localhost:3000/login',
                 code: code
             };
