@@ -39,7 +39,7 @@ export const dummyShowcases = [
             { _id: "comment1", user: { username: "user3", avatar: "https://via.placeholder.com/150" }, comment: "Amazing view!" },
             { _id: "comment2", user: { username: "user4", avatar: "https://via.placeholder.com/150" }, comment: "I love this place!" }
         ],
-        image: "https://via.placeholder.com/500",
+        image: "https://madcamp.dhki.kr/images/dongha.jpg",
         postedBy: { _id: "user1", username: "user1name", avatar: "https://via.placeholder.com/150" },
         savedBy: ["user5", "user6"],
         createdAt: "2021-01-01T00:00:00Z"

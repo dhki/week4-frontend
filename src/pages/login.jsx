@@ -11,14 +11,16 @@ function KakaoLogin(){
     const navigate = useNavigate();
     const queryParameters = new URLSearchParams(window.location.search)
     const code = queryParameters.get("code")
+    console.log(code)
 
     const loginRequest = async () => {
         if(code){
             const data = {
                 redirect_uri: 'http://localhost:3000/login',
+                redirect_uri: 'http://localhost:3000/login',
                 code: code
             };
-
+            console.log("kakaologin")
             axios.post('https://madcamp.dhki.kr/users/login/kakao', data) // login request
                 .then(response => {
                     if(response.status == 200){
@@ -42,6 +44,9 @@ function KakaoLogin(){
     loginRequest();
 
     const {loading, isAuthenticated, error, user} = useSelector((state) => state.user);
+    useEffect(() => {
+        loginRequest();
+    }, [code]);
 
     useEffect(() => {
         console.log(isAuthenticated);

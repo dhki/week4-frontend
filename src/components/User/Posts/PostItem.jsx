@@ -123,8 +123,8 @@ const PostItem = ({ _id, caption, likes, comments, image, postedBy, savedBy, cre
 
                             {comments.map((c) => (
                                 <div className="flex items-start space-x-1 mb-3" key={c._id}>
-                                    <Link to={`/${c.user}`}><img draggable="false" className="w-9 h-9 rounded-full object-cover mr-2.5" src={c.user.avatar} alt="avatar" /></Link>
-                                    <Link to={`/${c.user}`} className="text-sm font-semibold hover:underline">{c.user.username}</Link>
+                                    <Link to={`/profile/${c.user}`}><img draggable="false" className="w-9 h-9 rounded-full object-cover mr-2.5" src={c.user.avatar} alt="avatar" /></Link>
+                                    <Link to={`/profile/${c.user}`} className="text-sm font-semibold hover:underline">{c.user.username}</Link>
                                     <p className="text-sm whitespace-pre-line">{c.comment}</p>
                                 </div>
                             ))}

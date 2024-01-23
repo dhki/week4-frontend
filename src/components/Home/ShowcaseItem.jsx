@@ -89,7 +89,7 @@ const ShowcaseItem = ({ _id, caption, likes, comments, image, postedBy, savedBy,
 
 
     return (
-        <div className="flex flex-col border rounded bg-white relative">
+        <div className="flex flex-col border rounded-xl bg-white relative">
 
             {/* <div className="flex justify-between px-3 py-2.5 border-b items-center">
                 <div className="flex space-x-3 items-center">
@@ -101,15 +101,15 @@ const ShowcaseItem = ({ _id, caption, likes, comments, image, postedBy, savedBy,
 
             {/* post image container */}
             {/* <div className="relative flex items-center justify-center" style={{ width: '100%', height: '0', paddingBottom: '100%' }} onDoubleClick={setLike}> */}
-            <div className="relative flex items-center justify-center" style={{ width: '100%', height: '0', paddingBottom: '100%' }} onClick={handleImageClick}>
+            <div className="relative flex items-center justify-center rounded-tr-xl rounded-tl-xl" style={{ width: '100%', height: '0', paddingBottom: '100%' }} onClick={handleImageClick}>
                 <img
                     draggable="false"
                     loading="lazy"
-                    className="absolute top-0 left-0 w-full h-full object-cover object-center"
+                    className="absolute top-0 left-0 w-full h-full object-cover object-center rounded-tr-xl rounded-tl-xl"
                     src={image}
                     alt="post image" />
 
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/50 via-transparent to-black/50"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/50 via-transparent to-black/50 rounded-tr-xl rounded-tl-xl"></div>
 
                 <span className="absolute text-white text-4xl font-bold" style={{ top: '30px', left: '20px' }}>
                     <Link to={`/${postedBy.username}`} className="text-4xl font-semibold hover:underline">@{postedBy.username}</Link>
@@ -130,10 +130,10 @@ const ShowcaseItem = ({ _id, caption, likes, comments, image, postedBy, savedBy,
             />
 
             {/* like comment container */}
-            <div className="flex flex-col px-4 space-y-1 border-b pb-2 mt-2">
+            <div className="flex flex-col px-4 space-y-1 border-transparent pb-2 mt-2 rounded-br-xl rounded-bl-xl">
 
                 {/* icons container */}
-                <div className="flex items-center justify-between py-2">
+                <div className="flex items-center justify-between py-2 ">
                     <div className="flex space-x-4">
                         <button onClick={handleLike}>{liked ? likeFill : likeIconOutline}</button>
                         <button onClick={() => commentInput.current.focus()}>{commentIcon}</button>
