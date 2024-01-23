@@ -40,6 +40,7 @@ function KakaoLogin(){
             navigate(`/intro`);
         }
     }
+    loginRequest();
 
     const {loading, isAuthenticated, error, user} = useSelector((state) => state.user);
     useEffect(() => {
@@ -57,7 +58,8 @@ function KakaoLogin(){
 
     return(
         // 로그인이 되는 동안.. 대기 화면..
-        <Loading/>
+        // <Loading/>
+        <></>
     )
 }
 

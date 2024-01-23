@@ -10,16 +10,16 @@ import { toast } from 'react-toastify';
 import UserListItem from './UserListItem';
 
 const Sidebar = () => {
-    const user = {
-        username: "0_forever",
-        name: "Young Ko",
-        avatar: "default_avatar.png"
-    };
+    // const user = {
+    //     username: "0_forever",
+    //     name: "Young Ko",
+    //     avatar: "default_avatar.png"
+    // };
 
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    // const { user } = useSelector((state) => state.user);
+    const { user } = useSelector((state) => state.user);
 
     // const { error, users, loading } = useSelector((state) => state.allUsers)
     // const { error: followError, success, message } = useSelector((state) => state.followUser)
