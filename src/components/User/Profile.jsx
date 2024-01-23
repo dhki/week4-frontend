@@ -31,7 +31,7 @@ const Profile = () => {
 
         const user = getUser();
         setUser(user);
-    }, [])
+    }, [username])
 
     const [follow, setFollow] = useState(false);
     const [viewModal, setViewModal] = useState(false);
@@ -41,7 +41,7 @@ const Profile = () => {
 
     // const { error, loading } = useSelector((state) => state.userDetails);
     const loggedInUser  = useSelector((state) => state.user);
-    // const { error: followError, success, message } = useSelector((state) => state.followUser);
+    const { error: followError, success, message } = useSelector((state) => state.followUser);
     // const { error: chatError, chat } = useSelector((state) => state.newChat);
 
     const handleFollow = () => {
@@ -65,27 +65,27 @@ const Profile = () => {
         setViewModal(false)
     }
 
-    useEffect(() => {
-        if (error) {
-            toast.error(error);
-            dispatch(clearErrors());
-        }
-        dispatch(getUserDetails(username));
+    // useEffect(() => {
+    //     if (error) {
+    //         toast.error(error);
+    //         dispatch(clearErrors());
+    //     }
+    //     dispatch(getUserDetails(username));
 
-        if (followError) {
-            toast.error(followError);
-            dispatch(clearErrors());
-        }
-        if (success) {
-            toast.success(message)
-            dispatch({ type: FOLLOW_USER_RESET });
-        }
+    //     if (followError) {
+    //         toast.error(followError);
+    //         dispatch(clearErrors());
+    //     }
+    //     if (success) {
+    //         toast.success(message)
+    //         dispatch({ type: FOLLOW_USER_RESET });
+    //     }
 
-        return () => {
-            dispatch({ type: USER_DETAILS_RESET })
-        }
+    //     return () => {
+    //         dispatch({ type: USER_DETAILS_RESET })
+    //     }
 
-    }, [dispatch, error, username, followError, success, message]);
+    // }, [dispatch, error, username, followError, success, message]);
 
     // useEffect(() => {
     //     // console.log(user?.followers?.some((id) => id === loggedInUser._id))
