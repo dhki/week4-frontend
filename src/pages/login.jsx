@@ -15,7 +15,7 @@ function KakaoLogin(){
     const loginRequest = async () => {
         if(code){
             const data = {
-                redirect_uri: 'https://week4-frontend-indol.vercel.app/login',
+                redirect_uri: 'http://localhost:3000/login',
                 code: code
             };
 
@@ -39,11 +39,9 @@ function KakaoLogin(){
             navigate(`/intro`);
         }
     }
+    loginRequest();
 
     const {loading, isAuthenticated, error, user} = useSelector((state) => state.user);
-    useEffect(() => {
-        loginRequest();
-    }, []);
 
     useEffect(() => {
         console.log(isAuthenticated);
@@ -56,7 +54,8 @@ function KakaoLogin(){
 
     return(
         // 로그인이 되는 동안.. 대기 화면..
-        <Loading/>
+        // <Loading/>
+        <></>
     )
 }
 

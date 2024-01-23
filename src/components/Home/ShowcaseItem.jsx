@@ -12,17 +12,12 @@ import ShowcaseModal from './ShowcaseModal';
 
 const ShowcaseItem = ({ _id, caption, likes, comments, image, postedBy, savedBy, createdAt, setUsersDialog, setUsersList }) => {
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const commentInput = useRef(null);
 
     const { user } = useSelector((state) => state.user);
     const { loading, post } = useSelector((state) => state.postDetails);
 
-    // const user = {
-    //     username: "0_forever",
-    //     name: "Young Ko",
-    //     avatar: "default_avatar.png"
-    // }
 
     const [allLikes, setAllLikes] = useState(likes);
     const [allComments, setAllComments] = useState(comments);
