@@ -19,12 +19,37 @@ export const loginUser = () => async (dispatch) => {
 // kakao login success !!
 export const loginSuccess = (payload) => async (dispatch) => {
 
-    try{
+    try {
         dispatch({
             type: LOGIN_USER_SUCCESS,
             payload: payload
         });
-    } catch (error){
+    } catch (error) {
+        dispatch({
+            type: LOGIN_USER_FAIL,
+            payload: error
+        });
+
+        window.location.href = '/intro';
+    }
+}
+
+export const loginInitial = (token) => async (dispatch) => {
+    try {
+        console.log(token);
+        dispatch({ type: LOGIN_USER_REQUEST });
+        const config = {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+        };
+        const { data } = await axios.post("https://madcamp.dhki.kr/users/token", { token: token }, config);
+        console.log(data.user.avatar);
+
+        dispatch({
+            type: LOGIN_USER_SUCCESS,
+            payload: data.user
+        });
+    } catch (error) {
         dispatch({
             type: LOGIN_USER_FAIL,
             payload: error
@@ -89,7 +114,7 @@ export const loadUser = () => async (dispatch) => {
 // Logout User
 export const logoutUser = () => async (dispatch) => {
     try {
-        await axios.get('/api/v1/logout');
+        // await axios.get('/api/v1/logout');
         dispatch({ type: LOGOUT_USER_SUCCESS });
     } catch (error) {
         dispatch({

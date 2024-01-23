@@ -2,8 +2,23 @@ import React from "react";
 import Header from "../components/Header/Header";
 import Showcase from "../components/Home/Showcase";
 import Sidebar from "../components/Home/Sidebar/Sidebar";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { loading, isAuthenticated, error, user } = useSelector((state) => state.user);
+
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate(`/home`)
+        } else {
+            navigate(`/intro`)
+        }
+    }, [dispatch, error, isAuthenticated, navigate]);
     return (
         <>
             <Header />

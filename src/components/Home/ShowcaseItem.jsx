@@ -112,7 +112,7 @@ const ShowcaseItem = ({ _id, caption, likes, comments, image, postedBy, savedBy,
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/50 via-transparent to-black/50 rounded-tr-xl rounded-tl-xl"></div>
 
                 <span className="absolute text-white text-4xl font-bold" style={{ top: '30px', left: '20px' }}>
-                    <Link to={`/${postedBy.username}`} className="text-4xl font-semibold hover:underline">@{postedBy.username}</Link>
+                    <Link to={`/profile/${postedBy.username}`} className="text-4xl font-semibold hover:underline">@{postedBy.username}</Link>
                 </span>
                 <span className="absolute text-white text-2xl font-bold" style={{ bottom: '30px', right: '15px' }}>
                     <span className="text-2xl truncate">{caption}</span>

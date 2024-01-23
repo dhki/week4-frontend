@@ -12,10 +12,13 @@ import { Lights } from "./Lights";
 import * as THREE from 'three';
 import { Sky } from '@react-three/drei';
 import SnapshotModal from "../Home/SnapshotModal";
+import { useNavigate } from "react-router-dom";
 
 function ShowcaseThreeItem({ _id, imageUrl }) {
     const [cameraPosition, setCameraPosition] = useState(0);
     console.log(imageUrl);
+
+    const navigate = useNavigate();
 
     // 더미 이미지 데이터
     const imageList = [
@@ -89,7 +92,7 @@ function ShowcaseThreeItem({ _id, imageUrl }) {
     return (
         <>
             <div style={{ position: 'relative', width: '1400px', height: '900px' }}>
-                {/* <div
+                <div
                     style={{
                         position: 'absolute',
                         top: 0,
@@ -104,9 +107,9 @@ function ShowcaseThreeItem({ _id, imageUrl }) {
                         e.preventDefault();
                         // You can add custom handling here if needed
                     }}
-                > */}
-                {/* 여기에 오버레이 가능 */}
-                {/* </div> */}
+                >
+                <button className="relative text-2xl" onClick={() => navigate(`/${_id}`)}>Enter Metaverse</button>
+                </div>
                 <Canvas
                     camera={{
                         position: sceneState.camera.position,
@@ -188,6 +191,7 @@ function ShowcaseThreeItem({ _id, imageUrl }) {
                     Next
                 </button>
             )}
+            
             {showModal && (
                 <SnapshotModal imageUrl={selectedImage} onClose={() => setShowModal(false)} />
             )}

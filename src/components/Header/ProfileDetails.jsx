@@ -5,6 +5,7 @@ import { logoutUser } from '../../actions/userAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 import { ClickAwayListener } from '@mui/material';
+import { Cookies } from 'react-cookie';
 
 const ProfileDetails = ({ setProfileToggle }) => {
 
@@ -38,6 +39,8 @@ const ProfileDetails = ({ setProfileToggle }) => {
 
     const handleLogout = () => {
         dispatch(logoutUser());
+        const cookie = new Cookies();
+        cookie.remove('token');
         navigate("/login");
         toast.success("Logout Successfully");
     }

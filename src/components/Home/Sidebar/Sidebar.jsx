@@ -2,6 +2,9 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { logoutUser } from '../../../actions/userAction';
+import { Cookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 // import { getPostsOfFollowing } from '../../../actions/postAction';
 // import { clearErrors, getSuggestedUsers, loadUser } from '../../../actions/userAction';
 // import { POST_FOLLOWING_RESET } from '../../../constants/postConstants';
@@ -18,6 +21,7 @@ const Sidebar = () => {
 
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const { user } = useSelector((state) => state.user);
 
@@ -45,6 +49,15 @@ const Sidebar = () => {
     //     }
     // }, [success, followError])
 
+    const handleLogout = () => {
+        dispatch(logoutUser());
+        const cookie = new Cookies();
+        cookie.remove('token');
+
+        navigate("/login");
+        toast.success("Logout Successfully");
+    }
+
 
     return (
         <div className="fixed lg:right-32 xl:right-56 w-3/12 h-full hidden lg:flex flex-col flex-auto m-8 mt-12 pr-8 -z-1">
@@ -56,12 +69,12 @@ const Sidebar = () => {
                     <div className="flex flex-auto space-x-4 items-center">
                         {/* <Link to={`/${user.username}`}><img draggable="false" className="w-14 h-14 rounded-full object-cover" src={user.avatar} alt={user.name} /></Link> */}
                         <Link to={`/profile/${user.username}`}><img draggable="false" className="w-14 h-14 rounded-full object-cover" src={user.avatar} alt={user.name} /></Link>
-                        <div className="flex flex-col">
-                            <Link to={`/profile/${user.username}`} className="text-black text-sm font-semibold">{user.username}</Link>
+                        <div className="flex flex-col items-start">
+                            <Link to={`/profile/${user.username}`} className="text-black text-sm font-semibold">@{user.username}</Link>
                             <span className="text-gray-400 text-sm">{user.name}</span>
                         </div>
                     </div>
-                    <span className="text-blue-500 text-xs font-semibold cursor-pointer">Logout</span>
+                    <span className="text-blue-500 text-xs font-semibold cursor-pointer" onClick={handleLogout}>Logout</span>
                 </div>
 
                 {/* <!-- suggestions --> */}
