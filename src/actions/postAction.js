@@ -25,7 +25,6 @@ export const addNewPost = (postData) => async (dispatch) => {
         formData.append("images", postData.get('images'));
 
         console.log(formData.get("images"));
-        // const config = { header: { "Content-Type": "application/json" } }
 
         dispatch({ type: NEW_POST_REQUEST });
         const config = { 

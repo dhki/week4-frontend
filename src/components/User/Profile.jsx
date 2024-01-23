@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import axios from 'axios';
 import PostContainer from './Posts/PostContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -16,8 +17,21 @@ import NotFound from '../Errors/NotFound';
 const Profile = () => {
 
     const dispatch = useDispatch();
-    const params = useParams();
     const navigate = useNavigate();
+
+    const { username } = useParams();
+    const [user, setUser] = useState(null);
+    
+    // find user detail
+    useEffect(() => {
+        const getUser = async () => {
+            const ret = await axios.get(`https://madcamp.dhki.kr/users/detail/${username}`);
+            return ret;
+        }
+
+        const user = getUser();
+        setUser(user);
+    }, [])
 
     const [follow, setFollow] = useState(false);
     const [viewModal, setViewModal] = useState(false);
@@ -25,27 +39,10 @@ const Profile = () => {
     const [usersArr, setUsersArr] = useState([]);
     const [savedTab, setSavedTab] = useState(false);
 
-    // const user = {
-    //     name: 'Young Ko',
-    //     username: '0_forever',
-    //     posts: 20,
-    //     followers: 1000,
-    //     following: 500,
-    //     bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida tellus id metus ullamcorper.',
-    //     website: 'https://www.example.com',
-    //     avatar: 'https://www.example.com/avatar.jpg',
-    // };
-    // const dummyPosts = [
-    //     { id: 1, imageUrl: 'https://www.example.com/post1.jpg' },
-    //     { id: 2, imageUrl: 'https://www.example.com/post2.jpg' },
-    //     // Add more dummy posts here
-    // ];
-
-    const { user, error, loading } = useSelector((state) => state.userDetails);
     // const { error, loading } = useSelector((state) => state.userDetails);
-    const { user: loggedInUser } = useSelector((state) => state.user);
-    const { error: followError, success, message } = useSelector((state) => state.followUser);
-    const { error: chatError, chat } = useSelector((state) => state.newChat);
+    const loggedInUser  = useSelector((state) => state.user);
+    // const { error: followError, success, message } = useSelector((state) => state.followUser);
+    // const { error: chatError, chat } = useSelector((state) => state.newChat);
 
     const handleFollow = () => {
         // setFollow(!follow); 
@@ -73,7 +70,7 @@ const Profile = () => {
             toast.error(error);
             dispatch(clearErrors());
         }
-        dispatch(getUserDetails(params.username));
+        dispatch(getUserDetails(username));
 
         if (followError) {
             toast.error(followError);
@@ -88,28 +85,28 @@ const Profile = () => {
             dispatch({ type: USER_DETAILS_RESET })
         }
 
-    }, [dispatch, error, params.username, followError, success, message]);
+    }, [dispatch, error, username, followError, success, message]);
 
-    useEffect(() => {
-        // console.log(user?.followers?.some((id) => id === loggedInUser._id))
-        // setFollow(user?.followers?.some((u) => u._id === loggedInUser._id))
-    }, [user]);
+    // useEffect(() => {
+    //     // console.log(user?.followers?.some((id) => id === loggedInUser._id))
+    //     // setFollow(user?.followers?.some((u) => u._id === loggedInUser._id))
+    // }, [user]);
 
     const addToChat = () => {
         dispatch(addNewChat(user._id));
     }
 
-    useEffect(() => {
-        if (chatError) {
-            toast.error(chatError);
-            dispatch(clearChatErrors());
-        }
-        if (chat) {
-            const friendId = chat.users?.find((id) => id !== loggedInUser._id);
-            navigate(`/direct/t/${chat._id}/${friendId}`);
-            dispatch({ type: NEW_CHAT_RESET });
-        }
-    }, [dispatch, chatError, chat, navigate]);
+    // useEffect(() => {
+    //     if (chatError) {
+    //         toast.error(chatError);
+    //         dispatch(clearChatErrors());
+    //     }
+    //     if (chat) {
+    //         const friendId = chat.users?.find((id) => id !== loggedInUser._id);
+    //         navigate(`/direct/t/${chat._id}/${friendId}`);
+    //         dispatch({ type: NEW_CHAT_RESET });
+    //     }
+    // }, [dispatch, chatError, chat, navigate]);
 
     return (
         <>
