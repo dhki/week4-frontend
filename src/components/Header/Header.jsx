@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { exploreOutline, homeFill, homeOutline, likeFill, likeOutline, messageFill, messageOutline, postUploadOutline } from './SvgIcons'
 import { Link, useLocation } from 'react-router-dom';
 import ProfileDetails from './ProfileDetails';
-// import NewPost from './NewPost';
+import NewPost from './NewPost';
 import { useSelector } from 'react-redux';
 import SearchBox from './SearchBar/SearchBox';
 import { ClickAwayListener } from '@mui/material';
@@ -61,7 +61,7 @@ const Header = () => {
                     <ProfileDetails setProfileToggle={setProfileToggle} />
                 }
 
-                {/* <NewPost newPost={newPost} setNewPost={setNewPost} /> */}
+                <NewPost newPost={newPost} setNewPost={setNewPost} />
 
             </div>
         </nav>

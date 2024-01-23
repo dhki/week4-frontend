@@ -17,12 +17,12 @@ const ProfileDetails = ({ setProfileToggle }) => {
         {
             title: "Profile",
             icon: profileIcon,
-            redirect: `/${user.username}`
+            redirect: `/profile/${user.username}`
         },
         {
             title: "Saved",
             icon: savedIcon,
-            redirect: `/${user.username}`
+            redirect: `/profile/${user.username}`
         },
         {
             title: "Settings",

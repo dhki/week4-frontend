@@ -8,7 +8,7 @@ import { sceneState } from './modules/store';
 import { CameraAnimation } from './CameraAnimation';
 import { Model } from './Model';
 
-// TCanvas 컴포넌트: React-Three-Fiber의 Canvas를 활용한 3D 씬 렌더링
+// TCanvas 컴포넌트: @react-three/fiber의 Canvas를 활용한 3D 씬 렌더링
 export const TCanvas = () => {
 	return (
 		<Canvas

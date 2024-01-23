@@ -10,10 +10,10 @@ export const CameraAnimation = () => {
 	return useFrame(({ camera }) => {
 		// console.log(sceneState.camera.position[0], sceneState.camera.position[1], sceneState.camera.position[2]);
 		target.set(...sceneState.camera.position);
-		camera.position.lerp(target, 0.05);
+		camera.position.lerp(target, 0.02);
 
 		target.set(...sceneState.camera.target);
-		sceneState.cameraTargetProgress.lerp(target, 0.1);
+		sceneState.cameraTargetProgress.lerp(target, 0.05);
 		camera.lookAt(sceneState.cameraTargetProgress);
 	});
 };

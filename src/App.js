@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import KakaoLogin from './pages/login';
 import SpinLoader from './components/Layouts/SpinLoader';
 import Profile from './components/User/Profile';
+import Gallery from './pages/Gallery';
 
 import './App.css';
 
@@ -18,8 +19,11 @@ function App() {
           <Route path='/login' element={<KakaoLogin />}></Route>
           <Route path='/intro' element={<Intro />}></Route>
           <Route path='/home' element={<Home />}></Route>
-          <Route path="/:username" element={
+          <Route path="/profile/:username" element={
             <Profile />
+          } />
+          <Route path='/:id' element={
+            <Gallery />
           } />
         </Routes>
       </Suspense>
