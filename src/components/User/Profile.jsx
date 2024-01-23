@@ -26,12 +26,10 @@ const Profile = () => {
     useEffect(async () => {
         const getUser = async () => {
             const ret = await axios.get(`https://madcamp.dhki.kr/users/detail/${username}`);
-            console.log(ret.data);
             return ret.data.user;
         }
 
         const user = await getUser();
-        console.log(user);
         setUser(user);
     }, [username])
 
@@ -46,6 +44,9 @@ const Profile = () => {
     const { error: followError, success, message } = useSelector((state) => state.followUser);
     // const { error: chatError, chat } = useSelector((state) => state.newChat);
 
+    console.log(user);
+    console.log(loggedInUser);
+    
     const handleFollow = () => {
         // setFollow(!follow); 
         dispatch(followUser(user._id));
