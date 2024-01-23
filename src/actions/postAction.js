@@ -18,25 +18,18 @@ export const addNewPost = (postData) => async (dispatch) => {
         const formData = new FormData();
         formData.append("title", postData.get("title"));
         formData.append("discript", postData.get("discript"));
-        // formData.append("images", [postData.get("images"), postData.get("images"), postData.get("images")]);
+        formData.append("images", [postData.get("images"), postData.get("images"), postData.get("images")]);
         formData.append("token", token);
-        formData.append("images", postData.get('images'));
-        formData.append("images", postData.get('images'));
-        formData.append("images", postData.get('images'));
 
         console.log(formData.get("images"));
+        // const config = { header: { "Content-Type": "application/json" } }
 
         dispatch({ type: NEW_POST_REQUEST });
-<<<<<<< HEAD
         const config = { 
             headers: { "Content-Type": "multipart/form-data" },  // "multipart/form-data"으로 변경
             withCredentials: true,
         };
         const { data } = await axios.post("https://madcamp.dhki.kr/posts/new", formData, config);
-=======
-        const config = { header: { "Content-Type": "application/json" } }
-        const { data } = await axios.post("https://madcamp.dhki.kr/posts/new", postData, {withCredentials: true});
->>>>>>> bcc9c61 (fix: login)
 
         dispatch({
             type: NEW_POST_SUCCESS,
