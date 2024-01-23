@@ -40,13 +40,13 @@ const Profile = () => {
     const [savedTab, setSavedTab] = useState(false);
 
     const { error, loading } = useSelector((state) => state.userDetails);
-    const loggedInUser  = useSelector((state) => state.user);
+    const {user: loggedInUser}  = useSelector((state) => state.user);
     const { error: followError, success, message } = useSelector((state) => state.followUser);
     // const { error: chatError, chat } = useSelector((state) => state.newChat);
 
     console.log(user);
     console.log(loggedInUser);
-    
+
     const handleFollow = () => {
         // setFollow(!follow); 
         dispatch(followUser(user._id));
