@@ -8,25 +8,56 @@ export const Loading = () => {
     const ref = useRef(null);
     const loadingSnap = useSnapshot(loadingState);
 
+    // useEffect(() => {
+    //     const disableLoading = () => {
+    //         ref.current.classList.add('disable');
+    //         ref.current.ontransitionend = () => {
+    //             ref.current.style.visibility = 'hidden';
+    //             gsap.to(sceneState, { lightProgress: 1, duration: 1.5, delay: 0.3, ease: 'power3.in' });
+    //         };
+    //     };
+
+    //     if (loadingSnap.completed) {
+    //         disableLoading();
+    //     }
+
+    //     setTimeout(() => {
+    //         if (!loadingSnap.completed) {
+    //             disableLoading();
+    //         }
+    //     }, 2000);
+    // }, [loadingSnap.completed]);
     useEffect(() => {
+        const element = ref.current; // 요소 참조
+
         const disableLoading = () => {
-            ref.current.classList.add('disable');
-            ref.current.ontransitionend = () => {
-                ref.current.style.visibility = 'hidden';
-                gsap.to(sceneState, { lightProgress: 1, duration: 1.5, delay: 0.3, ease: 'power3.in' });
-            };
+            if (element) {
+                element.classList.add('disable');
+                element.ontransitionend = () => {
+                    element.style.visibility = 'hidden';
+                    gsap.to(sceneState, { lightProgress: 1, duration: 1.5, delay: 0.3, ease: 'power3.in' });
+                };
+            }
         };
 
         if (loadingSnap.completed) {
             disableLoading();
         }
 
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             if (!loadingSnap.completed) {
                 disableLoading();
             }
         }, 2000);
+
+        return () => {
+            if (element) {
+                element.ontransitionend = null;
+            }
+            clearTimeout(timeoutId);
+        };
     }, [loadingSnap.completed]);
+
 
     return (
         <div ref={ref} className={styles.container}>

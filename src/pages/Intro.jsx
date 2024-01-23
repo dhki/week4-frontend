@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Canvas } from '@react-three/fiber';
 import { MeshStandardMaterial } from 'three';
 import SpiritSphere from "../components/SpiritSphere";
@@ -15,6 +17,15 @@ import '../components/Intro/Intro.css'
 import { useSnapshot } from 'valtio';
 
 function Intro() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { loading, isAuthenticated, error, user } = useSelector((state) => state.user);
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate(`/home`)
+        }
+    }, [dispatch, error, isAuthenticated, navigate]);
 
     const snap = useSnapshot(sceneState);
     console.log(snap);

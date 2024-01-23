@@ -6,12 +6,21 @@ import { Loading } from "../components/ShowcaseThree/Loading";
 import '../components/Gallery/style/css/gallery.css';
 
 function Gallery() {
+    const navigate = useNavigate();
     const params = useParams();
     // const navigate = useNavigate();
     const id = params.id;
     console.log(id);
 
     const [ready, setReady] = useState(false)
+
+    const handleBackClick = () => {
+        // 100ms 후에 홈으로 리다이렉션합니다.
+        setTimeout(() => {
+            // navigate('/home');
+            window.location.href = '/intro';
+        }, 100);
+    };
 
     useEffect(() => {
         const handleLockchange = (e) => {
@@ -21,7 +30,7 @@ function Gallery() {
                 } else {
                     setReady(true)
                 }
-            }, 100); // 100 밀리초의 지연을 추가합니다.
+            }, 0); // 100 밀리초의 지연을 추가합니다.
         }
 
         document.addEventListener("pointerlockchange", handleLockchange);
@@ -39,6 +48,7 @@ function Gallery() {
                     {/* <img className={ready ? "" : "controlsL"} src="./assets/Images/ControlsL.png" alt="Move: WASD	Jump: SPACE Run: SHIFT"></img>
                 <img className={ready ? "" : "controlsR"} src="./assets/Images/ControlsR.png" alt="Look: MOUSE"></img>
                 <img className={ready ? "" : "controlsTR"} src="./assets/Images/ControlsTR.png" alt="Toggle Performance: P Toggle Night Mode: N"></img> */}
+                    <button className="relative text-2xl" onClick={handleBackClick}>Back</button>
                 </div>
                 <div className="dot"
                     style={{ pointerEvents: ready ? "none" : "all" }}
