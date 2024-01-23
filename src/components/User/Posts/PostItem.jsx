@@ -11,7 +11,7 @@ import { addComment, clearErrors, deletePost, likePost, savePost } from '../../.
 import { metaballsMenu } from '../SvgIcons';
 // import moment from 'moment';
 
-const PostItem = ({ _id, caption, likes, comments, image, postedBy, savedBy, createdAt }) => {
+const PostItem = ({ _id, title, likes, comments, title_image, owner, savedBy, createdAt }) => {
 
     const dispatch = useDispatch();
     const commentInput = useRef(null);
@@ -74,7 +74,7 @@ const PostItem = ({ _id, caption, likes, comments, image, postedBy, savedBy, cre
     return (
         <>
             <div onClick={() => setOpen(true)} className="group w-full h-32 sm:h-72 max-h-72 flex justify-center items-center bg-gray-100 hover:bg-black cursor-pointer relative z-0">
-                <img draggable="false" loading="lazy" className="hover:opacity-75 group-hover:opacity-75 cursor-pointer object-cover h-full w-full" src={image} alt="Post" />
+                <img draggable="false" loading="lazy" className="hover:opacity-75 group-hover:opacity-75 cursor-pointer object-cover h-full w-full" src={title_image} alt="Post" />
                 <div className="hidden group-hover:flex text-white absolute pointer-events-none gap-4">
                     {/* <span><FavoriteIcon /> {likes.length}</span> */}
                     {/* <span><ModeCommentIcon /> {comments.length}</span> */}
@@ -85,7 +85,7 @@ const PostItem = ({ _id, caption, likes, comments, image, postedBy, savedBy, cre
                 <div className="flex sm:flex-row flex-col max-w-7xl">
 
                     <div className="relative flex items-center justify-center bg-black sm:h-[90vh] w-full" onDoubleClick={setLike}>
-                        <img draggable="false" className="object-contain h-full w-full" src={image} alt="post" />
+                        <img draggable="false" className="object-contain h-full w-full" src={title_image} alt="post" />
                         {likeEffect &&
                             <img draggable="false" height="80px" className="likeEffect" alt="heart" src="https://img.icons8.com/ios-filled/2x/ffffff/like.png" />
                         }
@@ -97,29 +97,29 @@ const PostItem = ({ _id, caption, likes, comments, image, postedBy, savedBy, cre
                         <div className="flex justify-between px-3 py-2 border-b items-center">
                             {/* icon with name */}
                             <div className="flex space-x-3 items-center">
-                                <Link to={`/${postedBy.username}`}><img draggable="false" className="w-10 h-10 rounded-full object-cover" src={postedBy.avatar} alt="avatar" /></Link>
-                                <Link to={`/${postedBy.username}`} className="text-black text-sm font-semibold hover:underline">{postedBy.username}</Link>
+                                <Link to={`/${owner.username}`}><img draggable="false" className="w-10 h-10 rounded-full object-cover" src={owner.avatar} alt="avatar" /></Link>
+                                <Link to={`/${owner.username}`} className="text-black text-sm font-semibold hover:underline">{owner.username}</Link>
                             </div>
                             <span onClick={() => setDeleteModal(true)} className="cursor-pointer">{metaballsMenu}</span>
                         </div>
 
                         <Dialog open={deleteModal} onClose={closeDeleteModal} maxWidth='xl'>
                             <div className="flex flex-col items-center w-80">
-                                {postedBy._id === user._id &&
+                                {owner._id === user._id &&
                                     <button onClick={handleDeletePost} className="text-red-600 font-medium border-b py-2.5 w-full hover:bg-red-50">Delete</button>
                                 }
                                 <button onClick={closeDeleteModal} className="py-2.5 w-full hover:bg-gray-50">Cancel</button>
                             </div>
                         </Dialog>
 
-                        {/* comments */}
+                        {/* comments
                         <div className="p-4 w-full flex-1 max-h-[63vh] overscroll-x-hidden overflow-y-auto">
 
                             <div className="flex items-start">
-                                <Link to={`/${postedBy.username}`} className="w-12"><img draggable="false" className="w-9 h-9 rounded-full object-cover" src={postedBy.avatar} alt="avatar" /></Link>
-                                <Link to={`/${postedBy.username}`} className="text-sm font-semibold hover:underline mr-2">{postedBy.username}</Link>
+                                <Link to={`/${owner.username}`} className="w-12"><img draggable="false" className="w-9 h-9 rounded-full object-cover" src={owner.avatar} alt="avatar" /></Link>
+                                <Link to={`/${owner.username}`} className="text-sm font-semibold hover:underline mr-2">{owner.username}</Link>
                             </div>
-                            <p className="text-sm whitespace-pre-line ml-12 -mt-4 mb-3.5">{caption}</p>
+                            <p className="text-sm whitespace-pre-line ml-12 -mt-4 mb-3.5">{title}</p>
 
                             {comments.map((c) => (
                                 <div className="flex items-start space-x-1 mb-3" key={c._id}>
@@ -128,7 +128,7 @@ const PostItem = ({ _id, caption, likes, comments, image, postedBy, savedBy, cre
                                     <p className="text-sm whitespace-pre-line">{c.comment}</p>
                                 </div>
                             ))}
-                        </div>
+                        </div> */}
 
                         <div className="">
                             {/* like comment container */}

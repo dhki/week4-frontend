@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import axios from 'axios';
 import PostContainer from './Posts/PostContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -16,8 +17,21 @@ import NotFound from '../Errors/NotFound';
 const Profile = () => {
 
     const dispatch = useDispatch();
-    const params = useParams();
     const navigate = useNavigate();
+
+    const { username } = useParams();
+    const [user, setUser] = useState(null);
+    
+    // find user detail
+    useEffect(async () => {
+        const getUser = async () => {
+            const ret = await axios.get(`https://madcamp.dhki.kr/users/detail/${username}`);
+            return ret.data.user;
+        }
+
+        const user = await getUser();
+        setUser(user);
+    }, [username])
 
     const [follow, setFollow] = useState(false);
     const [viewModal, setViewModal] = useState(false);
@@ -25,27 +39,13 @@ const Profile = () => {
     const [usersArr, setUsersArr] = useState([]);
     const [savedTab, setSavedTab] = useState(false);
 
-    // const user = {
-    //     name: 'Young Ko',
-    //     username: '0_forever',
-    //     posts: 20,
-    //     followers: 1000,
-    //     following: 500,
-    //     bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida tellus id metus ullamcorper.',
-    //     website: 'https://www.example.com',
-    //     avatar: 'https://www.example.com/avatar.jpg',
-    // };
-    // const dummyPosts = [
-    //     { id: 1, imageUrl: 'https://www.example.com/post1.jpg' },
-    //     { id: 2, imageUrl: 'https://www.example.com/post2.jpg' },
-    //     // Add more dummy posts here
-    // ];
-
-    const { user, error, loading } = useSelector((state) => state.userDetails);
-    // const { error, loading } = useSelector((state) => state.userDetails);
-    const { user: loggedInUser } = useSelector((state) => state.user);
+    const { error, loading } = useSelector((state) => state.userDetails);
+    const {user: loggedInUser}  = useSelector((state) => state.user);
     const { error: followError, success, message } = useSelector((state) => state.followUser);
-    const { error: chatError, chat } = useSelector((state) => state.newChat);
+    // const { error: chatError, chat } = useSelector((state) => state.newChat);
+
+    console.log(user);
+    console.log(loggedInUser);
 
     const handleFollow = () => {
         // setFollow(!follow); 
@@ -68,54 +68,54 @@ const Profile = () => {
         setViewModal(false)
     }
 
-    useEffect(() => {
-        if (error) {
-            toast.error(error);
-            dispatch(clearErrors());
-        }
-        dispatch(getUserDetails(params.username));
+    // useEffect(() => {
+    //     if (error) {
+    //         toast.error(error);
+    //         dispatch(clearErrors());
+    //     }
+    //     dispatch(getUserDetails(username));
 
-        if (followError) {
-            toast.error(followError);
-            dispatch(clearErrors());
-        }
-        if (success) {
-            toast.success(message)
-            dispatch({ type: FOLLOW_USER_RESET });
-        }
+    //     if (followError) {
+    //         toast.error(followError);
+    //         dispatch(clearErrors());
+    //     }
+    //     if (success) {
+    //         toast.success(message)
+    //         dispatch({ type: FOLLOW_USER_RESET });
+    //     }
 
-        return () => {
-            dispatch({ type: USER_DETAILS_RESET })
-        }
+    //     return () => {
+    //         dispatch({ type: USER_DETAILS_RESET })
+    //     }
 
-    }, [dispatch, error, params.username, followError, success, message]);
+    // }, [dispatch, error, username, followError, success, message]);
 
-    useEffect(() => {
-        // console.log(user?.followers?.some((id) => id === loggedInUser._id))
-        // setFollow(user?.followers?.some((u) => u._id === loggedInUser._id))
-    }, [user]);
+    // useEffect(() => {
+    //     // console.log(user?.followers?.some((id) => id === loggedInUser._id))
+    //     // setFollow(user?.followers?.some((u) => u._id === loggedInUser._id))
+    // }, [user]);
 
     const addToChat = () => {
         dispatch(addNewChat(user._id));
     }
 
-    useEffect(() => {
-        if (chatError) {
-            toast.error(chatError);
-            dispatch(clearChatErrors());
-        }
-        if (chat) {
-            const friendId = chat.users?.find((id) => id !== loggedInUser._id);
-            navigate(`/direct/t/${chat._id}/${friendId}`);
-            dispatch({ type: NEW_CHAT_RESET });
-        }
-    }, [dispatch, chatError, chat, navigate]);
+    // useEffect(() => {
+    //     if (chatError) {
+    //         toast.error(chatError);
+    //         dispatch(clearChatErrors());
+    //     }
+    //     if (chat) {
+    //         const friendId = chat.users?.find((id) => id !== loggedInUser._id);
+    //         navigate(`/direct/t/${chat._id}/${friendId}`);
+    //         dispatch({ type: NEW_CHAT_RESET });
+    //     }
+    // }, [dispatch, chatError, chat, navigate]);
 
     return (
         <>
             <MetaData title={`${user?.name} (@${user?.username}) • Instagram photos and videos`} />
 
-            {loading && <BackdropLoader />}
+            {/* {loading && <BackdropLoader />} */}
             {user ?
                 <div className="mt-16 xl:w-2/3 mx-auto">
 
@@ -131,7 +131,7 @@ const Profile = () => {
                             <div className="flex items-center gap-8 sm:justify-start justify-between">
 
                                 <h2 className="text-2xl sm:text-3xl font-thin">{user.username}</h2>
-                                {(loggedInUser.username === user.username) ? (
+                                {(loggedInUser.username == user.username) ? (
                                     <div className="flex gap-3 items-center">
                                         <Link to="/accounts/edit" className="border font-medium hover:bg-gray-50 text-sm rounded px-2 py-1">Edit Profile</Link>
                                         <Link to="/accounts/edit">{settingsIcon}</Link>
@@ -184,7 +184,7 @@ const Profile = () => {
                         <div className="flex gap-12 justify-center">
                             <span onClick={() => setSavedTab(false)} className={`${savedTab ? 'text-gray-400' : 'border-t border-black'} py-3 cursor-pointer flex items-center text-[13px] uppercase gap-3 tracking-[1px] font-medium`}>
                                 {savedTab ? postsIconOutline : postsIconFill} posts</span>
-                            {user._id === loggedInUser._id && (
+                            {user._id == loggedInUser._id && (
                                 <span onClick={() => setSavedTab(true)} className={`${savedTab ? 'border-t border-black' : 'text-gray-400'} py-3 cursor-pointer flex items-center text-[13px] uppercase gap-3 tracking-[1px] font-medium`}>
                                     {savedTab ? savedIconFill : savedIconOutline} saved</span>
                             )}
