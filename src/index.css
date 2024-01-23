@@ -25,3 +25,20 @@ code {
   height: 30px; /* 화살표 높이 */
 }
 
+.snapshot-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.snapshot-modal {
+  background-color: white;
+  padding: 2em;
+  border-radius: 10px;
+}

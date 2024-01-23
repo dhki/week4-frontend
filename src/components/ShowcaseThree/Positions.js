@@ -1,7 +1,7 @@
 export const cameraPositions = [
     {
         num: 0,
-        position: [-8, 0, 3.5],
+        position: [-8, 0, 3],
         target: [-8, 0, 0]
     },
     {

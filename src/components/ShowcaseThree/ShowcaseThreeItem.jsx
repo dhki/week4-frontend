@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, Suspense } from "react";
 import PictureFrame from "../pictureFrame/PictureFrame";
+import PosterFrame from "../pictureFrame/PosterFrame";
 import MarbleWall from "../marbleWall/MarbleWall";
 import { Canvas, useThree } from "@react-three/fiber";
 import WhiteWall from "../whiteWall/WhiteWall";
@@ -10,27 +11,30 @@ import { cameraPositions } from "./Positions";
 import { Lights } from "./Lights";
 import * as THREE from 'three';
 import { Sky } from '@react-three/drei';
+import SnapshotModal from "../Home/SnapshotModal";
 
 function ShowcaseThreeItem({ _id, imageUrl }) {
     const [cameraPosition, setCameraPosition] = useState(0);
     console.log(imageUrl);
 
+    // 더미 이미지 데이터
     const imageList = [
-        { "id": 1, "url": "image_url_1.jpg" },
-        { "id": 2, "url": "image_url_2.jpg" },
-        { "id": 3, "url": "image_url_3.jpg" },
-        { "id": 4, "url": "image_url_1.jpg" },
-        { "id": 5, "url": "image_url_2.jpg" },
-        { "id": 6, "url": "image_url_3.jpg" },
-        { "id": 7, "url": "image_url_1.jpg" },
-        { "id": 8, "url": "image_url_2.jpg" },
-    ]
+        { id: 1, url: 'https://via.placeholder.com/150/0000FF/808080?Text=Image1' },
+        { id: 2, url: 'https://via.placeholder.com/150/FF0000/FFFFFF?Text=Image2' },
+        { id: 3, url: 'https://via.placeholder.com/150/FFFF00/000000?Text=Image3' },
+        { id: 4, url: 'https://via.placeholder.com/150/000000/FFFFFF?Text=Image4' },
+        { id: 5, url: 'https://via.placeholder.com/150/0000FF/808080?Text=Image5' },
+        { id: 6, url: 'https://via.placeholder.com/150/FF0000/FFFFFF?Text=Image6' },
+        { id: 7, url: 'https://via.placeholder.com/150/FFFF00/000000?Text=Image7' },
+        { id: 8, url: 'https://via.placeholder.com/150/000000/FFFFFF?Text=Image8' },
+    ];
+
     // check user's width and height
     const [winWidth, setWinWidth] = useState(window.innerWidth);
     const [winHeight, setWinHeight] = useState(window.innerHeight);
 
-    const [moveRight, setMoveRight] = useState(false);
-    const [moveLeft, setMoveLeft] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
 
     useEffect(() => {
         setCameraPosition(sceneState.camera.num);
@@ -46,6 +50,19 @@ function ShowcaseThreeItem({ _id, imageUrl }) {
             window.removeEventListener('resize', resizing);
         }
     }, [])
+
+    useEffect(() => {
+        setShowModal(false);
+        const timer = setTimeout(() => {
+            if (cameraPosition === 0) return;
+            setSelectedImage(imageList[cameraPosition - 1].url);
+            setShowModal(true); 
+        }, 2000); 
+
+        return () => {
+            clearTimeout(timer); 
+        };
+    }, [cameraPosition]);
 
     const frameWidth = 4; // Width of each PictureFrame
     const gapBetweenFrames = 4; // Gap between frames
@@ -133,6 +150,12 @@ function ShowcaseThreeItem({ _id, imageUrl }) {
                         <MarbleWall position={[8, -5.3, 5]}
                             args={[wallLength, 0.03, 100]} />
 
+                        <PosterFrame
+                            position={[-8, 0, 0]}
+                            size={{ width: 4, height: 4 }}
+                            image_url={"http://madcamp.dhki.kr/images/dongha.jpg"}
+                        />
+
                         {imageList.map((image, index) => (
                             <PictureFrame
                                 key={image.id}
@@ -165,7 +188,9 @@ function ShowcaseThreeItem({ _id, imageUrl }) {
                     Next
                 </button>
             )}
-
+            {showModal && (
+                <SnapshotModal imageUrl={selectedImage} onClose={() => setShowModal(false)} />
+            )}
         </>
     )
 }
