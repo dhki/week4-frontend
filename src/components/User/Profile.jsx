@@ -23,14 +23,14 @@ const Profile = () => {
     const [user, setUser] = useState(null);
     
     // find user detail
-    useEffect(() => {
+    useEffect(async () => {
         const getUser = async () => {
             const ret = await axios.get(`https://madcamp.dhki.kr/users/detail/${username}`);
             console.log(ret.data);
             return ret.data.user;
         }
 
-        const user = getUser();
+        const user = await getUser();
         console.log(user);
         setUser(user);
     }, [username])
