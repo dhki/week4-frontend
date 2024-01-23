@@ -18,8 +18,11 @@ export const addNewPost = (postData) => async (dispatch) => {
         const formData = new FormData();
         formData.append("title", postData.get("title"));
         formData.append("discript", postData.get("discript"));
-        formData.append("images", [postData.get("images"), postData.get("images"), postData.get("images")]);
+        // formData.append("images", [postData.get("images"), postData.get("images"), postData.get("images")]);
         formData.append("token", token);
+        formData.append("images", postData.get('images'));
+        formData.append("images", postData.get('images'));
+        formData.append("images", postData.get('images'));
 
         console.log(formData.get("images"));
         // const config = { header: { "Content-Type": "application/json" } }
