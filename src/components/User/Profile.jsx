@@ -131,7 +131,7 @@ const Profile = () => {
                             <div className="flex items-center gap-8 sm:justify-start justify-between">
 
                                 <h2 className="text-2xl sm:text-3xl font-thin">{user.username}</h2>
-                                {(loggedInUser.username === user.username) ? (
+                                {(loggedInUser.username == user.username) ? (
                                     <div className="flex gap-3 items-center">
                                         <Link to="/accounts/edit" className="border font-medium hover:bg-gray-50 text-sm rounded px-2 py-1">Edit Profile</Link>
                                         <Link to="/accounts/edit">{settingsIcon}</Link>
@@ -184,7 +184,7 @@ const Profile = () => {
                         <div className="flex gap-12 justify-center">
                             <span onClick={() => setSavedTab(false)} className={`${savedTab ? 'text-gray-400' : 'border-t border-black'} py-3 cursor-pointer flex items-center text-[13px] uppercase gap-3 tracking-[1px] font-medium`}>
                                 {savedTab ? postsIconOutline : postsIconFill} posts</span>
-                            {user._id === loggedInUser._id && (
+                            {user._id == loggedInUser._id && (
                                 <span onClick={() => setSavedTab(true)} className={`${savedTab ? 'border-t border-black' : 'text-gray-400'} py-3 cursor-pointer flex items-center text-[13px] uppercase gap-3 tracking-[1px] font-medium`}>
                                     {savedTab ? savedIconFill : savedIconOutline} saved</span>
                             )}
