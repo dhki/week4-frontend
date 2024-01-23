@@ -30,6 +30,7 @@ const Profile = () => {
         }
 
         const user = getUser();
+        console.log(user);
         setUser(user);
     }, [username])
 
@@ -112,7 +113,7 @@ const Profile = () => {
         <>
             <MetaData title={`${user?.name} (@${user?.username}) • Instagram photos and videos`} />
 
-            {loading && <BackdropLoader />}
+            {/* {loading && <BackdropLoader />} */}
             {user ?
                 <div className="mt-16 xl:w-2/3 mx-auto">
 
