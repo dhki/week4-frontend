@@ -7,6 +7,8 @@ import KakaoLogin from './pages/login';
 import SpinLoader from './components/Layouts/SpinLoader';
 import Profile from './components/User/Profile';
 import Gallery from './pages/Gallery';
+import UpdateProfile from './components/User/Update/UpdateProfile';
+import Update from './components/User/Update/Update';
 
 import './App.css';
 
@@ -24,6 +26,11 @@ function App() {
           } />
           <Route path='/:id' element={
             <Gallery />
+          } />
+          <Route path="/accounts/edit" element={
+            <Update activeTab={0}>
+              <UpdateProfile />
+            </Update>
           } />
         </Routes>
       </Suspense>
