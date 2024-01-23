@@ -10,30 +10,6 @@ export const addNewPost = (postData) => async (dispatch) => {
         const cookies = new Cookies();
         const token = cookies.get('token');
 
-        console.log(token);
-        console.log(postData.get("title"));
-        console.log(postData.get("discript"));
-        console.log(postData.get("images"));
-
-        const formData = new FormData();
-        formData.append("title", postData.get("title"));
-        formData.append("discript", postData.get("discript"));
-        // formData.append("images", [postData.get("images"), postData.get("images"), postData.get("images")]);
-        formData.append("token", token);
-        formData.append("images", postData.get('images'));
-        formData.append("images", postData.get('images'));
-        formData.append("images", postData.get('images'));
-
-        console.log(formData.get("images"));
-
-        const cookies = new Cookies();
-        const token = cookies.get('token');
-
-        console.log(token);
-        console.log(postData.get("title"));
-        console.log(postData.get("discript"));
-        console.log(postData.get("images"));
-
         const formData = new FormData();
         formData.append("title", postData.get("title"));
         formData.append("discript", postData.get("discript"));
@@ -46,11 +22,7 @@ export const addNewPost = (postData) => async (dispatch) => {
         console.log(formData.get("images"));
 
         dispatch({ type: NEW_POST_REQUEST });
-        const config = {
-            headers: { "Content-Type": "multipart/form-data" },  // "multipart/form-data"으로 변경
-            withCredentials: true,
-        };
-        const { data } = await axios.post("https://madcamp.dhki.kr/posts/new", formData, config);
+
         const config = {
             headers: { "Content-Type": "multipart/form-data" },  // "multipart/form-data"으로 변경
             withCredentials: true,
