@@ -8,7 +8,7 @@ export const addNewPost = (postData) => async (dispatch) => {
 
         dispatch({ type: NEW_POST_REQUEST });
         const config = { header: { "Content-Type": "application/json" } }
-        const { data } = await axios.post("https://madcamp.dhki.kr/posts/new", postData, config);
+        const { data } = await axios.post("https://madcamp.dhki.kr/posts/new", postData, {withCredentials: true});
 
         dispatch({
             type: NEW_POST_SUCCESS,
