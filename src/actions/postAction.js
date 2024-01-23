@@ -1,5 +1,5 @@
 import axios from "axios";
-import {Cookies} from 'react-cookie';
+import { Cookies } from 'react-cookie';
 import { CLEAR_ERRORS, DELETE_POST_FAIL, DELETE_POST_REQUEST, DELETE_POST_SUCCESS, LIKE_UNLIKE_POST_FAIL, LIKE_UNLIKE_POST_REQUEST, LIKE_UNLIKE_POST_SUCCESS, NEW_COMMENT_FAIL, NEW_COMMENT_REQUEST, NEW_COMMENT_SUCCESS, NEW_POST_FAIL, NEW_POST_REQUEST, NEW_POST_SUCCESS, POST_DETAILS_FAIL, POST_DETAILS_REQUEST, POST_DETAILS_SUCCESS, POST_FOLLOWING_FAIL, POST_FOLLOWING_REQUEST, POST_FOLLOWING_SUCCESS, SAVE_UNSAVE_POST_FAIL, SAVE_UNSAVE_POST_REQUEST, SAVE_UNSAVE_POST_SUCCESS } from "../constants/postConstants";
 
 
@@ -18,8 +18,11 @@ export const addNewPost = (postData) => async (dispatch) => {
         const formData = new FormData();
         formData.append("title", postData.get("title"));
         formData.append("discript", postData.get("discript"));
-        formData.append("images", [postData.get("images"), postData.get("images"), postData.get("images")]);
+        // formData.append("images", [postData.get("images"), postData.get("images"), postData.get("images")]);
         formData.append("token", token);
+        formData.append("images", postData.get('images'));
+        formData.append("images", postData.get('images'));
+        formData.append("images", postData.get('images'));
 
         console.log(formData.get("images"));
         // const config = { header: { "Content-Type": "application/json" } }
