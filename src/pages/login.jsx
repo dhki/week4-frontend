@@ -11,15 +11,14 @@ function KakaoLogin(){
     const navigate = useNavigate();
     const queryParameters = new URLSearchParams(window.location.search)
     const code = queryParameters.get("code")
-    console.log(code)
 
     const loginRequest = async () => {
         if(code){
             const data = {
-                redirect_uri: 'http://localhost:3000/login',
+                redirect_uri: 'https://week4-frontend-indol.vercel.app/login',
                 code: code
             };
-            console.log("kakaologin")
+
             axios.post('https://madcamp.dhki.kr/users/login/kakao', data) // login request
                 .then(response => {
                     if(response.status == 200){
@@ -40,12 +39,11 @@ function KakaoLogin(){
             navigate(`/intro`);
         }
     }
-    loginRequest();
 
     const {loading, isAuthenticated, error, user} = useSelector((state) => state.user);
     useEffect(() => {
         loginRequest();
-    }, [code]);
+    }, []);
 
     useEffect(() => {
         console.log(isAuthenticated);
@@ -58,8 +56,7 @@ function KakaoLogin(){
 
     return(
         // 로그인이 되는 동안.. 대기 화면..
-        // <Loading/>
-        <></>
+        <Loading/>
     )
 }
 
