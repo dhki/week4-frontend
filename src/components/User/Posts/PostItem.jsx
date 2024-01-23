@@ -11,7 +11,7 @@ import { addComment, clearErrors, deletePost, likePost, savePost } from '../../.
 import { metaballsMenu } from '../SvgIcons';
 // import moment from 'moment';
 
-const PostItem = ({ _id, title, likes, comments, image, owner, savedBy, createdAt }) => {
+const PostItem = ({ _id, title, likes, comments, title_image, owner, savedBy, createdAt }) => {
 
     const dispatch = useDispatch();
     const commentInput = useRef(null);
@@ -74,7 +74,7 @@ const PostItem = ({ _id, title, likes, comments, image, owner, savedBy, createdA
     return (
         <>
             <div onClick={() => setOpen(true)} className="group w-full h-32 sm:h-72 max-h-72 flex justify-center items-center bg-gray-100 hover:bg-black cursor-pointer relative z-0">
-                <img draggable="false" loading="lazy" className="hover:opacity-75 group-hover:opacity-75 cursor-pointer object-cover h-full w-full" src={image} alt="Post" />
+                <img draggable="false" loading="lazy" className="hover:opacity-75 group-hover:opacity-75 cursor-pointer object-cover h-full w-full" src={title_image} alt="Post" />
                 <div className="hidden group-hover:flex text-white absolute pointer-events-none gap-4">
                     {/* <span><FavoriteIcon /> {likes.length}</span> */}
                     {/* <span><ModeCommentIcon /> {comments.length}</span> */}
@@ -85,7 +85,7 @@ const PostItem = ({ _id, title, likes, comments, image, owner, savedBy, createdA
                 <div className="flex sm:flex-row flex-col max-w-7xl">
 
                     <div className="relative flex items-center justify-center bg-black sm:h-[90vh] w-full" onDoubleClick={setLike}>
-                        <img draggable="false" className="object-contain h-full w-full" src={image} alt="post" />
+                        <img draggable="false" className="object-contain h-full w-full" src={title_image} alt="post" />
                         {likeEffect &&
                             <img draggable="false" height="80px" className="likeEffect" alt="heart" src="https://img.icons8.com/ios-filled/2x/ffffff/like.png" />
                         }
