@@ -17,6 +17,7 @@ function KakaoLogin(){
         if(code){
             const data = {
                 redirect_uri: 'http://localhost:3000/login',
+                redirect_uri: 'http://localhost:3000/login',
                 code: code
             };
             console.log("kakaologin")
