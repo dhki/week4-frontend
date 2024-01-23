@@ -6,9 +6,29 @@ import { CLEAR_ERRORS, DELETE_POST_FAIL, DELETE_POST_REQUEST, DELETE_POST_SUCCES
 export const addNewPost = (postData) => async (dispatch) => {
     try {
 
+        const cookies = new Cookies();
+        const token = cookies.get('token');
+
+        console.log(token);
+        console.log(postData.get("title"));
+        console.log(postData.get("discript"));
+        console.log(postData.get("images"));
+
+        const formData = new FormData();
+        formData.append("title", postData.get("title"));
+        formData.append("discript", postData.get("discript"));
+        formData.append("images", [postData.get("images"), postData.get("images"), postData.get("images")]);
+        formData.append("token", token);
+
+        console.log(formData.get("images"));
+        // const config = { header: { "Content-Type": "application/json" } }
+
         dispatch({ type: NEW_POST_REQUEST });
-        const config = { header: { "Content-Type": "application/json" } }
-        const { data } = await axios.post("https://madcamp.dhki.kr/posts/new", postData, {withCredentials: true});
+        const config = { 
+            headers: { "Content-Type": "multipart/form-data" },  // "multipart/form-data"으로 변경
+            withCredentials: true,
+        };
+        const { data } = await axios.post("https://madcamp.dhki.kr/posts/new", formData, config);
 
         dispatch({
             type: NEW_POST_SUCCESS,
