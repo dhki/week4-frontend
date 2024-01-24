@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { clearErrors, loadUser, updateProfile } from '../../../actions/userAction';
 import { UPDATE_PROFILE_RESET } from '../../../constants/userConstants';
 import MetaData from '../../Layouts/MetaData';
+import axios from 'axios';
 
 const UpdateProfile = () => {
 
@@ -24,7 +25,7 @@ const UpdateProfile = () => {
     const [avatar, setAvatar] = useState("");
     const [avatarPreview, setAvatarPreview] = useState("");
 
-    const handleUpdate = (e) => {
+    const handleUpdate = async (e) => {
         e.preventDefault();
 
         const userCheck = /^[a-z0-9_.-]{6,25}$/igm;
@@ -34,15 +35,18 @@ const UpdateProfile = () => {
             return;
         }
 
-        const formData = new FormData();
-        formData.set("name", name);
-        formData.set("username", username);
-        formData.set("website", website);
-        formData.set("bio", bio);
-        formData.set("email", email);
-        formData.set("avatar", avatar);
+        const {data} = await axios.get(`https://madcamp.dhki.kr/users/check/${username}`);
+        if(data.available){
+            const body = {
+                username: username,
+                bio: bio
+            }
 
-        dispatch(updateProfile(formData));
+            dispatch(updateProfile(body));
+        }else{
+            alert('you can not use this username!');
+            return;
+        }
     }
 
     const handleAvatarChange = (e) => {
@@ -73,7 +77,7 @@ const UpdateProfile = () => {
         if (isUpdated) {
             toast.success("Profile Updated");
             dispatch(loadUser());
-            navigate(`/${username}`);
+            navigate(`/profile/${username}`);
 
             dispatch({ type: UPDATE_PROFILE_RESET });
         }
@@ -92,7 +96,7 @@ const UpdateProfile = () => {
                     <div className="w-11 h-11">
                         <img draggable="false" className="w-full h-full rounded-full border object-cover" src={avatarPreview ? avatarPreview : oldAvatar} alt="avatar" />
                     </div>
-                    <div className="flex flex-col gap-0">
+                    {/* <div className="flex flex-col gap-0">
                         <span className="text-xl">{username}</span>
                         <label onClick={(e) => avatarInput.current.click()} className="text-sm font-medium text-primary-blue cursor-pointer">Change Profile Photo</label>
                         <input
@@ -102,7 +106,7 @@ const UpdateProfile = () => {
                             ref={avatarInput}
                             onChange={handleAvatarChange}
                             className="hidden" />
-                    </div>
+                    </div> */}
                 </div>
                 <div className="flex w-full gap-8 text-right items-center">
                     <span className="w-1/4 font-semibold">Name</span>
@@ -111,7 +115,7 @@ const UpdateProfile = () => {
                         type="text"
                         placeholder="Name"
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        readOnly
                         required
                     />
                 </div>
@@ -123,17 +127,6 @@ const UpdateProfile = () => {
                         placeholder="Username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="flex w-full gap-8 text-right items-center">
-                    <span className="w-1/4 font-semibold">Website</span>
-                    <input
-                        className="border rounded p-1 w-3/4"
-                        type="url"
-                        placeholder="Website"
-                        value={website}
-                        onChange={(e) => setWebsite(e.target.value)}
                         required
                     />
                 </div>
@@ -157,7 +150,7 @@ const UpdateProfile = () => {
                         type="email"
                         placeholder="Email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        readOnly
                         required
                     />
                 </div>
