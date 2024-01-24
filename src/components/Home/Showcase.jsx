@@ -25,7 +25,11 @@ const Showcase = () => {
             setPosts(prevPosts => [...prevPosts, ...data.posts]);
 
             setIsHasMore(true);
-            currentPage++;
+            if(posts.length == 0){
+                currentPage = 0;
+            }else{
+                currentPage++;
+            }
         }else if (data.success == false){ // 더 가져오는 정보가 없다면
             setIsHasMore(false);
         }
