@@ -14,23 +14,29 @@ import { Sky } from '@react-three/drei';
 import SnapshotModal from "../Home/SnapshotModal";
 import { useNavigate } from "react-router-dom";
 
-function ShowcaseThreeItem({ _id, imageUrl, position }) {
+function ShowcaseThreeItem({ _id, title_image, position, images_origin, images_small, scripts }) {
     const [cameraPosition, setCameraPosition] = useState(position);
-    console.log(imageUrl);
+    // console.log(imageUrl);
 
     const navigate = useNavigate();
 
     // 더미 이미지 데이터
-    const imageList = [
-        { id: 1, url: 'https://via.placeholder.com/150/0000FF/808080?Text=Image1' },
-        { id: 2, url: 'https://via.placeholder.com/150/FF0000/FFFFFF?Text=Image2' },
-        { id: 3, url: 'https://via.placeholder.com/150/FFFF00/000000?Text=Image3' },
-        { id: 4, url: 'https://via.placeholder.com/150/000000/FFFFFF?Text=Image4' },
-        { id: 5, url: 'https://via.placeholder.com/150/0000FF/808080?Text=Image5' },
-        { id: 6, url: 'https://via.placeholder.com/150/FF0000/FFFFFF?Text=Image6' },
-        { id: 7, url: 'https://via.placeholder.com/150/FFFF00/000000?Text=Image7' },
-        { id: 8, url: 'https://via.placeholder.com/150/000000/FFFFFF?Text=Image8' },
-    ];
+    // const imageList = [
+    //     { id: 1, url: 'https://via.placeholder.com/150/0000FF/808080?Text=Image1' },
+    //     { id: 2, url: 'https://via.placeholder.com/150/FF0000/FFFFFF?Text=Image2' },
+    //     { id: 3, url: 'https://via.placeholder.com/150/FFFF00/000000?Text=Image3' },
+    //     { id: 4, url: 'https://via.placeholder.com/150/000000/FFFFFF?Text=Image4' },
+    //     { id: 5, url: 'https://via.placeholder.com/150/0000FF/808080?Text=Image5' },
+    //     { id: 6, url: 'https://via.placeholder.com/150/FF0000/FFFFFF?Text=Image6' },
+    //     { id: 7, url: 'https://via.placeholder.com/150/FFFF00/000000?Text=Image7' },
+    //     { id: 8, url: 'https://via.placeholder.com/150/000000/FFFFFF?Text=Image8' },
+    // ];
+
+    const numImages = images_origin.length;
+    console.log("numImages: ", numImages)
+    for (let i = 0; i < numImages; i++) {
+        console.log("Images: ", images_origin[i])
+    }
 
     // check user's width and height
     const [winWidth, setWinWidth] = useState(window.innerWidth);
@@ -38,9 +44,11 @@ function ShowcaseThreeItem({ _id, imageUrl, position }) {
 
     const [showModal, setShowModal] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedScript, setSelectedScript] = useState(null);
 
     useEffect(() => {
-        setCameraPosition(sceneState.camera.num);
+        sceneState.camera = cameraPositions[position];
+        setCameraPosition(position);
         const resizing = () => {
             setWinWidth(window.innerWidth);
             setWinHeight(window.innerHeight);
@@ -58,7 +66,8 @@ function ShowcaseThreeItem({ _id, imageUrl, position }) {
         setShowModal(false);
         const timer = setTimeout(() => {
             if (cameraPosition === 0) return;
-            setSelectedImage(imageList[cameraPosition - 1].url);
+            setSelectedImage(images_origin[cameraPosition - 1]);
+            setSelectedScript(scripts[cameraPosition - 1]);
             setShowModal(true);
         }, 2000);
 
@@ -76,7 +85,7 @@ function ShowcaseThreeItem({ _id, imageUrl, position }) {
 
     const handleRightClick = () => {
         const currnetPostion = sceneState.camera.num;
-        if (currnetPostion < imageList.length) {
+        if (currnetPostion < numImages) {
             sceneState.camera = cameraPositions[currnetPostion + 1];
         }
         setCameraPosition(cameraPosition + 1);
@@ -156,16 +165,16 @@ function ShowcaseThreeItem({ _id, imageUrl, position }) {
                         <PosterFrame
                             position={[-8, 0, 0]}
                             size={{ width: 4, height: 4 }}
-                            image_url={imageUrl}
+                            image_url={title_image}
                         />
 
-                        {imageList.map((image, index) => (
+                        {images_small.map((image, index) => (
                             <PictureFrame
-                                key={image.id}
-                                // image_url={imageUrl}
-                                image_url={"http://madcamp.dhki.kr/images/dongha.jpg"}
+                                // key={image.id}
+                                image_url={image}
+                                // image_url={"http://madcamp.dhki.kr/images/dongha.jpg"}
                                 position={[(frameWidth + gapBetweenFrames) * index, 0, 0]}
-                                size={{ width: frameWidth, height: 3 }}
+                                size={{ width: frameWidth, height: 4 }}
                             />
                         ))}
                     </Suspense>
@@ -184,7 +193,7 @@ function ShowcaseThreeItem({ _id, imageUrl, position }) {
                 </button>
             )}
 
-            {cameraPosition < (imageList.length) && (
+            {cameraPosition < (numImages) && (
                 <button
                     className="rounded-full border text-white font-bold"
                     onClick={handleRightClick}
@@ -197,7 +206,7 @@ function ShowcaseThreeItem({ _id, imageUrl, position }) {
             )}
 
             {showModal && (
-                <SnapshotModal imageUrl={selectedImage} onClose={() => setShowModal(false)} />
+                <SnapshotModal imageUrl={selectedImage} script={selectedScript} onClose={() => setShowModal(false)} />
             )}
         </>
     )

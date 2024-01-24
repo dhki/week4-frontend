@@ -9,7 +9,6 @@ import axios from 'axios';
 
 const Showcase = () => {
     const [posts, setPosts] = useState([]);
-    console.log(posts);
     const [usersList, setUsersList] = useState([]);
     const [usersDialog, setUsersDialog] = useState(false);
     const [isHasMore, setIsHasMore] = useState(true);

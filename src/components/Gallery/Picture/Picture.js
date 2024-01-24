@@ -1,41 +1,60 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { TextureLoader } from 'three';
 import { useGLTF } from '@react-three/drei';
 
 const Picture = ({
   url,
+  image,
   scale,
-  position,  
+  position,
   rotation,
   metalness,
   roughness
 
 }) => {
-    // const { scene } = useLoader(GLTFLoader, url, draco("https://www.gstatic.com/draco/versioned/decoders/1.4.0/"));
-    const { scene } = useGLTF(url, 'https://www.gstatic.com/draco/versioned/decoders/1.4.0/');
-    scene.traverse( function ( child ) {
-      if ( child.isMesh ) {                                     
-          child.castShadow = true;
-          child.receiveShadow = true;
-          child.material.toneMapped = false;
-          child.material.metalness = metalness;
-          child.material.roughness =roughness;
-      }
-  });
-  
-    return (
-         <primitive 
-            scale={scale} 
-            position={position}
-            rotation={rotation}
-            object={scene}                    
-            dispose={null}
-          />
-    )
-  }
+  // const { scene } = useLoader(GLTFLoader, url, draco("https://www.gstatic.com/draco/versioned/decoders/1.4.0/"));
+  const { scene } = useGLTF(url, 'https://www.gstatic.com/draco/versioned/decoders/1.4.0/');
+  const textureLoader = new TextureLoader();
 
-  export default Picture;
+  useEffect(() => {
+    const texture = textureLoader.load(image);
+    console.log("image: ", image);
+    console.log("texture: ", texture);
+    scene.traverse((child) => {
+      if (child.isMesh && child.material.map) {
+        // 모든 메쉬의 텍스처를 새 이미지로 변경
+        if (child.material.name === 'None.001') {
+          console.log("child.material.name: ", child.material.name);
+          child.material.map = texture;
+        }
+      }
+    });
+  }, [scene, image, textureLoader]);
+
+  scene.traverse(function (child) {
+    if (child.isMesh) {
+      child.castShadow = true;
+      child.receiveShadow = true;
+      child.material.toneMapped = false;
+      child.material.metalness = metalness;
+      child.material.roughness = roughness;
+    }
+  });
+
+  return (
+    <primitive
+      object={scene}
+      scale={scale}
+      position={position}
+      rotation={rotation}
+      dispose={null}
+    />
+  );
+}
+
+export default Picture;
 
 // import React from 'react';
 // import { useLoader } from '@react-three/fiber';

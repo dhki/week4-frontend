@@ -85,17 +85,17 @@ const StoriesContainer = () => {
         return (
             <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 story-modal" onClick={handleModalOutsideClick}>
 
-                <div className="p-4 rounded" style={{ width: '320px', height: '350px' }}>
+                <div className="p-4 rounded" style={{ width: '620px', height: '650px' }}>
                     <ProgressBar duration={5000} onComplete={onNext} />
-                    <img src={story.poster} alt={story.title} style={{ width: '300px', height: '300px' }} />
-                    <p className="text-lg text-white mt-2">{story.owner.username}</p>
+                    <img src={story.poster} alt={story.title} style={{ width: '600px', height: '600px' }} />
+                    <p className="text-lg text-white mt-2">@{story.owner.username}</p>
                 </div>
                 {!isFirstChild && (
                     <button
                         className="rounded-full border text-white font-bold"
                         onClick={onPrevious}
                         style={{
-                            position: 'absolute', top: '48%', left: 650,
+                            position: 'absolute', top: '48%', left: 500,
                             width: 40, height: 40, zIndex: 1000
                         }}>
                         Prev
@@ -106,7 +106,7 @@ const StoriesContainer = () => {
                         className="rounded-full border text-white font-bold"
                         onClick={onNext}
                         style={{
-                            position: 'absolute', top: '48%', right: 650,
+                            position: 'absolute', top: '48%', right: 500,
                             width: 40, height: 40, zIndex: 1000
                         }}>
                         Next

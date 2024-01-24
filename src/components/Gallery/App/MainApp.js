@@ -13,7 +13,7 @@ import Player from '../Player/Player';
 import Lights from '../Lights/Lights';
 
 
-function MainApp() {
+function MainApp({ galleryData }) {
   const [night, setNight] = useState(false)
   const [performance, setPerformance] = useState(true)
 
@@ -73,7 +73,7 @@ function MainApp() {
             <Suspense fallback={null}>
               <Ground />
               <Building />
-              <Art />
+              <Art galleryData={galleryData}/>
               {/* <Furniture /> */}
             </Suspense>
             <Player />
