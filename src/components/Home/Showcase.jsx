@@ -7,6 +7,7 @@ import ShowcaseItem from './ShowcaseItem';
 import SpinLoader from '../Layouts/SpinLoader';
 import axios from 'axios';
 
+let currentPage = 1; // request를 보내기 위해 설정하는 page 값
 
 const Showcase = () => {
     const [posts, setPosts] = useState([]);
@@ -14,8 +15,6 @@ const Showcase = () => {
     const [usersList, setUsersList] = useState([]);
     const [usersDialog, setUsersDialog] = useState(false);
     const [isHasMore, setIsHasMore] = useState(true);
-
-    let currentPage = 1; // request를 보내기 위해 설정하는 page 값
 
 
     const fetchMorePosts = async () => {
@@ -26,7 +25,7 @@ const Showcase = () => {
             setPosts(prevPosts => [...prevPosts, ...data.posts]);
 
             setIsHasMore(true);
-            currentPage += 1;
+            currentPage++;
         }else if (data.success == false){ // 더 가져오는 정보가 없다면
             setIsHasMore(false);
         }
