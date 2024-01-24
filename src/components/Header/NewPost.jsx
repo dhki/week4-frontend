@@ -109,8 +109,9 @@ const NewPost = ({ newPost, setNewPost }) => {
         const formData = new FormData();
 
         postImages.forEach((image, index) => {
-            formData.append(`images[${index}]`, image);
+            formData.append("images", image);
         });
+
         formData.set("title", title);
         formData.set("discript", discript);
 

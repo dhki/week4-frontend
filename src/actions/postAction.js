@@ -4,22 +4,13 @@ import { CLEAR_ERRORS, DELETE_POST_FAIL, DELETE_POST_REQUEST, DELETE_POST_SUCCES
 
 
 // New Post
-export const addNewPost = (postData) => async (dispatch) => {
+export const addNewPost = (formData) => async (dispatch) => {
     try {
 
         const cookies = new Cookies();
         const token = cookies.get('token');
-
-        const formData = new FormData();
-        formData.append("title", postData.get("title"));
-        formData.append("discript", postData.get("discript"));
-        // formData.append("images", [postData.get("images"), postData.get("images"), postData.get("images")]);
+        
         formData.append("token", token);
-        formData.append("images", postData.get('images'));
-        formData.append("images", postData.get('images'));
-        formData.append("images", postData.get('images'));
-
-        console.log(formData.get("images"));
 
         dispatch({ type: NEW_POST_REQUEST });
 
