@@ -24,13 +24,12 @@ const Profile = () => {
     const { username } = useParams();
     const [user, setUser] = useState(null);
 
-    // find user detail
-    useEffect(async () => {
-        const getUser = async () => {
-            const ret = await axios.get(`https://madcamp.dhki.kr/users/detail/${username}`);
-            return ret.data.user;
-        }
+    const getUser = async () => {
+        const ret = await axios.get(`https://madcamp.dhki.kr/users/detail/${username}`);
+        return ret.data.user;
+    }
 
+    const loadUser = async () => {
         const user = await getUser();
         setUser(user);
         for(const follower of user.followers){
@@ -39,6 +38,11 @@ const Profile = () => {
                 break;
             }
         }
+    }
+    
+    // find user detail
+    useEffect(() => {
+        loadUser();
     }, [username])
 
     const [follow, setFollow] = useState(false);
@@ -76,33 +80,6 @@ const Profile = () => {
     const closeModal = () => {
         setViewModal(false)
     }
-
-    useEffect(() => {
-        if (error) {
-            toast.error(error);
-            dispatch(clearErrors());
-        }
-        dispatch(getUserDetails(username));
-
-        if (followError) {
-            toast.error(followError);
-            dispatch(clearErrors());
-        }
-        if (success) {
-            toast.success(message)
-            dispatch({ type: FOLLOW_USER_RESET });
-        }
-
-        return () => {
-            dispatch({ type: USER_DETAILS_RESET })
-        }
-
-    }, [dispatch, error, username, followError, success, message]);
-
-    // useEffect(() => {
-    //     // console.log(user?.followers?.some((id) => id === loggedInUser._id))
-    //     // setFollow(user?.followers?.some((u) => u._id === loggedInUser._id))
-    // }, [user]);
 
     const addToChat = () => {
         dispatch(addNewChat(user._id));
