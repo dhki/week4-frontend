@@ -90,7 +90,7 @@ const StoriesContainer = () => {
                 <div className="p-4 rounded" style={{ width: '320px', height: '350px' }}>
                     <p className="text-lg text-white mt-2">{story.title}</p>
                     <ProgressBar duration={5000} onComplete={onNext} />
-                    <img src={story.image} alt={story.title} style={{ width: '300px', height: '300px' }} />
+                    <img src={story.poster} alt={story.title} style={{ width: '300px', height: '300px' }} />
                     <p className="text-lg text-white mt-2">{story.owner.username}</p>
                 </div>
                 {!isFirstChild && (
