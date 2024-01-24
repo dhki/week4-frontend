@@ -27,7 +27,9 @@ const StoriesContainer = () => {
         }
 
         const {data} = await axios.post('https://madcamp.dhki.kr/posts/stories', req);
+        console.log(data.stories);
         setStories(prevStat => [...prevStat, ...data.stories]);
+        console.log(stories);
     }
     useEffect(() => {
         getStories();
