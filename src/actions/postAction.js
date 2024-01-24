@@ -9,8 +9,10 @@ export const addNewPost = (formData) => async (dispatch) => {
 
         const cookies = new Cookies();
         const token = cookies.get('token');
-        
+
         formData.append("token", token);
+
+        console.log(formData);
 
         dispatch({ type: NEW_POST_REQUEST });
 

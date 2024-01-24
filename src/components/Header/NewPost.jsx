@@ -115,6 +115,8 @@ const NewPost = ({ newPost, setNewPost }) => {
         formData.set("title", title);
         formData.set("descript", discript);
 
+        console.log(formData);
+
         dispatch(addNewPost(formData));
     };
 
