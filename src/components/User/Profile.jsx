@@ -11,6 +11,7 @@ import { metaballsMenu, postsIconFill, postsIconOutline, reelsIcon, savedIconFil
 import { FOLLOW_USER_RESET, USER_DETAILS_RESET } from '../../constants/userConstants';
 import UsersDialog from '../Layouts/UsersDialog';
 import { NEW_CHAT_RESET } from '../../constants/chatConstants';
+import { Cookies } from 'react-cookie';
 import MetaData from '../Layouts/MetaData';
 import NotFound from '../Errors/NotFound';
 
@@ -54,7 +55,8 @@ const Profile = () => {
     console.log(loggedInUser);
 
     const handleFollow = () => {
-        dispatch(followUser({userId: user._id, token: loggedInUser.token}));
+        const cookies = new Cookies();
+        dispatch(followUser({userId: user._id, token: cookies.get('token')}));
         setFollow(!follow);
     }
 
