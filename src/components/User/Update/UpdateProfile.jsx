@@ -94,7 +94,7 @@ const UpdateProfile = () => {
             <form
                 onSubmit={handleUpdate}
                 encType="multipart/form-data"
-                className="flex flex-col gap-4 py-4 px-4 sm:py-10 sm:px-24 sm:w-3/4"
+                className="flex flex-col gap-6 py-4 px-4 sm:py-10 sm:px-24 sm:w-3/4"
             >
                 <div className="flex items-center gap-8 ml-20">
                     <div className="w-11 h-11">
@@ -135,7 +135,7 @@ const UpdateProfile = () => {
                     />
                 </div>
                 <div className="flex w-full gap-8 text-right items-start">
-                    <span className="w-1/4 font-semibold">Bio</span>
+                    <span className="w-1/4 font-semibold mt-1">Bio</span>
                     <textarea
                         className="border rounded outline-none resize-none p-1 w-3/4"
                         name="bio"
@@ -157,7 +157,7 @@ const UpdateProfile = () => {
                         required
                     />
                 </div>
-                <button type="submit" disabled={loading} className="bg-primary-blue font-medium rounded text-white py-2 w-40 mx-auto text-sm">Submit</button>
+                <button type="submit" disabled={loading} className="bg-primary-blue font-medium rounded text-white py-2 w-40 mx-auto text-sm mt-5">Submit</button>
             </form>
         </>
     )

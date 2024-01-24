@@ -14,12 +14,16 @@ const Art = (galleryData) => {
         const newImageUrls = [];
         if (galleryData && galleryDataLoaded) {
             for (let i = 0; i < 8; i++) {
-                newImageUrls.push(galleryDataLoaded?.images_small[i] || '/default_canvas.jpg');
+                if (i === 0) {
+                    newImageUrls.push(galleryDataLoaded?.title_image_small);
+                } else {
+                    newImageUrls.push(galleryDataLoaded?.images_small[i - 1] || '/default_canvas.jpg');
+                }
             }
         }
         setImageUrls(newImageUrls);
     }, [galleryData]);
-    
+
     return (
         <>
             <Picture

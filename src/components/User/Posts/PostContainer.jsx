@@ -54,7 +54,7 @@ const PostContainer = ({ posts, id }) => {
     }, [dispatch, success, likeError, message, commentError, commentSuccess, saveError, saveSuccess, saveMessage, deleteError, deleteSuccess]);
 
     return (
-        <div className="grid grid-cols-3 gap-1 sm:gap-8 my-1 mb-8" id={id}>
+        <div className="grid grid-cols-3 gap-1 sm:gap-4 my-1 mb-8" id={id}>
             {posts?.map((post, i) => (
                 <PostItem {...post} key={i} />
             )).reverse()

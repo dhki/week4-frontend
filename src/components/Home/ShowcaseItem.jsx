@@ -11,7 +11,7 @@ import axios from 'axios';
 // import moment from 'moment';
 import ShowcaseModal from './ShowcaseModal';
 
-const ShowcaseItem = ({ _id, title, likes, comments, title_image, images_origin, images_small, scripts, owner, savedBy, createdAt, setUsersDialog, setUsersList }) => {
+const ShowcaseItem = ({ _id, title, post_descript, likes, comments, title_image, images_origin, images_small, scripts, owner, savedBy, createdAt, setUsersDialog, setUsersList }) => {
 
     const dispatch = useDispatch();
     const commentInput = useRef(null);
@@ -144,7 +144,7 @@ const ShowcaseItem = ({ _id, title, likes, comments, title_image, images_origin,
             <ShowcaseModal
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
-                data={{ _id, title, likes, comments, title_image, images_origin, images_small, scripts, owner, savedBy, createdAt }}
+                data={{ _id, title, post_descript, likes, comments, title_image, images_origin, images_small, scripts, owner, savedBy, createdAt }}
             />
 
             {/* like comment container */}

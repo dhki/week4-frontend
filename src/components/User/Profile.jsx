@@ -171,19 +171,19 @@ const Profile = () => {
                                     </div>
                             </div>
 
-                            <div className="flex justify-between items-center max-w-[21.5rem]">
-                                <div className="cursor-pointer"><span className="font-semibold">{user.posts?.length}</span> posts</div>
-                                <div onClick={handleFollowersModal} className="cursor-pointer"><span className="font-semibold">{user.followers?.length}</span> followers</div>
-                                <div onClick={handleFollowingModal} className="cursor-pointer"><span className="font-semibold">{user.following?.length}</span> following</div>
+                            <div className="flex text-sm justify-between items-center max-w-[21.5rem]">
+                                <div className="cursor-pointer"><span className="font-semibold">{user.posts?.length}</span> Showcases</div>
+                                <div onClick={handleFollowersModal} className="cursor-pointer"><span className="font-semibold">{user.followers?.length}</span> Followers</div>
+                                <div onClick={handleFollowingModal} className="cursor-pointer"><span className="font-semibold">{user.following?.length}</span> Following</div>
                                 {/* <div className="cursor-pointer"><span className="font-semibold">{user.posts}</span> posts</div>
                                 <div className="cursor-pointer"><span className="font-semibold">{user.followers}</span> followers</div>
                                 <div className="cursor-pointer"><span className="font-semibold">{user.following}</span> following</div> */}
                             </div>
 
                             {/* bio */}
-                            <div className="max-w-full">
-                                <p className="font-medium">{user.name}</p>
-                                <p className="whitespace-pre-line">{user.bio}</p>
+                            <div className="max-w-full" style={{ textAlign: 'left' }}>
+                                <p className="font-semibold text-sm">{user.name}</p>
+                                <p className="whitespace-pre-line mt-1">{user.bio}</p>
                                 {/* {user?.website &&
                                     <a href={user.website} target="_blank" className="text-blue-900 font-medium">{new URL(user.website).hostname}</a>
                                 } */}
@@ -203,7 +203,7 @@ const Profile = () => {
                         {/* tabs */}
                         <div className="flex gap-12 justify-center">
                             <span onClick={() => setSavedTab(false)} className={`${savedTab ? 'text-gray-400' : 'border-t border-black'} py-3 cursor-pointer flex items-center text-[13px] uppercase gap-3 tracking-[1px] font-medium`}>
-                                {savedTab ? postsIconOutline : postsIconFill} posts</span>
+                                {savedTab ? postsIconOutline : postsIconFill} Showcases</span>
                             {user._id == loggedInUser._id && (
                                 <span onClick={() => setSavedTab(true)} className={`${savedTab ? 'border-t border-black' : 'text-gray-400'} py-3 cursor-pointer flex items-center text-[13px] uppercase gap-3 tracking-[1px] font-medium`}>
                                     {savedTab ? savedIconFill : savedIconOutline} saved</span>
