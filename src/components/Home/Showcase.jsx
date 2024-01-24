@@ -7,8 +7,6 @@ import ShowcaseItem from './ShowcaseItem';
 import SpinLoader from '../Layouts/SpinLoader';
 import axios from 'axios';
 
-let currentPage = 1; // request를 보내기 위해 설정하는 page 값
-
 const Showcase = () => {
     const [posts, setPosts] = useState([]);
     console.log(posts);
@@ -16,6 +14,7 @@ const Showcase = () => {
     const [usersDialog, setUsersDialog] = useState(false);
     const [isHasMore, setIsHasMore] = useState(true);
 
+    let currentPage = 1; // request를 보내기 위해 설정하는 page 값
 
     const fetchMorePosts = async () => {
         // 여기에 데이터를 불러오는 로직 추가
@@ -25,17 +24,10 @@ const Showcase = () => {
             setPosts(prevPosts => [...prevPosts, ...data.posts]);
 
             setIsHasMore(true);
-            if(posts.length == 0){
-                currentPage = 0;
-            }else{
-                currentPage++;
-            }
+            currentPage++;
         }else if (data.success == false){ // 더 가져오는 정보가 없다면
             setIsHasMore(false);
         }
-
-        
-        // console.log("더 많은 게시물을 불러오는 중...");
     };
 
 
