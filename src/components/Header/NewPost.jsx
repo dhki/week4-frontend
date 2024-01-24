@@ -92,17 +92,8 @@ const NewPost = ({ newPost, setNewPost }) => {
             toast.error("Select at least one image");
             return;
         }
-        console.log(postImages);
 
-        const formData = new FormData();
-
-        postImages.forEach((image) => {
-            formData.append("images", image);
-        });
-        formData.set("title", title);
-        formData.set("descript", descript);
-
-        dispatch(addNewPost(formData));
+        dispatch(addNewPost({title, discript, postImages}));
     };
 
 
