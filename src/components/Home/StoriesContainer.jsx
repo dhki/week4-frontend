@@ -16,22 +16,19 @@ const StoriesContainer = () => {
         slidesToShow: 8,
         slidesToScroll: 3,
     };
-
+    
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedStoryIndex, setSelectedStoryIndex] = useState(0);
-    const [stories, setStories] = useState([{
-        "title": "Sunset Vibes",
-        "image": "https://via.placeholder.com/150/FF5733/FFFFFF"
-    },]);
+    const [stories, setStories] = useState([]);
     const getStories = async () => {
         const cookies = new Cookies();
         const req = {
             token: cookies.get('token')
         }
 
-        const response = await axios.post('https://madcamp.dhki.kr/posts/stories', req);
-        console.log(response.data.stories);
-        setStories(response.data.stories);
+        const {data} = await axios.post('https://madcamp.dhki.kr/posts/stories', req);
+        console.log(data.stories);
+        setStories([...stories, data.stories]);
         console.log(stories);
     }
     useEffect(() => {
