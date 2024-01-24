@@ -5,20 +5,35 @@ import UsersDialog from '../Layouts/UsersDialog'
 import { dummyShowcases } from './DummyShowcases';
 import ShowcaseItem from './ShowcaseItem';
 import SpinLoader from '../Layouts/SpinLoader';
-
+import axios from 'axios';
 
 const Showcase = () => {
-    const [posts, setPosts] = useState(dummyShowcases);
+    const [posts, setPosts] = useState([]);
     console.log(posts);
     const [usersList, setUsersList] = useState([]);
     const [usersDialog, setUsersDialog] = useState(false);
+    const [isHasMore, setIsHasMore] = useState(true);
 
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const fetchMorePosts = () => {
+    const fetchMorePosts = async () => {
         // 여기에 데이터를 불러오는 로직 추가
-        setPosts(prevPosts => [...prevPosts, ...dummyShowcases]);
-        console.log("더 많은 게시물을 불러오는 중...");
+        const {data} = await axios.get(`https://madcamp.dhki.kr/posts/fetch?page=${currentPage}`);
+
+        if(data.success == true){ // 더 가져오는 정보가 있다면
+            setPosts(prevPosts => [...prevPosts, ...data.posts]);
+
+            setIsHasMore(true);
+            setCurrentPage(currentPage + 1);
+        }else if (data.success == false){ // 더 가져오는 정보가 없다면
+            setIsHasMore(false);
+        }
     };
+
+
+    useEffect(() => { // 처음 게시물 로딩
+        fetchMorePosts();
+    }, [])
 
 
     return (
@@ -36,7 +51,7 @@ const Showcase = () => {
                     // loader={<SpinLoader />}
                     dataLength={posts.length}
                     next={fetchMorePosts}
-                    hasMore={true} // 테스트를 위해 임시로 true 설정
+                    hasMore={isHasMore}
                     loader={<SpinLoader />}
                 >
                     <div className="w-full h-full mt-1 sm:mt-6 flex flex-col space-y-4">

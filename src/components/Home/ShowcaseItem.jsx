@@ -10,7 +10,7 @@ import axios from 'axios';
 // import moment from 'moment';
 import ShowcaseModal from './ShowcaseModal';
 
-const ShowcaseItem = ({ _id, caption, likes, comments, image, postedBy, savedBy, createdAt, setUsersDialog, setUsersList }) => {
+const ShowcaseItem = ({ _id, title, likes, comments, title_image, owner, savedBy, createdAt, setUsersDialog, setUsersList }) => {
 
     const dispatch = useDispatch();
     const commentInput = useRef(null);
@@ -93,8 +93,8 @@ const ShowcaseItem = ({ _id, caption, likes, comments, image, postedBy, savedBy,
 
             {/* <div className="flex justify-between px-3 py-2.5 border-b items-center">
                 <div className="flex space-x-3 items-center">
-                    <Link to={`/${postedBy.username}`}><img draggable="false" className="w-10 h-10 rounded-full object-cover" src={postedBy.avatar} alt="avatar" /></Link>
-                    <Link to={`/${postedBy.username}`} className="text-black text-sm font-semibold">{postedBy.username}</Link>
+                    <Link to={`/${owner.username}`}><img draggable="false" className="w-10 h-10 rounded-full object-cover" src={owner.avatar} alt="avatar" /></Link>
+                    <Link to={`/${owner.username}`} className="text-black text-sm font-semibold">{owner.username}</Link>
                 </div>
                 <span className="cursor-pointer">{moreIcons}</span>
             </div> */}
@@ -106,16 +106,16 @@ const ShowcaseItem = ({ _id, caption, likes, comments, image, postedBy, savedBy,
                     draggable="false"
                     loading="lazy"
                     className="absolute top-0 left-0 w-full h-full object-cover object-center rounded-tr-xl rounded-tl-xl"
-                    src={image}
+                    src={title_image}
                     alt="post image" />
 
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/50 via-transparent to-black/50 rounded-tr-xl rounded-tl-xl"></div>
 
                 <span className="absolute text-white text-4xl font-bold" style={{ top: '30px', left: '20px' }}>
-                    <Link to={`/profile/${postedBy.username}`} className="text-4xl font-semibold hover:underline">@{postedBy.username}</Link>
+                    <Link to={`/profile/${owner.username}`} className="text-4xl font-semibold hover:underline">@{owner.username}</Link>
                 </span>
                 <span className="absolute text-white text-2xl font-bold" style={{ bottom: '30px', right: '15px' }}>
-                    <span className="text-2xl truncate">{caption}</span>
+                    <span className="text-2xl truncate">{title}</span>
                 </span>
 
                 {likeEffect &&
@@ -126,7 +126,7 @@ const ShowcaseItem = ({ _id, caption, likes, comments, image, postedBy, savedBy,
             <ShowcaseModal
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
-                data={{ _id, caption, likes, comments, image, postedBy, savedBy, createdAt }}
+                data={{ _id, title, likes, comments, title_image, owner, savedBy, createdAt }}
             />
 
             {/* like comment container */}
@@ -147,8 +147,8 @@ const ShowcaseItem = ({ _id, caption, likes, comments, image, postedBy, savedBy,
 
                 {/* comment */}
                 {/* <div className="flex flex-auto items-center space-x-1">
-                    <Link to={`/${postedBy.username}`} className="text-sm font-semibold hover:underline">{postedBy.username}</Link>
-                    <span className="text-sm truncate">{caption}</span>
+                    <Link to={`/${owner.username}`} className="text-sm font-semibold hover:underline">{owner.username}</Link>
+                    <span className="text-sm truncate">{title}</span>
                 </div> */}
 
                 {/* time */}

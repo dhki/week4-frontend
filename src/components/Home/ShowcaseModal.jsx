@@ -17,7 +17,7 @@ const ShowcaseModal = ({ isOpen, onClose, data }) => {
 
     if (!isOpen || !data) return null;
 
-    const { _id, caption, likes, comments, image, postedBy, savedBy, createdAt } = data;
+    const { _id, title, likes, comments, title_image, owner, savedBy, createdAt } = data;
 
     return (
         <>
@@ -33,11 +33,11 @@ const ShowcaseModal = ({ isOpen, onClose, data }) => {
                         loading="lazy"
                         style={{ width: '1200px', height: '800px', objectFit: 'cover' }}
                     /> */}
-                        <ShowcaseThreeItem _id={_id} imageUrl={image} />
+                        <ShowcaseThreeItem _id={_id} imageUrl={title_image} position={0} />
                     </div>
                     {/* <div className="w-1/3 p-4">
-                    <h2 className="text-xl font-bold">{postedBy.username}</h2>
-                    <p>{caption}</p>
+                    <h2 className="text-xl font-bold">{owner.username}</h2>
+                    <p>{title}</p>
                 </div> */}
 
                 </div>
