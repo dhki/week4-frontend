@@ -275,7 +275,7 @@ export const updateProfile = (userData) => async (dispatch) => {
 
         dispatch({ type: UPDATE_PROFILE_REQUEST });
 
-        const { data } = await axios.put('https://madcamp.dhki.kr/update', userData);
+        const { data } = await axios.put('https://madcamp.dhki.kr/users/update', userData);
 
         dispatch({
             type: UPDATE_PROFILE_SUCCESS,
