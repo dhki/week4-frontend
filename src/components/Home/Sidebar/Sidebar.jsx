@@ -103,7 +103,9 @@ const Sidebar = () => {
                         </div> */}
                         <div className="flex items-center space-x-1.5">
                             {['About', 'Help', 'Press', 'API', 'Jobs', 'Privacy', 'Terms', 'Locations'].map((el, i) => (
-                                <a href="#" key={i}>{el}</a>
+                                el === 'Privacy' ?
+                                    <Link to="/secret" key={i}>{el}</Link> :
+                                    <a href="#" key={i}>{el}</a>
                             ))}
                         </div>
                         {/* <div className="flex items-center space-x-1.5">

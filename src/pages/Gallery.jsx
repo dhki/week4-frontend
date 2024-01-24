@@ -5,6 +5,7 @@ import MainApp from '../components/Gallery/App/MainApp';
 import { Loading } from "../components/ShowcaseThree/Loading";
 import '../components/Gallery/style/css/gallery.css';
 import axios from "axios";
+import { SecretData } from "../components/Secret/SecretData";
 
 function Gallery() {
     const navigate = useNavigate();
@@ -36,7 +37,11 @@ function Gallery() {
     };
 
     useEffect(() => {
-        fetchData(); // 컴포넌트가 마운트될 때 fetchData 함수를 호출
+        if (id == "dhki") {
+            setGalleryData(SecretData)
+        } else {
+            fetchData(); // 컴포넌트가 마운트될 때 fetchData 함수를 호출
+        }
     }, [id]);
 
     useEffect(() => {
@@ -59,7 +64,7 @@ function Gallery() {
     return (
         <>
             <div className="inside">
-                <MainApp galleryData={galleryData}/>
+                <MainApp galleryData={galleryData} />
                 <div className={ready ? "inside" : "overlay"}>
                     <div className={"start"}>Click to Explore</div>
                     {/* <img className={ready ? "" : "controlsL"} src="./assets/Images/ControlsL.png" alt="Move: WASD	Jump: SPACE Run: SHIFT"></img>

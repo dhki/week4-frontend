@@ -22,7 +22,7 @@ const Profile = () => {
 
     const { username } = useParams();
     const [user, setUser] = useState(null);
-    
+
     // find user detail
     useEffect(async () => {
         const getUser = async () => {
@@ -41,7 +41,7 @@ const Profile = () => {
     const [savedTab, setSavedTab] = useState(false);
 
     const { error, loading } = useSelector((state) => state.userDetails);
-    const {user: loggedInUser}  = useSelector((state) => state.user);
+    const { user: loggedInUser } = useSelector((state) => state.user);
     const { error: followError, success, message } = useSelector((state) => state.followUser);
     // const { error: chatError, chat } = useSelector((state) => state.newChat);
 
@@ -151,16 +151,22 @@ const Profile = () => {
                                     </div>
                                 )} */}
                                 <div className="flex gap-3 items-center">
-                                        {follow ? (
-                                            <>
-                                                <button onClick={addToChat} className="border rounded px-2.5 py-[0.3rem] text-sm font-medium hover:bg-gray-100">Message</button>
-                                                <button onClick={handleFollow} className="font-medium text-sm bg-red-50 rounded py-1.5 px-3 text-red-600 hover:bg-red-100 hover:text-red-700">Unfollow</button>
-                                            </>
+                                    {follow ? (
+                                        <>
+                                            <button onClick={addToChat} className="border rounded px-2.5 py-[0.3rem] text-sm font-medium hover:bg-gray-100">Message</button>
+                                            <button onClick={handleFollow} className="font-medium text-sm bg-red-50 rounded py-1.5 px-3 text-red-600 hover:bg-red-100 hover:text-red-700">Unfollow</button>
+                                        </>
+                                    ) :
+                                        user._id == loggedInUser._id ? (
+                                            null
                                         ) : (
-                                            <button onClick={handleFollow} className="font-medium bg-primary-blue text-sm text-white hover:shadow rounded px-6 py-1.5">Follow</button>
-                                        )}
-                                        <span className="sm:block hidden">{metaballsMenu}</span>
-                                    </div>
+                                            <>
+                                                <button onClick={handleFollow} className="font-medium bg-primary-blue text-sm text-white hover:shadow rounded px-6 py-1.5">Follow</button>
+                                            </>
+                                        )
+                                    }
+                                    <span className="sm:block hidden">{metaballsMenu}</span>
+                                </div>
                             </div>
 
                             <div className="flex text-sm justify-between items-center max-w-[21.5rem]">

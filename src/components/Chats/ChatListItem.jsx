@@ -39,7 +39,7 @@ const ChatListItem = ({ _id, users, latestMessage }) => {
             </div>
             <div className="flex flex-col items-start">
                 <span className="text-sm">{friend.name}</span>
-                <span className="text-sm truncate w-36 text-gray-400">{latestMessage?.content}</span>
+                <span className="text-sm truncate w-36 text-gray-500" style={{ textAlign: "left" }}>{latestMessage?.content}</span>
             </div>
         </Link>
     )
