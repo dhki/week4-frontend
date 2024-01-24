@@ -60,14 +60,14 @@ const NewDialog = ({ open, onClose }) => {
         <Dialog open={open} onClose={onClose}>
             <div className="flex flex-col w-80 sm:w-96">
                 <div className="flex justify-between items-center px-4 border-b py-2.5">
-                    <span className="font-medium mx-auto">New Message</span>
+                    <span className="font-medium text-sm mx-auto">New Message</span>
                     <svg onClick={onClose} className="cursor-pointer" aria-label="Close" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><line fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" x1="21" x2="3" y1="3" y2="21"></line><line fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" x1="21" x2="3" y1="21" y2="3"></line></svg>
                 </div>
 
                 <div className="flex items-center gap-3 border-b p-3">
-                    <span className="font-medium">To:</span>
+                    <span className="text-sm font-medium">To:</span>
                     <input
-                        className="outline-none w-full"
+                        className="text-sm outline-none w-full"
                         type="text"
                         placeholder="Search User.."
                         value={searchTerm}
