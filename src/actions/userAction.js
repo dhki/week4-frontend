@@ -95,8 +95,8 @@ export const loadUser = () => async (dispatch) => {
     try {
 
         dispatch({ type: LOAD_USER_REQUEST });
-
-        const { data } = await axios.get('/api/v1/me');
+        const cookie = new Cookies();
+        const { data } = await axios.post('https://madcamp.dhki.kr/users/token', {token: cookie.get('token')});
 
         dispatch({
             type: LOAD_USER_SUCCESS,
