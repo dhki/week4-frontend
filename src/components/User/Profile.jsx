@@ -173,7 +173,7 @@ const Profile = () => {
                                             </>
                                         )
                                     }
-                                    <span className="sm:block hidden">{metaballsMenu}</span>
+                                    {/* <span className="sm:block hidden">{metaballsMenu}</span> */}
                                 </div>
                             </div>
 
