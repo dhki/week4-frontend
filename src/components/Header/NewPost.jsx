@@ -106,7 +106,7 @@ const NewPost = ({ newPost, setNewPost }) => {
             toast.success("Post Shared");
             dispatch({ type: NEW_POST_RESET });
             setNewPost(false)
-            navigate("/");
+            navigate("/intro");
 
             setPostImages("");
             setPostPreviews("");
