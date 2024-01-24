@@ -12,26 +12,21 @@ export const addNewPost = (postData) => async (dispatch) => {
 
         const formData = new FormData();
         formData.append("title", postData.get("title"));
-        formData.append("discript", postData.get("discript"));
-        // formData.append("images", [postData.get("images"), postData.get("images"), postData.get("images")]);
+        formData.append("descript", postData.get("descript"));
         formData.append("token", token);
         formData.append("images", postData.get('images'));
-        formData.append("images", postData.get('images'));
-        formData.append("images", postData.get('images'));
-
-        console.log(formData.get("images"));
-
+        
         dispatch({ type: NEW_POST_REQUEST });
 
         const config = {
             headers: { "Content-Type": "multipart/form-data" },  // "multipart/form-data"으로 변경
             withCredentials: true,
         };
-        const { data } = await axios.post("https://madcamp.dhki.kr/posts/new", formData, config);
+        // const { data } = await axios.post("https://madcamp.dhki.kr/posts/new", formData, config);
 
         dispatch({
             type: NEW_POST_SUCCESS,
-            payload: data,
+            // payload: data,
         });
 
     } catch (error) {

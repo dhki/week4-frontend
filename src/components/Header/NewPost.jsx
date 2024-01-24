@@ -21,7 +21,7 @@ const NewPost = ({ newPost, setNewPost }) => {
     const [postImages, setPostImages] = useState([]);
     const [postPreviews, setPostPreviews] = useState([]);
     const [title, setTitle] = useState("");
-    const [discript, setDiscript] = useState("");
+    const [descript, setDescript] = useState("");
     // const [showEmojis, setShowEmojis] = useState(false);
     const [dragged, setDragged] = useState(false);
 
@@ -105,14 +105,15 @@ const NewPost = ({ newPost, setNewPost }) => {
             toast.error("Select at least one image");
             return;
         }
+        console.log(postImages);
 
         const formData = new FormData();
 
-        postImages.forEach((image, index) => {
-            formData.append(`images[${index}]`, image);
+        postImages.forEach((image) => {
+            formData.append("images", image);
         });
         formData.set("title", title);
-        formData.set("discript", discript);
+        formData.set("descript", descript);
 
         dispatch(addNewPost(formData));
     };
@@ -132,7 +133,7 @@ const NewPost = ({ newPost, setNewPost }) => {
             setPostImages("");
             setPostPreviews("");
             setTitle("");
-            setDiscript("");
+            setDescript("");
         }
     }, [dispatch, error, success, navigate]);
 
@@ -231,12 +232,12 @@ const NewPost = ({ newPost, setNewPost }) => {
                         <div className="p-3 w-full border-b relative">
                             <textarea
                                 className="outline-none resize-none h-32 sm:h-auto text-sm"
-                                placeholder="Write a Discription for your showcase"
-                                name="discript"
+                                placeholder="Write a Description for your showcase"
+                                name="descript"
                                 cols="40"
                                 rows="10"
-                                value={discript}
-                                onChange={(e) => setDiscript(e.target.value)}
+                                value={descript}
+                                onChange={(e) => setDescript(e.target.value)}
                             >
                             </textarea>
                         </div>

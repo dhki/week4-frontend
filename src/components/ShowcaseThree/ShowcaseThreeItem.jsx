@@ -59,11 +59,11 @@ function ShowcaseThreeItem({ _id, imageUrl }) {
         const timer = setTimeout(() => {
             if (cameraPosition === 0) return;
             setSelectedImage(imageList[cameraPosition - 1].url);
-            setShowModal(true); 
-        }, 2000); 
+            setShowModal(true);
+        }, 2000);
 
         return () => {
-            clearTimeout(timer); 
+            clearTimeout(timer);
         };
     }, [cameraPosition]);
 
@@ -108,7 +108,7 @@ function ShowcaseThreeItem({ _id, imageUrl }) {
                         // You can add custom handling here if needed
                     }}
                 >
-                <button className="relative text-2xl" onClick={() => navigate(`/${_id}`)}>Enter Metaverse</button>
+                    <button className="relative border border-black p-2 text-sm rounded mt-4" onClick={() => navigate(`/${_id}`)}>Enter Gallery</button>
                 </div>
                 <Canvas
                     camera={{
@@ -173,7 +173,9 @@ function ShowcaseThreeItem({ _id, imageUrl }) {
 
             </div>
             {cameraPosition > 0 && (
-                <button onClick={handleLeftClick}
+                <button
+                    className="rounded-full border text-white font-bold"
+                    onClick={handleLeftClick}
                     style={{
                         position: 'absolute', top: '50%', left: 60,
                         width: 40, height: 40, zIndex: 1000
@@ -183,7 +185,9 @@ function ShowcaseThreeItem({ _id, imageUrl }) {
             )}
 
             {cameraPosition < (imageList.length) && (
-                <button onClick={handleRightClick}
+                <button
+                    className="rounded-full border text-white font-bold"
+                    onClick={handleRightClick}
                     style={{
                         position: 'absolute', top: '50%', right: 60,
                         width: 40, height: 40, zIndex: 1000
@@ -191,7 +195,7 @@ function ShowcaseThreeItem({ _id, imageUrl }) {
                     Next
                 </button>
             )}
-            
+
             {showModal && (
                 <SnapshotModal imageUrl={selectedImage} onClose={() => setShowModal(false)} />
             )}
