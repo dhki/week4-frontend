@@ -91,7 +91,7 @@ const StoriesContainer = () => {
                     <p className="text-lg text-white mt-2">{story.title}</p>
                     <ProgressBar duration={5000} onComplete={onNext} />
                     <img src={story.image} alt={story.title} style={{ width: '300px', height: '300px' }} />
-                    <p className="text-lg text-white mt-2">{story.owner}</p>
+                    <p className="text-lg text-white mt-2">{story.owner.username}</p>
                 </div>
                 {!isFirstChild && (
                     <button
@@ -150,7 +150,7 @@ const StoriesContainer = () => {
                         <div className="ml-1 mb-1 w-16 p-[1px] h-16 rounded-full border-2 border-red-500">
                             <img loading="lazy" className="rounded-full h-full w-full border border-gray-300 object-cover" src={s.poster} draggable="false" alt="story" />
                         </div>
-                        <span className="text-xs ellipsis">{s.owner}</span>
+                        <span className="text-xs ellipsis">{s.owner.username}</span>
                     </div>
                 ))}
 
