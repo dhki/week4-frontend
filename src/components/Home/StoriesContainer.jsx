@@ -26,9 +26,9 @@ const StoriesContainer = () => {
             token: cookies.get('token')
         }
 
-        const resopnse = await axios.post('https://madcamp.dhki.kr/posts/stories', req);
+        const response = await axios.post('https://madcamp.dhki.kr/posts/stories', req);
         console.log(response.data);
-        setStories(resopnse.data);
+        setStories(response.data);
     }
     useEffect(() => {
         getStories();
