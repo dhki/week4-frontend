@@ -152,8 +152,9 @@ const ShowcaseItem = ({ _id, title, post_descript, likes, comments, title_image,
 
                 {/* icons container */}
                 <div className="flex items-center justify-between py-2 ">
-                    <div className="flex space-x-4">
-                        <button onClick={handleLike}>{liked ? likeFill : likeIconOutline}</button><span>{likeCnt}</span>
+                    <div className="flex space-x-2">
+                        <button onClick={handleLike}>{liked ? likeFill : likeIconOutline}</button>
+                        <span className='font-semibold text-sm mt-0.5'>{likeCnt}</span>
                         {/* {shareIcon} */}
                     </div>
                     <button onClick={handleSave}>{saved ? saveIconFill : saveIconOutline}</button>

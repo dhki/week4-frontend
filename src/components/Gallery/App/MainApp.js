@@ -15,15 +15,13 @@ import Lights from '../Lights/Lights';
 
 function MainApp({ galleryData }) {
   const [night, setNight] = useState(false)
-  const [performance, setPerformance] = useState(true)
+  const [performance, setPerformance] = useState(false)
 
   useEffect(() => {
     const handleKeyDown = (e) => {
       switch (e.code) {
-        case "KeyN":
+        case "KeyE":
           setNight(!night)
-          return;
-        case "KeyP":
           setPerformance(!performance)
           return;
         default: return;

@@ -167,7 +167,7 @@ const Inbox = () => {
 
     return (
         <>
-            <MetaData title="Instagram • Chats" />
+            <MetaData title="SPIRIT • Chats" />
             <Header />
             <div className="mt-14 sm:mt-[4.7rem] pb-4 rounded h-[90vh] xl:w-2/3 mx-auto sm:pr-14 sm:pl-8">
                 <div className="flex border h-full rounded w-full bg-white">

@@ -89,7 +89,7 @@ const UpdateProfile = () => {
 
     return (
         <>
-            <MetaData title="Edit Profile • Instagram" />
+            <MetaData title="Edit Profile • SPIRIT" />
 
             <form
                 onSubmit={handleUpdate}
