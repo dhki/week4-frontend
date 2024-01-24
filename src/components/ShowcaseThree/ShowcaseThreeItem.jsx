@@ -14,8 +14,8 @@ import { Sky } from '@react-three/drei';
 import SnapshotModal from "../Home/SnapshotModal";
 import { useNavigate } from "react-router-dom";
 
-function ShowcaseThreeItem({ _id, imageUrl }) {
-    const [cameraPosition, setCameraPosition] = useState(0);
+function ShowcaseThreeItem({ _id, imageUrl, position }) {
+    const [cameraPosition, setCameraPosition] = useState(position);
     console.log(imageUrl);
 
     const navigate = useNavigate();

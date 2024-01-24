@@ -14,7 +14,7 @@ const Showcase = () => {
     const [usersDialog, setUsersDialog] = useState(false);
     const [isHasMore, setIsHasMore] = useState(true);
 
-    let currentPage = 1; // request를 보내기 위해 설정하는 page 값
+    const [currentPage, setCurrentPage] = useState(1);
 
     const fetchMorePosts = async () => {
         // 여기에 데이터를 불러오는 로직 추가
@@ -24,7 +24,7 @@ const Showcase = () => {
             setPosts(prevPosts => [...prevPosts, ...data.posts]);
 
             setIsHasMore(true);
-            currentPage++;
+            setCurrentPage(currentPage + 1);
         }else if (data.success == false){ // 더 가져오는 정보가 없다면
             setIsHasMore(false);
         }

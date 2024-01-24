@@ -33,7 +33,7 @@ const ShowcaseModal = ({ isOpen, onClose, data }) => {
                         loading="lazy"
                         style={{ width: '1200px', height: '800px', objectFit: 'cover' }}
                     /> */}
-                        <ShowcaseThreeItem _id={_id} imageUrl={title_image} />
+                        <ShowcaseThreeItem _id={_id} imageUrl={title_image} position={0} />
                     </div>
                     {/* <div className="w-1/3 p-4">
                     <h2 className="text-xl font-bold">{owner.username}</h2>
