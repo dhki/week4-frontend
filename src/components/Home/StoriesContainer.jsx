@@ -96,6 +96,9 @@ const StoriesContainer = () => {
                         Next
                     </button>
                 )}
+                <div className="absolute top-0 right-0 p-6">
+                    <button onClick={onClose} className="text-white font-bold text-sm">Close</button>
+                </div>
             </div>
         );
     };

@@ -131,7 +131,7 @@ const Profile = () => {
                             <div className="flex items-center gap-8 sm:justify-start justify-between">
 
                                 <h2 className="text-2xl sm:text-3xl font-thin">{user.username}</h2>
-                                {(loggedInUser.username == user.username) ? (
+                                {/* {(loggedInUser.username == user.username) ? (
                                     <div className="flex gap-3 items-center">
                                         <Link to="/accounts/edit" className="border font-medium hover:bg-gray-50 text-sm rounded px-2 py-1">Edit Profile</Link>
                                         <Link to="/accounts/edit">{settingsIcon}</Link>
@@ -148,7 +148,18 @@ const Profile = () => {
                                         )}
                                         <span className="sm:block hidden">{metaballsMenu}</span>
                                     </div>
-                                )}
+                                )} */}
+                                <div className="flex gap-3 items-center">
+                                        {follow ? (
+                                            <>
+                                                <button onClick={addToChat} className="border rounded px-2.5 py-[0.3rem] text-sm font-medium hover:bg-gray-100">Message</button>
+                                                <button onClick={handleFollow} className="font-medium text-sm bg-red-50 rounded py-1.5 px-3 text-red-600 hover:bg-red-100 hover:text-red-700">Unfollow</button>
+                                            </>
+                                        ) : (
+                                            <button onClick={handleFollow} className="font-medium bg-primary-blue text-sm text-white hover:shadow rounded px-6 py-1.5">Follow</button>
+                                        )}
+                                        <span className="sm:block hidden">{metaballsMenu}</span>
+                                    </div>
                             </div>
 
                             <div className="flex justify-between items-center max-w-[21.5rem]">
@@ -188,10 +199,10 @@ const Profile = () => {
                                 <span onClick={() => setSavedTab(true)} className={`${savedTab ? 'border-t border-black' : 'text-gray-400'} py-3 cursor-pointer flex items-center text-[13px] uppercase gap-3 tracking-[1px] font-medium`}>
                                     {savedTab ? savedIconFill : savedIconOutline} saved</span>
                             )}
-                            <span className="py-3 flex items-center text-gray-400 text-[13px] uppercase gap-3 tracking-[1px] font-medium">
+                            {/* <span className="py-3 flex items-center text-gray-400 text-[13px] uppercase gap-3 tracking-[1px] font-medium">
                                 {reelsIcon} reels</span>
                             <span className="py-3 hidden sm:flex items-center text-gray-400 text-[13px] uppercase gap-3 tracking-[1px] font-medium">
-                                {taggedIcon} tagged</span>
+                                {taggedIcon} tagged</span> */}
                         </div>
 
                         {/* posts grid data */}
