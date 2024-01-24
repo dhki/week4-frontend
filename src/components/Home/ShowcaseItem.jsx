@@ -37,7 +37,7 @@ const ShowcaseItem = ({ _id, title, likes, comments, title_image, owner, savedBy
         let flag = likes.some(likeUser => {return likeUser.name == user.name});
         if(flag){setLiked(true);}
 
-        flag = savedBy.some(savedUser => {return likeUser.name == user.name});
+        flag = savedBy.some(savedUser => {return savedUser.name == user.name});
         if(flag){setSaved(true);}
     }, []);
 
