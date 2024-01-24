@@ -5,6 +5,7 @@ import Display from '../Display/Display';
 const Art = (galleryData) => {
     // console.log("galleryData: ", galleryData);
     const galleryDataLoaded = galleryData?.galleryData;
+    // console.log("galleryDataLoaded: ", galleryDataLoaded);
     const numImages = galleryDataLoaded?.images_small.length;
     console.log("galleryData.images_small: ", galleryDataLoaded?.images_small);
 

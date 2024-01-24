@@ -14,6 +14,7 @@ import UpdateProfile from './components/User/Update/UpdateProfile';
 import Update from './components/User/Update/Update';
 import Inbox from './components/Chats/Inbox';
 import PrivateRoute from './Routes/PrivateRoute';
+import Secret from './components/Secret/Secret';
 
 import './App.css';
 
@@ -67,6 +68,7 @@ function App() {
               <Inbox />
             </PrivateRoute>
           } />
+          <Route path='/secret' element={<Secret />}></Route>
         </Routes>
       </Suspense>
     </div>
