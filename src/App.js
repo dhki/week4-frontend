@@ -12,6 +12,8 @@ import Profile from './components/User/Profile';
 import Gallery from './pages/Gallery';
 import UpdateProfile from './components/User/Update/UpdateProfile';
 import Update from './components/User/Update/Update';
+import Inbox from './components/Chats/Inbox';
+import PrivateRoute from './Routes/PrivateRoute';
 
 import './App.css';
 
@@ -38,15 +40,32 @@ function App() {
           <Route path='/intro' element={<Intro />}></Route>
           <Route path='/home' element={<Home />}></Route>
           <Route path="/profile/:username" element={
-            <Profile />
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
           } />
           <Route path='/:id' element={
-            <Gallery />
+            <PrivateRoute>
+              <Gallery />
+            </PrivateRoute>
           } />
           <Route path="/accounts/edit" element={
-            <Update activeTab={0}>
-              <UpdateProfile />
-            </Update>
+            <PrivateRoute>
+              <Update activeTab={0}>
+                <UpdateProfile />
+              </Update>
+            </PrivateRoute>
+          } />
+          <Route path="/direct/inbox" element={
+            <PrivateRoute>
+              <Inbox />
+            </PrivateRoute>
+          } />
+
+          <Route path="/direct/t/:chatId/:userId" element={
+            <PrivateRoute>
+              <Inbox />
+            </PrivateRoute>
           } />
         </Routes>
       </Suspense>
