@@ -31,7 +31,7 @@ const Profile = () => {
 
         const user = await getUser();
         setUser(user);
-        for(follower of user.followers){
+        for(const follower of user.followers){
             if(follower.name == loggedInUser.name){
                 setFollow(true);
                 break;
