@@ -195,7 +195,7 @@ export const followUser = ({userId, token}) => async (dispatch) => {
         const body = {
             token: token
         };
-        const { data } = await axios.post(`https://madcamp.dhki.kr/users/follow/${userId}`, body);
+        const { data } = await axios.post(`https://madcamp.dhki.kr/users/follow/${userId}`, body, {headers: {'Content-Type' : 'application/json'}});
 
         dispatch({
             type: FOLLOW_USER_SUCCESS,
