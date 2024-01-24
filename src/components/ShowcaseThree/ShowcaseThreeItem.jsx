@@ -156,7 +156,7 @@ function ShowcaseThreeItem({ _id, imageUrl }) {
                         <PosterFrame
                             position={[-8, 0, 0]}
                             size={{ width: 4, height: 4 }}
-                            image_url={"http://madcamp.dhki.kr/images/dongha.jpg"}
+                            image_url={imageUrl}
                         />
 
                         {imageList.map((image, index) => (
