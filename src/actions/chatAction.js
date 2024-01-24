@@ -9,14 +9,27 @@ const cookie = new Cookies();
 export const getAllChats = () => async (dispatch) => {
     try {
 
+        console.log('get all chats called');
         dispatch({ type: ALL_CHATS_REQUEST });
+        const body = {
+            token: cookie.get('token')
+        }
 
-        const { data } = await axios.get('/api/v1/chats');
+        const { data } = await axios.post('https://madcamp.dhki.kr/chats/get', body);
 
-        dispatch({
-            type: ALL_CHATS_SUCCESS,
-            payload: data.chats,
-        });
+        console.log(data);
+        if(data.success){
+            dispatch({
+                type: ALL_CHATS_SUCCESS,
+                payload: data.chats,
+            });
+        }else{
+            dispatch({
+                type: ALL_CHATS_FAIL,
+                payload: data,
+            });
+        }
+        
 
     } catch (error) {
         dispatch({
