@@ -31,6 +31,12 @@ const Profile = () => {
 
         const user = await getUser();
         setUser(user);
+        for(follower of user.followers){
+            if(follower.name == loggedInUser.name){
+                setFollow(true);
+                break;
+            }
+        }
     }, [username])
 
     const [follow, setFollow] = useState(false);
@@ -48,8 +54,8 @@ const Profile = () => {
     console.log(loggedInUser);
 
     const handleFollow = () => {
-        // setFollow(!follow); 
-        dispatch(followUser(user._id));
+        dispatch(followUser({userId: user._id, token: loggedInUser.token}));
+        setFollow(!follow);
     }
 
     const handleFollowersModal = () => {

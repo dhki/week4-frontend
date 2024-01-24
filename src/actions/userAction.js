@@ -188,11 +188,11 @@ export const getSuggestedUsers = () => async (dispatch) => {
 };
 
 // Follow | Unfollow User
-export const followUser = (userId) => async (dispatch) => {
+export const followUser = ({userId, token}) => async (dispatch) => {
     try {
 
         dispatch({ type: FOLLOW_USER_REQUEST });
-        const { data } = await axios.get(`/api/v1/follow/${userId}`);
+        const { data } = await axios.put(`https://madcamp.dhki.kr/users/follow/${userId}`, {token: token});
 
         dispatch({
             type: FOLLOW_USER_SUCCESS,
