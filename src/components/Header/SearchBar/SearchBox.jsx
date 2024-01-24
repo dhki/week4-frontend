@@ -14,7 +14,7 @@ const SearchBox = () => {
 
     const fetchUsers = async (term) => {
         setLoading(true);
-        const { data } = await axios.get(`https://madcamp.dhki.kr/users/search?keyword=${keyword}`);
+        const { data } = await axios.get(`https://madcamp.dhki.kr/users/search?keyword=${searchTerm}`);
         setUsers(data.users);
         setLoading(false);
     }
