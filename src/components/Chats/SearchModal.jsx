@@ -23,6 +23,7 @@ const NewDialog = ({ open, onClose }) => {
     const fetchUsers = async (term) => {
         setLoading(true);
         const { data } = await axios.get(`https://madcamp.dhki.kr/users/search?keyword=${term}`);
+        console.log(data);
         setUsers(data.users.filter((u) => u._id !== self._id));
         setLoading(false);
     }

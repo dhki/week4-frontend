@@ -26,11 +26,11 @@ const Inbox = () => {
     const scrollRef = useRef(null);
     const socket = useRef(null);
 
-    const [typing, setTyping] = useState(false);
-    const [isTyping, setIsTyping] = useState(false);
-    const [typingData, setTypingData] = useState({});
+    const [typing, setTyping] = useState(false); // 내가 타이핑 중인지?
+    const [isTyping, setIsTyping] = useState(false); // 내 상대가 타이핑중인가?
+    const [typingData, setTypingData] = useState({}); // 타이핑 데이터 :: 상대, 타이핑 중인지
 
-    const [isOnline, setIsOnline] = useState(false);
+    const [isOnline, setIsOnline] = useState(false); // 내 상대가 온라인인지 확인
     const [showEmojis, setShowEmojis] = useState(false);
 
     const [showSearch, setShowSearch] = useState(false);
@@ -40,7 +40,7 @@ const Inbox = () => {
     const { error, messages, loading } = useSelector((state) => state.allMessages)
     const { success, newMessage } = useSelector((state) => state.newMessage);
 
-    const userId = params.userId;
+    const userId = params.userId; // 내 상대
 
     useEffect(() => {
         socket.current = io(SOCKET_ENDPOINT);
@@ -133,6 +133,9 @@ const Inbox = () => {
     }, [messages]);
 
     const handleTyping = (e) => {
+        // 내가 타이핑을 하면 서버에 타이핑 중이라고 보냄
+        // 2초 뒤에 끌건데.. 다시 치고 있으면 친다고 올 둣
+
         setMessage(e.target.value);
 
         if (!typing) {

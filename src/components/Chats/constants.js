@@ -1,1 +1,1 @@
-export const SOCKET_ENDPOINT = "";
+export const SOCKET_ENDPOINT = "https://madcamp.dhki.kr";
