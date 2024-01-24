@@ -77,27 +77,27 @@ const Profile = () => {
         setViewModal(false)
     }
 
-    // useEffect(() => {
-    //     if (error) {
-    //         toast.error(error);
-    //         dispatch(clearErrors());
-    //     }
-    //     dispatch(getUserDetails(username));
+    useEffect(() => {
+        if (error) {
+            toast.error(error);
+            dispatch(clearErrors());
+        }
+        dispatch(getUserDetails(username));
 
-    //     if (followError) {
-    //         toast.error(followError);
-    //         dispatch(clearErrors());
-    //     }
-    //     if (success) {
-    //         toast.success(message)
-    //         dispatch({ type: FOLLOW_USER_RESET });
-    //     }
+        if (followError) {
+            toast.error(followError);
+            dispatch(clearErrors());
+        }
+        if (success) {
+            toast.success(message)
+            dispatch({ type: FOLLOW_USER_RESET });
+        }
 
-    //     return () => {
-    //         dispatch({ type: USER_DETAILS_RESET })
-    //     }
+        return () => {
+            dispatch({ type: USER_DETAILS_RESET })
+        }
 
-    // }, [dispatch, error, username, followError, success, message]);
+    }, [dispatch, error, username, followError, success, message]);
 
     // useEffect(() => {
     //     // console.log(user?.followers?.some((id) => id === loggedInUser._id))
@@ -107,18 +107,6 @@ const Profile = () => {
     const addToChat = () => {
         dispatch(addNewChat(user._id));
     }
-
-    // useEffect(() => {
-    //     if (chatError) {
-    //         toast.error(chatError);
-    //         dispatch(clearChatErrors());
-    //     }
-    //     if (chat) {
-    //         const friendId = chat.users?.find((id) => id !== loggedInUser._id);
-    //         navigate(`/direct/t/${chat._id}/${friendId}`);
-    //         dispatch({ type: NEW_CHAT_RESET });
-    //     }
-    // }, [dispatch, chatError, chat, navigate]);
 
     return (
         <>
