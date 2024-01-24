@@ -20,8 +20,7 @@ const StoriesContainer = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedStoryIndex, setSelectedStoryIndex] = useState(0);
     const [stories, setStories] = useState([]);
-
-    useEffect(async () => {
+    const getStories = async () => {
         const cookies = new Cookies();
         const req = {
             token: cookies.get('token')
@@ -29,6 +28,9 @@ const StoriesContainer = () => {
 
         const { data } = await axios.post('https://madcamp.dhki.kr/posts/stories', req);
         setStories(data.stories);
+    }
+    useEffect(() => {
+        getStories();
     }, [])
 
 
