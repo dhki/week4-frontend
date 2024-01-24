@@ -6,6 +6,7 @@ import { clearErrors, loadUser, updateProfile } from '../../../actions/userActio
 import { UPDATE_PROFILE_RESET } from '../../../constants/userConstants';
 import MetaData from '../../Layouts/MetaData';
 import axios from 'axios';
+import { Cookies } from 'react-cookie';
 
 const UpdateProfile = () => {
 
@@ -25,6 +26,8 @@ const UpdateProfile = () => {
     const [avatar, setAvatar] = useState("");
     const [avatarPreview, setAvatarPreview] = useState("");
 
+    const cookies = new Cookies();
+
     const handleUpdate = async (e) => {
         e.preventDefault();
 
@@ -39,7 +42,8 @@ const UpdateProfile = () => {
         if(data.available){
             const body = {
                 username: username,
-                bio: bio
+                bio: bio,
+                token: cookies.get('token')
             }
 
             dispatch(updateProfile(body));
@@ -96,17 +100,17 @@ const UpdateProfile = () => {
                     <div className="w-11 h-11">
                         <img draggable="false" className="w-full h-full rounded-full border object-cover" src={avatarPreview ? avatarPreview : oldAvatar} alt="avatar" />
                     </div>
-                    {/* <div className="flex flex-col gap-0">
+                    <div className="flex flex-col gap-0">
                         <span className="text-xl">{username}</span>
-                        <label onClick={(e) => avatarInput.current.click()} className="text-sm font-medium text-primary-blue cursor-pointer">Change Profile Photo</label>
+                        {/* <label onClick={(e) => avatarInput.current.click()} className="text-sm font-medium text-primary-blue cursor-pointer">Change Profile Photo</label>
                         <input
                             type="file"
                             accept="image/*"
                             name="avatar"
                             ref={avatarInput}
                             onChange={handleAvatarChange}
-                            className="hidden" />
-                    </div> */}
+                            className="hidden" /> */}
+                    </div>
                 </div>
                 <div className="flex w-full gap-8 text-right items-center">
                     <span className="w-1/4 font-semibold">Name</span>
@@ -139,7 +143,6 @@ const UpdateProfile = () => {
                         rows="3"
                         value={bio}
                         onChange={(e) => setBio(e.target.value)}
-                        required
                     >
                     </textarea>
                 </div>
