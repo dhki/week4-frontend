@@ -15,6 +15,7 @@ export const addNewPost = ({title, discript, postImages}) => async (dispatch) =>
         const token = cookies.get('token');
 
         const formData = new FormData();
+        formData.append('token', token);
         formData.append('title', title);
         formData.append('descript', discript);
         for (const file of postImages){
