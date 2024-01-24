@@ -43,7 +43,9 @@ const Inbox = () => {
     const userId = params.userId; // 내 상대
 
     useEffect(() => {
+        console.log('trying socket connect...');
         socket.current = io(SOCKET_ENDPOINT);
+        console.log(`socket: ${socket.current}`);
         socket.current.on("getMessage", (data) => {
             setArrivalMessage({
                 sender: data.senderId,
