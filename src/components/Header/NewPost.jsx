@@ -93,7 +93,7 @@ const NewPost = ({ newPost, setNewPost }) => {
             return;
         }
 
-        dispatch(addNewPost({title, discript, postImages}));
+        dispatch(addNewPost({title, descript, postImages}));
     };
 
 

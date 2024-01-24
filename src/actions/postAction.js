@@ -4,12 +4,8 @@ import { CLEAR_ERRORS, DELETE_POST_FAIL, DELETE_POST_REQUEST, DELETE_POST_SUCCES
 
 
 // New Post
-export const addNewPost = ({title, discript, postImages}) => async (dispatch) => {
+export const addNewPost = ({title, descript, postImages}) => async (dispatch) => {
     try {
-
-        console.log(`title: ${title}`);
-        console.log(`descript: ${discript}`);
-        console.log(`files: ${postImages}`);
 
         const cookies = new Cookies();
         const token = cookies.get('token');
@@ -18,7 +14,7 @@ export const addNewPost = ({title, discript, postImages}) => async (dispatch) =>
       
         formData.append('token', token);
         formData.append('title', title);
-        formData.append('descript', discript);
+        formData.append('descript', descript);
         for (const file of postImages){
             formData.append('images', file);
         }
@@ -28,11 +24,11 @@ export const addNewPost = ({title, discript, postImages}) => async (dispatch) =>
             headers: { "Content-Type": "multipart/form-data" },  // "multipart/form-data"으로 변경
             withCredentials: true,
         };
-        // const { data } = await axios.post("https://madcamp.dhki.kr/posts/new", formData, config);
+        const { data } = await axios.post("https://madcamp.dhki.kr/posts/new", formData, config);
 
         dispatch({
             type: NEW_POST_SUCCESS,
-            // payload: data,
+            payload: data,
         });
 
     } catch (error) {
