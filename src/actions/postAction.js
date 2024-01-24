@@ -4,14 +4,19 @@ import { CLEAR_ERRORS, DELETE_POST_FAIL, DELETE_POST_REQUEST, DELETE_POST_SUCCES
 
 
 // New Post
-export const addNewPost = (formData) => async (dispatch) => {
+export const addNewPost = ({title, discript, postImages}) => async (dispatch) => {
     try {
 
         const cookies = new Cookies();
         const token = cookies.get('token');
 
-        formData.append("token", token);
-
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('descript', discript);
+        for (const file of postImages){
+            formData.append('images', file);
+        }
+        
         console.log(formData);
 
         dispatch({ type: NEW_POST_REQUEST });
