@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, Suspense } from "react";
 import PictureFrame from "../pictureFrame/PictureFrame";
 import PosterFrame from "../pictureFrame/PosterFrame";
 import MarbleWall from "../marbleWall/MarbleWall";
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import WhiteWall from "../whiteWall/WhiteWall";
 import { CameraAnimation } from "./CameraAnimation";
 import { Loading } from "./Loading";
@@ -14,23 +14,24 @@ import { Sky } from '@react-three/drei';
 import SnapshotModal from "../Home/SnapshotModal";
 import { useNavigate } from "react-router-dom";
 
-function ShowcaseThreeItem({ _id, title_image, position, images_origin, images_small, scripts }) {
+const CameraMovementChecker = ({ onCameraStop }) => {
+    // 카메라의 현재 위치와 회전값을 저장할 상태
+    const { camera } = useThree();
+
+    useFrame(() => {
+        const newPosition = camera.position.toArray();
+        if (newPosition[0] < -7.19) {
+            onCameraStop();
+        } else { }
+    });
+    return null; // 이 컴포넌트는 시각적 요소를 렌더링하지 않습니다.
+};
+
+function ShowcaseThreeItem({ _id, title, post_descript, title_image, position, images_origin, images_small, scripts, owner, createdAt }) {
     const [cameraPosition, setCameraPosition] = useState(position);
-    // console.log(imageUrl);
+    const [isCameraStopped, setIsCameraStopped] = useState(false);
 
     const navigate = useNavigate();
-
-    // 더미 이미지 데이터
-    // const imageList = [
-    //     { id: 1, url: 'https://via.placeholder.com/150/0000FF/808080?Text=Image1' },
-    //     { id: 2, url: 'https://via.placeholder.com/150/FF0000/FFFFFF?Text=Image2' },
-    //     { id: 3, url: 'https://via.placeholder.com/150/FFFF00/000000?Text=Image3' },
-    //     { id: 4, url: 'https://via.placeholder.com/150/000000/FFFFFF?Text=Image4' },
-    //     { id: 5, url: 'https://via.placeholder.com/150/0000FF/808080?Text=Image5' },
-    //     { id: 6, url: 'https://via.placeholder.com/150/FF0000/FFFFFF?Text=Image6' },
-    //     { id: 7, url: 'https://via.placeholder.com/150/FFFF00/000000?Text=Image7' },
-    //     { id: 8, url: 'https://via.placeholder.com/150/000000/FFFFFF?Text=Image8' },
-    // ];
 
     const numImages = images_origin.length;
     console.log("numImages: ", numImages)
@@ -38,7 +39,6 @@ function ShowcaseThreeItem({ _id, title_image, position, images_origin, images_s
         console.log("Images: ", images_origin[i])
     }
 
-    // check user's width and height
     const [winWidth, setWinWidth] = useState(window.innerWidth);
     const [winHeight, setWinHeight] = useState(window.innerHeight);
 
@@ -89,6 +89,7 @@ function ShowcaseThreeItem({ _id, title_image, position, images_origin, images_s
             sceneState.camera = cameraPositions[currnetPostion + 1];
         }
         setCameraPosition(cameraPosition + 1);
+        setIsCameraStopped(false);
     };
     const handleLeftClick = () => {
         const currnetPostion = sceneState.camera.num;
@@ -97,6 +98,19 @@ function ShowcaseThreeItem({ _id, title_image, position, images_origin, images_s
         }
         setCameraPosition(cameraPosition - 1);
     };
+
+    const onCameraStop = () => {
+        console.log('Camera has stopped');
+        setIsCameraStopped(true);
+    };
+
+    const date = new Date(createdAt);
+    // 날짜, 월, 연도 추출
+    const year = date.getFullYear().toString().slice(-2); // 연도의 마지막 두 자리
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // 월 (getMonth()는 0부터 시작하므로 1을 더해야 함)
+    const day = String(date.getDate()).padStart(2, '0'); // 일
+    // 원하는 형식으로 조합
+    const formattedDate = `${year}.${month}.${day}`;
 
     return (
         <>
@@ -118,6 +132,20 @@ function ShowcaseThreeItem({ _id, title_image, position, images_origin, images_s
                     }}
                 >
                     <button className="relative border border-black p-2 text-sm rounded mt-4" onClick={() => navigate(`/${_id}`)}>Enter Gallery</button>
+
+                    {isCameraStopped && cameraPosition == 0 && (
+                        // <h2 className="absolute text-black text-4xl font-bold" style={{ top: '100px', right: '200px' }}>TITLE</h2>
+                        <div className="absolute border border-transparent" style={{ top: '100px', right: '130px', width: '300px', height: '700px' }}>
+                            <div>
+                                <p className="absolute text-black text-3xl font-extrabold" style={{ bottom: '380px', textAlign: 'left' }}>{title}</p>
+                                <p className="absolute text-gray-700 text-xl font-medium italic" style={{ bottom: '350px', textAlign: 'left' }}>@{owner.username}, {formattedDate}</p>
+                                {/* <p className="absolute text-black text-2xl font-light" style={{ top: '300px' }}>@{owner.username}</p> */}
+                            </div>
+                            <div>
+                                <p className="absolute text-black text-xl font-light" style={{ top: '400px', textAlign: 'left' }}>{post_descript}</p>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <Canvas
                     camera={{
@@ -134,6 +162,7 @@ function ShowcaseThreeItem({ _id, title_image, position, images_origin, images_s
                 >
                     <Suspense fallback={<Loading />}>
                         <CameraAnimation />
+                        <CameraMovementChecker onCameraStop={onCameraStop} />
                         <Lights />
                         <Sky distance={450} sunPosition={[0, 1, 0]} inclination={0} azimuth={0.25} />
 
@@ -143,21 +172,6 @@ function ShowcaseThreeItem({ _id, title_image, position, images_origin, images_s
                         <WhiteWall
                             position={[8, 0, 0]}
                             args={[wallLength, 10, 0.03]} />
-
-                        {/* <WhiteWall
-                            position={[0, 0, 50]}
-                            rotation={[0, 0, 0]}
-                            args={[wallLength, 15, 10]} />
-
-                        <WhiteWall
-                            position={[25, 0, 25]}
-                            rotation={[0, Math.PI / 2, 0]}
-                            args={[wallLength, 15, 10]} />
-
-                        <WhiteWall
-                            position={[-25, 0, 25]}
-                            rotation={[0, Math.PI / 2, 0]}
-                            args={[wallLength, 15, 10]} /> */}
 
                         <MarbleWall position={[8, -5.3, 5]}
                             args={[wallLength, 0.03, 100]} />
@@ -170,9 +184,7 @@ function ShowcaseThreeItem({ _id, title_image, position, images_origin, images_s
 
                         {images_small.map((image, index) => (
                             <PictureFrame
-                                // key={image.id}
                                 image_url={image}
-                                // image_url={"http://madcamp.dhki.kr/images/dongha.jpg"}
                                 position={[(frameWidth + gapBetweenFrames) * index, 0, 0]}
                                 size={{ width: frameWidth, height: 4 }}
                             />

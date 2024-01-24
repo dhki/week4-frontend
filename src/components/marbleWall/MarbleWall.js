@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useThree, useLoader, extend } from '@react-three/fiber';
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import texture from './marble_texture.png';
+// import texture from './marble_texture.png';
+import texture from './floor.jpg';
 
 extend({OrbitControls})
 
