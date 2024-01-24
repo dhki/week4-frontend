@@ -1,7 +1,9 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { stories } from "./DummyStories";
+import axios from "axios";
+import { Cookies } from "react-cookie";
+// import { stories } from "./DummyStories";
 import "./HomeComponents.css";
 import { useState, useEffect } from "react";
 
@@ -17,6 +19,18 @@ const StoriesContainer = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedStoryIndex, setSelectedStoryIndex] = useState(0);
+    const [stories, setStories] = useState([]);
+
+    useEffect(async () => {
+        const cookies = new Cookies();
+        const req = {
+            token: cookies.get('token')
+        }
+
+        const { data } = await axios.post('https://madcamp.dhki.kr/posts/stories', req);
+        setStories(data.stories);
+    }, [])
+
 
     const handleStoryClick = (index) => {
         setSelectedStoryIndex(index);
@@ -70,9 +84,10 @@ const StoriesContainer = () => {
             <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 story-modal" onClick={handleModalOutsideClick}>
 
                 <div className="p-4 rounded" style={{ width: '320px', height: '350px' }}>
+                    <p className="text-lg text-white mt-2">{story.title}</p>
                     <ProgressBar duration={5000} onComplete={onNext} />
                     <img src={story.image} alt={story.title} style={{ width: '300px', height: '300px' }} />
-                    <p className="text-lg text-white mt-2">{story.title}</p>
+                    <p className="text-lg text-white mt-2">{story.owner}</p>
                 </div>
                 {!isFirstChild && (
                     <button
@@ -129,9 +144,9 @@ const StoriesContainer = () => {
                 {stories.map((s, i) => (
                     <div className="flex flex-col text-center justify-center items-center p-2 cursor-pointer" onClick={() => handleStoryClick(i)} key={i}>
                         <div className="ml-1 mb-1 w-16 p-[1px] h-16 rounded-full border-2 border-red-500">
-                            <img loading="lazy" className="rounded-full h-full w-full border border-gray-300 object-cover" src={s.image} draggable="false" alt="story" />
+                            <img loading="lazy" className="rounded-full h-full w-full border border-gray-300 object-cover" src={s.poster} draggable="false" alt="story" />
                         </div>
-                        <span className="text-xs ellipsis">{s.title}</span>
+                        <span className="text-xs ellipsis">{s.owner}</span>
                     </div>
                 ))}
 
