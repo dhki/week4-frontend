@@ -105,9 +105,6 @@ const NewPost = ({ newPost, setNewPost }) => {
             toast.error("Select at least one image");
             return;
         }
-        console.log(`title: ${title}`);
-        console.log(`descript: ${discript}`);
-        console.log(`files: ${postImages}`);
 
         dispatch(addNewPost({title, discript, postImages}));
     };

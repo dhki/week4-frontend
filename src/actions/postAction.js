@@ -7,6 +7,10 @@ import { CLEAR_ERRORS, DELETE_POST_FAIL, DELETE_POST_REQUEST, DELETE_POST_SUCCES
 export const addNewPost = ({title, discript, postImages}) => async (dispatch) => {
     try {
 
+        console.log(`title: ${title}`);
+        console.log(`descript: ${discript}`);
+        console.log(`files: ${postImages}`);
+
         const cookies = new Cookies();
         const token = cookies.get('token');
 
@@ -16,8 +20,10 @@ export const addNewPost = ({title, discript, postImages}) => async (dispatch) =>
         for (const file of postImages){
             formData.append('images', file);
         }
-        
-        console.log(formData);
+
+        console.log(formData.get('title'));
+        console.log(formData.get('descript'));
+        console.log(formData.get('images'));
 
         dispatch({ type: NEW_POST_REQUEST });
 
