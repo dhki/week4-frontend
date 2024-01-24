@@ -14,7 +14,7 @@ function WhiteWall(props){
         </mesh>
         <mesh position={[props.position[0], props.position[1], props.position[2]+0.02]} rotation={props.rotation} receiveShadow>
             <boxGeometry attach="geometry" args={[props.args[0], props.args[1], 0.01]}/>
-            <meshStandardMaterial attach="material" map={WhitePaperTexture}/>
+            <meshStandardMaterial attach="material" color={0xffffff}/>
         </mesh>
         </>
     )

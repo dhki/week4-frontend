@@ -25,7 +25,7 @@ export const Lights = () => {
                 bias={0.0001}
             />
            
-            <ambientLight intensity={0.1} />
+            <ambientLight intensity={0.3} />
         </>
     );
 };
