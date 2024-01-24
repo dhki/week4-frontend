@@ -154,7 +154,7 @@ const Inbox = () => {
                 receiverId: userId
             });
             setTyping(false);
-        }, 2000);
+        }, 3000);
     }
 
     const handleModalClose = () => {
