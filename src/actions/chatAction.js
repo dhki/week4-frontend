@@ -8,16 +8,13 @@ const cookie = new Cookies();
 // Get All Chats
 export const getAllChats = () => async (dispatch) => {
     try {
-
-        console.log('get all chats called');
         dispatch({ type: ALL_CHATS_REQUEST });
         const body = {
             token: cookie.get('token')
         }
 
         const { data } = await axios.post('https://madcamp.dhki.kr/chats/get', body);
-
-        console.log(data);
+        
         if(data.success){
             dispatch({
                 type: ALL_CHATS_SUCCESS,

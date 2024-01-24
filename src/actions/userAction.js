@@ -149,7 +149,7 @@ export const getUserDetailsById = (userId) => async (dispatch) => {
     try {
 
         dispatch({ type: USER_DETAILS_REQUEST });
-        const { data } = await axios.get(`/api/v1/userdetails/${userId}`);
+        const { data } = await axios.get(`https://madcamp.dhki.kr/users/detail/id/${userId}`);
 
         dispatch({
             type: USER_DETAILS_SUCCESS,
