@@ -13,7 +13,7 @@ export const getAllMessages = (chatId) => async (dispatch) => {
             token: cookie.get('token'),
         }
 
-        const { data } = await axios.post(`https://madcamp.dhki.kr/messages/${chatId}`);
+        const { data } = await axios.post(`https://madcamp.dhki.kr/messages/${chatId}`, body);
 
         dispatch({
             type: ALL_MESSAGES_SUCCESS,
