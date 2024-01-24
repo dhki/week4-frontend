@@ -28,6 +28,8 @@ function MainApp({ galleryData }) {
       }
     }
 
+    //hello there
+
     document.addEventListener("keydown", handleKeyDown)
     return () => {
       document.removeEventListener("keydown", handleKeyDown)
