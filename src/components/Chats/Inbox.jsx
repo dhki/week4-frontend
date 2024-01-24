@@ -14,6 +14,7 @@ import SearchModal from './SearchModal';
 import SpinLoader from '../Layouts/SpinLoader';
 import MetaData from '../Layouts/MetaData';
 import { USER_DETAILS_RESET } from '../../constants/userConstants';
+import Header from '../Header/Header';
 
 const Inbox = () => {
 
@@ -162,7 +163,7 @@ const Inbox = () => {
     return (
         <>
             <MetaData title="Instagram • Chats" />
-
+            <Header />
             <div className="mt-14 sm:mt-[4.7rem] pb-4 rounded h-[90vh] xl:w-2/3 mx-auto sm:pr-14 sm:pl-8">
                 <div className="flex border h-full rounded w-full bg-white">
 

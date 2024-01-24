@@ -17,7 +17,7 @@ const ShowcaseModal = ({ isOpen, onClose, data }) => {
 
     if (!isOpen || !data) return null;
 
-    const { _id, title, likes, comments, title_image, owner, savedBy, createdAt } = data;
+    const { _id, title, likes, comments, title_image, images_origin, images_small, scripts, owner, savedBy, createdAt } = data;
 
     return (
         <>
@@ -26,19 +26,8 @@ const ShowcaseModal = ({ isOpen, onClose, data }) => {
                 <div className="bg-white w-7/10 h-7/10 overflow-auto flex rounded-2xl">
                     {/* <div className="w-2/3 flex justify-center items-center"> */}
                     <div className="flex justify-center items-center">
-                        {/* <img
-                        src={image}
-                        alt="Showcase"
-                        draggable="false"
-                        loading="lazy"
-                        style={{ width: '1200px', height: '800px', objectFit: 'cover' }}
-                    /> */}
-                        <ShowcaseThreeItem _id={_id} imageUrl={title_image} position={0} />
+                        <ShowcaseThreeItem _id={_id} title_image={title_image} position={0} images_origin={images_origin} images_small={images_small} scripts={scripts}/>
                     </div>
-                    {/* <div className="w-1/3 p-4">
-                    <h2 className="text-xl font-bold">{owner.username}</h2>
-                    <p>{title}</p>
-                </div> */}
 
                 </div>
             </div>

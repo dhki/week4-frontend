@@ -14,6 +14,7 @@ import { NEW_CHAT_RESET } from '../../constants/chatConstants';
 import { Cookies } from 'react-cookie';
 import MetaData from '../Layouts/MetaData';
 import NotFound from '../Errors/NotFound';
+import Header from '../Header/Header';
 
 const Profile = () => {
 
@@ -122,7 +123,7 @@ const Profile = () => {
     return (
         <>
             <MetaData title={`${user?.name} (@${user?.username}) • Instagram photos and videos`} />
-
+            <Header />
             {/* {loading && <BackdropLoader />} */}
             {user ?
                 <div className="mt-16 xl:w-2/3 mx-auto">

@@ -11,7 +11,7 @@ import axios from 'axios';
 // import moment from 'moment';
 import ShowcaseModal from './ShowcaseModal';
 
-const ShowcaseItem = ({ _id, title, likes, comments, title_image, owner, savedBy, createdAt, setUsersDialog, setUsersList }) => {
+const ShowcaseItem = ({ _id, title, likes, comments, title_image, images_origin, images_small, scripts, owner, savedBy, createdAt, setUsersDialog, setUsersList }) => {
 
     const dispatch = useDispatch();
     const commentInput = useRef(null);
@@ -144,7 +144,7 @@ const ShowcaseItem = ({ _id, title, likes, comments, title_image, owner, savedBy
             <ShowcaseModal
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
-                data={{ _id, title, likes, comments, title_image, owner, savedBy, createdAt }}
+                data={{ _id, title, likes, comments, title_image, images_origin, images_small, scripts, owner, savedBy, createdAt }}
             />
 
             {/* like comment container */}
@@ -154,7 +154,6 @@ const ShowcaseItem = ({ _id, title, likes, comments, title_image, owner, savedBy
                 <div className="flex items-center justify-between py-2 ">
                     <div className="flex space-x-4">
                         <button onClick={handleLike}>{liked ? likeFill : likeIconOutline}</button><span>{likeCnt}</span>
-                        <button onClick={() => commentInput.current.focus()}>{commentIcon}</button>
                         {/* {shareIcon} */}
                     </div>
                     <button onClick={handleSave}>{saved ? saveIconFill : saveIconOutline}</button>
