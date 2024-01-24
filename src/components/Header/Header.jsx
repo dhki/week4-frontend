@@ -26,7 +26,7 @@ const Header = () => {
     const [onChat, setOnChat] = useState(false);
 
     useEffect(() => {
-        setOnHome(location.pathname === "/")
+        setOnHome(location.pathname === "/home")
         setOnChat(location.pathname.split('/').includes("direct"))
     }, [location]);
 
