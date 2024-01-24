@@ -15,7 +15,7 @@ function KakaoLogin(){
     const loginRequest = async () => {
         if(code){
             const data = {
-                redirect_uri: 'http://localhost:3000/login',
+                redirect_uri: 'https://week4-frontend-indol.vercel.app/login',
                 code: code
             };
 

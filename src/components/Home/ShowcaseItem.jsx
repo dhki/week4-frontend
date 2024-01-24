@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addComment, likePost, savePost } from '../../actions/postAction';
 import { likeFill } from '../Header/SvgIcons';
+import { Cookies } from 'react-cookie';
 import { commentIcon, emojiIcon, likeIconOutline, moreIcons, saveIconFill, saveIconOutline, shareIcon } from './SvgIcons'
 // import { Picker } from 'emoji-mart'
 // import ScrollToBottom from 'react-scroll-to-bottom';
@@ -14,11 +15,12 @@ const ShowcaseItem = ({ _id, title, post_descript, likes, comments, title_image,
 
     const dispatch = useDispatch();
     const commentInput = useRef(null);
+    const cookies = new Cookies();
 
     const { user } = useSelector((state) => state.user);
     const { loading, post } = useSelector((state) => state.postDetails);
 
-
+    const [likeCnt, setLikeCnt] = useState(likes.length);
     const [allLikes, setAllLikes] = useState(likes);
     const [allComments, setAllComments] = useState(comments);
     const [allSavedBy, setAllSavedBy] = useState(savedBy);
@@ -31,18 +33,24 @@ const ShowcaseItem = ({ _id, title, post_descript, likes, comments, title_image,
 
     const [likeEffect, setLikeEffect] = useState(false);
 
-    // for (let i = 0; i < images_origin.length; i++) {
-    //     console.log("Images: ", images_origin[i])
-    //     console.log("Images: ", images_small[i])
-    //     console.log("Images: ", scripts[i])
-    //     console.log("=====");
-    // }
+    useEffect(() => {
+        let flag = likes.some(likeUser => {return likeUser.name == user.name});
+        if(flag){setLiked(true);}
+
+        flag = savedBy.some(savedUser => {return savedUser.name == user.name});
+        if(flag){setSaved(true);}
+    }, []);
 
     const handleLike = async () => {
-        setLiked(!liked);
+        
         // await dispatch(likePost(_id));
-        const { data } = await axios.get(`/api/v1/post/detail/${_id}`)
-        setAllLikes(data.post.likes)
+        const { data } = await axios.put(`https://madcamp.dhki.kr/posts/like/${_id}`, {token: cookies.get('token')});
+        if(data.apply){
+            setLiked(!liked);
+            setLikeCnt(data.likes.length);
+        }else {
+
+        }
     }
 
     const handleComment = async (e) => {
@@ -54,10 +62,13 @@ const ShowcaseItem = ({ _id, title, post_descript, likes, comments, title_image,
     }
 
     const handleSave = async () => {
-        setSaved(!saved);
         // await dispatch(savePost(_id));
-        const { data } = await axios.get(`/api/v1/post/detail/${_id}`)
-        setAllSavedBy(data.post.savedBy)
+        
+        const { data } = await axios.put(`https://madcamp.dhki.kr/posts/save/${_id}`, {token: cookies.get('token')});
+        if(data.apply){
+            setSaved(!saved);
+            setAllSavedBy(data.post.savedBy)
+        }
     }
 
     const handleLikeModal = () => {
@@ -142,8 +153,7 @@ const ShowcaseItem = ({ _id, title, post_descript, likes, comments, title_image,
                 {/* icons container */}
                 <div className="flex items-center justify-between py-2 ">
                     <div className="flex space-x-4">
-                        <button onClick={handleLike}>{liked ? likeFill : likeIconOutline}</button>
-                        {/* <button onClick={() => commentInput.current.focus()}>{commentIcon}</button> */}
+                        <button onClick={handleLike}>{liked ? likeFill : likeIconOutline}</button><span>{likeCnt}</span>
                         {/* {shareIcon} */}
                     </div>
                     <button onClick={handleSave}>{saved ? saveIconFill : saveIconOutline}</button>

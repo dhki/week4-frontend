@@ -7,7 +7,7 @@ export const loginUser = () => async (dispatch) => {
     try {
         dispatch({ type: LOGIN_USER_REQUEST });
 
-        window.location.href = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=3407bf71c6f6be482b518366e128d6d7&redirect_uri=http://localhost:3000/login'
+        window.location.href = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=3407bf71c6f6be482b518366e128d6d7&redirect_uri=https://week4-frontend-indol.vercel.app/login'
     } catch (error) {
         dispatch({
             type: LOGIN_USER_FAIL,
@@ -95,8 +95,8 @@ export const loadUser = () => async (dispatch) => {
     try {
 
         dispatch({ type: LOAD_USER_REQUEST });
-
-        const { data } = await axios.get('/api/v1/me');
+        const cookie = new Cookies();
+        const { data } = await axios.post('https://madcamp.dhki.kr/users/token', {token: cookie.get('token')});
 
         dispatch({
             type: LOAD_USER_SUCCESS,
@@ -149,7 +149,7 @@ export const getUserDetailsById = (userId) => async (dispatch) => {
     try {
 
         dispatch({ type: USER_DETAILS_REQUEST });
-        const { data } = await axios.get(`/api/v1/userdetails/${userId}`);
+        const { data } = await axios.get(`https://madcamp.dhki.kr/users/detail/id/${userId}`);
 
         dispatch({
             type: USER_DETAILS_SUCCESS,
@@ -188,11 +188,11 @@ export const getSuggestedUsers = () => async (dispatch) => {
 };
 
 // Follow | Unfollow User
-export const followUser = (userId) => async (dispatch) => {
+export const followUser = ({userId, token}) => async (dispatch) => {
     try {
-
+        console.log(`my token: ${token}`);
         dispatch({ type: FOLLOW_USER_REQUEST });
-        const { data } = await axios.get(`/api/v1/follow/${userId}`);
+        const { data } = await axios.post(`https://madcamp.dhki.kr/users/follow/${userId}`, {token: token}, {headers: {'Content-Type' : 'application/json'}});
 
         dispatch({
             type: FOLLOW_USER_SUCCESS,
@@ -275,17 +275,7 @@ export const updateProfile = (userData) => async (dispatch) => {
 
         dispatch({ type: UPDATE_PROFILE_REQUEST });
 
-        const config = {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        }
-
-        const { data } = await axios.put(
-            '/api/v1/update/profile',
-            userData,
-            config
-        );
+        const { data } = await axios.put('https://madcamp.dhki.kr/users/update', userData);
 
         dispatch({
             type: UPDATE_PROFILE_SUCCESS,

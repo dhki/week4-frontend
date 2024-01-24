@@ -41,7 +41,7 @@ export const newChatReducer = (state = {}, { type, payload }) => {
                 ...state,
                 loading: false,
                 success: payload.success,
-                chat: payload.newChat,
+                chat: payload.chat,
             };
         case NEW_CHAT_FAIL:
             return {

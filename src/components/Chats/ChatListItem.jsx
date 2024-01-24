@@ -16,7 +16,7 @@ const ChatListItem = ({ _id, users, latestMessage }) => {
     const { user } = useSelector((state) => state.user);
 
     useEffect(() => {
-        const friendDetails = users.find((u) => u._id !== user._id);
+        const friendDetails = users.find((u) => u._id != user._id);
         setFriend(friendDetails)
     }, [users]);
 
@@ -27,7 +27,7 @@ const ChatListItem = ({ _id, users, latestMessage }) => {
     useEffect(() => {
         socket.current.on("getUsers", users => {
             // console.log(users);
-            setIsOnline(users.some((u) => u.userId === friend._id));
+            setIsOnline(users.some((u) => u.userId == friend._id));
         })
     }, [friend._id])
 
