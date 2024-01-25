@@ -19,8 +19,7 @@ const ShowcaseModal = ({ isOpen, onClose, data }) => {
 
         const { data } = await axios.post(`https://madcamp.dhki.kr/posts/delete/${_id}`, body);
         if(data.delete){
-            console.log(user.username);
-            navigate(`/profile/${user.username}`, {replace: true});
+            location.reload(true);
         }else{
             alert('Server Error!');
         }
