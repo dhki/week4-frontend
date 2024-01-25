@@ -58,7 +58,7 @@ const ProfileDetails = ({ setProfileToggle }) => {
                             {el.title}
                         </Link>
                     ))}
-                    <button onClick={handleLogout} className="flex rounded-b border-t-2 items-center gap-3 p-2.5 text-sm pl-4 cursor-pointer hover:bg-gray-50">
+                    <button onClick={handleLogout} className="flex text-black rounded-b border-t-2 items-center gap-3 p-2.5 text-sm pl-4 cursor-pointer hover:bg-gray-50">
                         Logout
                     </button>
                 </div>
