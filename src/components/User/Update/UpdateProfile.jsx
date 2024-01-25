@@ -38,19 +38,28 @@ const UpdateProfile = () => {
             return;
         }
 
-        const {data} = await axios.get(`https://madcamp.dhki.kr/users/check/${username}`);
-        if(data.available){
-            const body = {
-                username: username,
-                bio: bio,
-                token: cookies.get('token')
-            }
-
-            dispatch(updateProfile(body));
-        }else{
-            alert('you can not use this username!');
-            return;
+        const body = {
+            username: username,
+            bio: bio,
+            token: cookies.get('token')
         }
+        
+        if(user.username != username){
+            const {data} = await axios.get(`https://madcamp.dhki.kr/users/check/${username}`);
+
+            if(data.available){
+
+                dispatch(updateProfile(body));
+
+            }else{
+                alert('you can not use this username!');
+                return;
+            }
+        }else{
+            dispatch(updateProfile(body));
+        }
+        
+        
     }
 
     const handleAvatarChange = (e) => {
