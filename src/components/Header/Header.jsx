@@ -6,6 +6,7 @@ import NewPost from './NewPost';
 import { useSelector } from 'react-redux';
 import SearchBox from './SearchBar/SearchBox';
 import { ClickAwayListener } from '@mui/material';
+import "./Header.css"
 
 const Header = () => {
 
@@ -31,13 +32,13 @@ const Header = () => {
     }, [location]);
 
     return (
-        <nav className="fixed top-0 w-full border-b bg-white z-10">
+        <nav className="fixed top-0 w-full border-b bg-black z-10">
             {/* <!-- navbar container --> */}
-            <div className="flex flex-row justify-between items-center py-2 px-3.5 sm:w-full sm:py-2 sm:px-4 md:w-full md:py-2 md:px-6 xl:w-4/6 xl:py-3 xl:px-8 mx-auto">
+            <div className="flex flex-row justify-between items-center py-2 px-3.5 sm:w-full sm:px-4 md:w-full md:px-6 xl:w-4/6 xl:px-8 mx-auto">
 
                 {/* <!-- logo --> */}
-                {/* <Link to="/"><img draggable="false" className="mt-1.5 w-full h-full object-contain" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="" /></Link> */}
-                <Link to="/home"><h1 className="text-3xl font-bold text-gray-800">SPIRIT</h1></Link>
+                <Link to="/home"><img draggable="false" className="w-42 h-10 object-contain" src="logo/logo_header.png" alt="" /></Link>
+                {/* <Link to="/home"><h1 className="text-3xl font-bold text-gray-800">SPIRIT</h1></Link> */}
 
                 {/* <!-- search bar --> */}
 

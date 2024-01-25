@@ -5,7 +5,8 @@ import { css } from '@emotion/css';
 export const Title = () => {
     return (
         <div>
-            <span className={styles.text}>SPIRIT</span>
+            {/* <span className={styles.text}>SPIRIT</span> */}
+            <img className={styles.logo} src='logo/logo_text.png' style={{ width: "260px", height: "130px" }}/>
             <span className={styles.text2}>Your Own Art Gallery</span>
         </div>
     );
@@ -15,7 +16,7 @@ const styles = {
     text: css`
       font-size: 4rem;
       color: #fff;
-      left: 30px;
+      left: 50px;
       text-align: left;
       position: absolute;
       top: 48%;
@@ -24,11 +25,19 @@ const styles = {
     text2: css`
     font-size: 1.5rem;
     color: #fff;
-    left: 30px;
+    left: 50px;
     text-align: left;
     position: absolute;
-    top: 53%;
+    top: 55%;
     transform: translateY(-50%);
   `,
+  logo: css`
+      color: #fff;
+      left: 50px;
+      text-align: left;
+      position: absolute;
+      top: 45%;
+      transform: translateY(-50%);
+    `,
 };
 
