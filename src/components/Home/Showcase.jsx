@@ -6,6 +6,7 @@ import { dummyShowcases } from './DummyShowcases';
 import ShowcaseItem from './ShowcaseItem';
 import SpinLoader from '../Layouts/SpinLoader';
 import axios from 'axios';
+import { Cookies } from 'react-cookie';
 
 const Showcase = () => {
     const [posts, setPosts] = useState([]);
@@ -14,10 +15,12 @@ const Showcase = () => {
     const [isHasMore, setIsHasMore] = useState(true);
 
     const [currentPage, setCurrentPage] = useState(1);
+    const cookie = new Cookies();
 
     const fetchMorePosts = async () => {
         // 여기에 데이터를 불러오는 로직 추가
-        const {data} = await axios.get(`https://madcamp.dhki.kr/posts/fetch?page=${currentPage}`);
+
+        const {data} = await axios.post(`https://madcamp.dhki.kr/posts/fetch?page=${currentPage}`, {token: cookie.get('token')});
 
         if(data.success == true){ // 더 가져오는 정보가 있다면
             setPosts(prevPosts => [...prevPosts, ...data.posts]);
