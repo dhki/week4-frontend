@@ -17,7 +17,7 @@ const ShowcaseModal = ({ isOpen, onClose, data }) => {
             token: cookie.get('token')
         };
 
-        const { data } = await axios.post(`https://madcamp.dhki.kr/posts/delete${_id}`, body);
+        const { data } = await axios.post(`https://madcamp.dhki.kr/posts/delete/${_id}`, body);
         if(data.delete){
             navigate(`/profile/${user.username}`);
         }else{
