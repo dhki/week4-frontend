@@ -20,7 +20,7 @@ const UpdateProfile = () => {
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [website, setWebsite] = useState("");
-    const [bio, setBio] = useState("");
+    const [bio, setBio] = useState(user.bio);
     const [email, setEmail] = useState("");
     const [oldAvatar, setOldAvatar] = useState("");
     const [avatar, setAvatar] = useState("");
@@ -43,7 +43,7 @@ const UpdateProfile = () => {
             bio: bio,
             token: cookies.get('token')
         }
-        
+
         if(user.username != username){
             const {data} = await axios.get(`https://madcamp.dhki.kr/users/check/${username}`);
 
